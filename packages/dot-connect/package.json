@@ -45,8 +45,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
-    "@reactive-dot/core": "^0.46.0",
-    "@reactive-dot/wallet-ledger": "^0.16.46",
+    "@reactive-dot/core": "^0.47.4",
+    "@reactive-dot/wallet-ledger": "^0.16.50",
     "@tsconfig/recommended": "^1.0.10",
     "@tsconfig/strictest": "^2.0.5",
     "@types/qrcode": "^1.5.5",
