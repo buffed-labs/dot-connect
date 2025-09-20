@@ -34,12 +34,12 @@
   },
   "dependencies": {
     "@lit/react": "^1.0.8",
-    "@noble/hashes": "^1.8.0",
+    "@noble/hashes": "^2.0.0",
     "lit": "^3.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
-    "@polkadot-api/substrate-bindings": "^0.15.1",
+    "@polkadot-api/substrate-bindings": "^0.16.3",
     "@tsconfig/recommended": "^1.0.10",
     "@tsconfig/strictest": "^2.0.5",
     "@types/react": "^19.1.9",

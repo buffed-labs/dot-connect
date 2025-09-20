@@ -1706,6 +1706,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@noble/hashes@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@noble/hashes@npm:2.0.0"
+  checksum: 10c0/4c619df392164ea8655c630e753e791e1afb5f38cb746463d36509f684a197c3c653858b6a78135a0b54c80270a66f28003d5999ec1ad06cec0d658bf720a03f
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -2205,7 +2212,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@polkadot-api/substrate-bindings@npm:0.15.1, @polkadot-api/substrate-bindings@npm:^0.15.1":
+"@polkadot-api/substrate-bindings@npm:0.15.1":
   version: 0.15.1
   resolution: "@polkadot-api/substrate-bindings@npm:0.15.1"
   dependencies:
@@ -2214,6 +2221,18 @@ __metadata:
     "@scure/base": "npm:^1.2.6"
     scale-ts: "npm:^1.6.1"
   checksum: 10c0/c2744dc7e852d4f3d0e3c6a629d7296d52955b9b7176bd5d9b799794c71e17e5c9d346a0c1c5f88bccbc809bfdfb5947454c10b7f69882e4b2b948b46e5d1bf7
+  languageName: node
+  linkType: hard
+
+"@polkadot-api/substrate-bindings@npm:^0.16.3":
+  version: 0.16.3
+  resolution: "@polkadot-api/substrate-bindings@npm:0.16.3"
+  dependencies:
+    "@noble/hashes": "npm:^2.0.0"
+    "@polkadot-api/utils": "npm:0.2.0"
+    "@scure/base": "npm:^2.0.0"
+    scale-ts: "npm:^1.6.1"
+  checksum: 10c0/2ce5b96ac6523ef9686abe0d06322f21369b61044c3cade47343c3ac041372f67a707b89d29f638cc09f0ef4353be4796fff572e63cb3e67756ff0ea3e09ee07
   languageName: node
   linkType: hard
 
@@ -2452,6 +2471,13 @@ __metadata:
   version: 1.2.6
   resolution: "@scure/base@npm:1.2.6"
   checksum: 10c0/49bd5293371c4e062cb6ba689c8fe3ea3981b7bb9c000400dc4eafa29f56814cdcdd27c04311c2fec34de26bc373c593a1d6ca6d754398a488d587943b7c128a
+  languageName: node
+  linkType: hard
+
+"@scure/base@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@scure/base@npm:2.0.0"
+  checksum: 10c0/7d999c7bebf053bb49cb706fdc6c5366737cff0f7f7518f52d32d7f7ad7b898904f03673648a2af5c4f22396f5c05f1d8bddbf010d6595052d07ba8163d506ad
   languageName: node
   linkType: hard
 
@@ -4438,8 +4464,8 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^9.32.0"
     "@lit/react": "npm:^1.0.8"
-    "@noble/hashes": "npm:^1.8.0"
-    "@polkadot-api/substrate-bindings": "npm:^0.15.1"
+    "@noble/hashes": "npm:^2.0.0"
+    "@polkadot-api/substrate-bindings": "npm:^0.16.3"
     "@tsconfig/recommended": "npm:^1.0.10"
     "@tsconfig/strictest": "npm:^2.0.5"
     "@types/react": "npm:^19.1.9"
