@@ -17,6 +17,7 @@ export class ConnectionButton extends DotConnectElement {
     super.styles,
     css`
       :host {
+        display: contents;
         font-size: 1.5em;
       }
 
