@@ -7,7 +7,7 @@
  * This file has been adapted from the original version that can be found at:
  * https://github.com/polkadot-js/ui/blob/16ca4b023377421fe1f8ab976cdc3110f5b0f281/packages/ui-shared/src/icons/polkadot.ts
  */
-import { blake2b as blake2bJs } from "@noble/hashes/blake2b";
+import { blake2b } from "@noble/hashes/blake2.js";
 import { AccountId } from "@polkadot-api/substrate-bindings";
 
 export function generatePolkadotIcon(
@@ -95,8 +95,8 @@ function blake2AsU8a(
   const u8a = data;
 
   return key
-    ? blake2bJs(u8a, { dkLen: byteLength, key })
-    : blake2bJs(u8a, { dkLen: byteLength });
+    ? blake2b(u8a, { dkLen: byteLength, key })
+    : blake2b(u8a, { dkLen: byteLength });
 }
 
 function getRotation() {
