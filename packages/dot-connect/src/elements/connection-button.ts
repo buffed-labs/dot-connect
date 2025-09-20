@@ -17,10 +17,12 @@ export class ConnectionButton extends DotConnectElement {
     super.styles,
     css`
       :host {
+        display: inline-flex;
         font-size: 1.5em;
       }
 
       #button {
+        width: 100%;
         text-wrap-mode: nowrap;
       }
 

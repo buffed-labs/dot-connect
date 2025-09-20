@@ -14,6 +14,10 @@ export class PolkadotIdenticon extends LitElement {
   backgroundColor: string = "transparent";
 
   static override styles = css`
+    :host {
+      display: inline-flex;
+    }
+
     button {
       cursor: copy;
     }
