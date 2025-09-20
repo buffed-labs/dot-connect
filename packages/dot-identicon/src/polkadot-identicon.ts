@@ -7,15 +7,24 @@ export class PolkadotIdenticon extends LitElement {
   @property()
   address!: string;
 
+  // @deprecated use CSS property --size instead
   @property()
-  size: string | number = 24;
+  size?: string | number;
 
+  // @deprecated use CSS property --background-color instead
   @property()
-  backgroundColor: string = "transparent";
+  backgroundColor?: string;
 
   static override styles = css`
     :host {
       display: inline-flex;
+      width: var(--size, 24px);
+      min-width: var(--size, 24px);
+      max-width: var(--size, 24px);
+      height: var(--size, 24px);
+      min-height: var(--size, 24px);
+      max-height: var(--size, 24px);
+      aspect-ratio: 1;
     }
 
     button {
@@ -23,15 +32,31 @@ export class PolkadotIdenticon extends LitElement {
     }
   `;
 
+  override updated(changedProps: Map<string, unknown>) {
+    if (changedProps.has("size") && this.size !== undefined) {
+      this.style.setProperty(
+        "--size",
+        typeof this.size === "number" ? `${this.size}px` : this.size,
+      );
+    }
+
+    if (
+      changedProps.has("background-color") &&
+      this.backgroundColor !== undefined
+    ) {
+      this.style.setProperty("--background-color", this.backgroundColor);
+    }
+  }
+
   protected override render() {
     const circles = generatePolkadotIcon(this.address, {
-      backgroundColor: this.backgroundColor,
+      backgroundColor: `var(--background-color, transparent)`,
     });
 
     return html`<svg
       name=${this.address}
-      width=${this.size}
-      height=${this.size}
+      width="100%"
+      height="100%"
       viewBox="0 0 64 64"
     >
       ${circles.map(
