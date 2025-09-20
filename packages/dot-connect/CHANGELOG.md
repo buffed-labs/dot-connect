@@ -1,5 +1,14 @@
 # dot-connect
 
+## 0.22.2
+
+### Patch Changes
+
+- [#375](https://github.com/buffed-labs/dot-connect/pull/375) [`7f0480a`](https://github.com/buffed-labs/dot-connect/commit/7f0480ab93f6211a84ccbecf44fc9c27542c81de) Thanks [@tien](https://github.com/tien)! - Applied `display: inline-flex` to web-component `host`.
+
+- Updated dependencies [[`7f0480a`](https://github.com/buffed-labs/dot-connect/commit/7f0480ab93f6211a84ccbecf44fc9c27542c81de), [`7b79d5c`](https://github.com/buffed-labs/dot-connect/commit/7b79d5ca75e7d8b26b42f6a109e5319365a3879f), [`b1775ca`](https://github.com/buffed-labs/dot-connect/commit/b1775ca0ec6d5ddcaff4d0e29a760095255a60af)]:
+  - dot-identicon@0.1.4
+
 ## 0.22.1
 
 ### Patch Changes
