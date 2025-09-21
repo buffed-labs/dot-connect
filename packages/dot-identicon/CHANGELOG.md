@@ -1,5 +1,11 @@
 # dot-identicon
 
+## 0.1.5
+
+### Patch Changes
+
+- [#376](https://github.com/buffed-labs/dot-connect/pull/376) [`9d0d05a`](https://github.com/buffed-labs/dot-connect/commit/9d0d05af1e69559a9356d847347132e7d013347f) Thanks [@tien](https://github.com/tien)! - Fixed non-functional background color attribute.
+
 ## 0.1.4
 
 ### Patch Changes
