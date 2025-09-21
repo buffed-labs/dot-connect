@@ -41,7 +41,7 @@ export class PolkadotIdenticon extends LitElement {
     }
 
     if (
-      changedProps.has("background-color") &&
+      changedProps.has("backgroundColor") &&
       this.backgroundColor !== undefined
     ) {
       this.style.setProperty("--background-color", this.backgroundColor);
