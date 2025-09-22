@@ -67,7 +67,7 @@ export const config = defineConfig({
 
 // Register dot-connect custom elements & configure supported wallets
 registerDotConnect({
-  wallets: config.wallets,
+  wallets: config.wallets ?? [],
 });
 ```
 
