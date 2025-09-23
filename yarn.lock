@@ -1728,6 +1728,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@noble/hashes@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@noble/hashes@npm:2.0.1"
+  checksum: 10c0/e81769ce21c3b1c80141a3b99bd001f17edea09879aa936692ae39525477386d696101cd573928a304806efb2b9fa751e1dd83241c67d0c84d30091e85c79bdb
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -4507,7 +4514,7 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^9.36.0"
     "@lit/react": "npm:^1.0.8"
-    "@noble/hashes": "npm:^2.0.0"
+    "@noble/hashes": "npm:^2.0.1"
     "@polkadot-api/substrate-bindings": "npm:^0.16.3"
     "@tsconfig/recommended": "npm:^1.0.10"
     "@tsconfig/strictest": "npm:^2.0.5"
