@@ -48,13 +48,13 @@
     "@reactive-dot/core": "^0.48.0",
     "@reactive-dot/wallet-ledger": "^0.16.51",
     "@tsconfig/recommended": "^1.0.10",
-    "@tsconfig/strictest": "^2.0.5",
+    "@tsconfig/strictest": "^2.0.6",
     "@types/qrcode": "^1.5.5",
-    "@types/react": "^19.1.13",
+    "@types/react": "^19.1.16",
     "eslint": "^9.36.0",
     "polkadot-api": "^1.18.0",
-    "typescript": "^5.9.2",
-    "typescript-eslint": "^8.44.0"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.45.0"
   },
   "peerDependencies": {
     "@reactive-dot/core": ">= 0.46.0",
