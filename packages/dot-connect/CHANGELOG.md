@@ -1,5 +1,38 @@
 # dot-connect
 
+## 0.22.3
+
+### Patch Changes
+
+- [#391](https://github.com/buffed-labs/dot-connect/pull/391) [`b747edf`](https://github.com/buffed-labs/dot-connect/commit/b747edf7d5c9ecb8852255af9d9d6d72d7f1679b) Thanks [@tien](https://github.com/tien)! - Prefer the entire `ReactiveDot.Config` object for the setup function.
+
+  ## Before
+
+  ```ts
+  export const config = defineConfig({
+    // ...
+    wallets: [new InjectedWalletProvider()],
+  });
+
+  registerDotConnect({
+    wallets: config.wallets ?? [],
+  });
+  ```
+
+  ## After
+
+  ```ts
+  export const config = defineConfig({
+    // ...
+    wallets: [new InjectedWalletProvider()],
+  });
+
+  registerDotConnect(config);
+  ```
+
+- Updated dependencies [[`e8de38a`](https://github.com/buffed-labs/dot-connect/commit/e8de38a3b9596bcf20862db2b0b80153fa960f94)]:
+  - dot-identicon@0.1.6
+
 ## 0.22.2
 
 ### Patch Changes
