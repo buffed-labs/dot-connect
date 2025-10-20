@@ -798,6 +798,7 @@ __metadata:
     "@reactive-dot/wallet-mimir": "npm:^0.1.26"
     "@reactive-dot/wallet-walletconnect": "npm:^0.17.39"
     dot-connect: "workspace:^"
+    highlight.js: "npm:^11.11.1"
     polkadot-api: "npm:^1.20.0"
     vitepress: "npm:^1.6.4"
     vue: "npm:^3.5.22"
@@ -5675,6 +5676,13 @@ __metadata:
   version: 1.0.8
   resolution: "hey-listen@npm:1.0.8"
   checksum: 10c0/38db3028b4756f3d536c0f6a92da53bad577ab649b06dddfd0a4d953f9a46bbc6a7f693c8c5b466a538d6d23dbc469260c848427f0de14198a2bbecbac37b39e
+  languageName: node
+  linkType: hard
+
+"highlight.js@npm:^11.11.1":
+  version: 11.11.1
+  resolution: "highlight.js@npm:11.11.1"
+  checksum: 10c0/40f53ac19dac079891fcefd5bd8a21cf2e8931fd47da5bd1dca73b7e4375c1defed0636fc39120c639b9c44119b7d110f7f0c15aa899557a5a1c8910f3c0144c
   languageName: node
   linkType: hard
 
