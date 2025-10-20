@@ -32,6 +32,12 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
         transparent 95%
       );
 
+      --outline-color: color-mix(
+        in srgb,
+        var(--on-surface-color) 25%,
+        transparent
+      );
+
       --info-color: var(--dc-info-color, light-dark(#007aff, #0a84ff));
       --success-color: var(--dc-success-color, light-dark(#34c759, #30d158));
       --error-color: var(--dc-error-color, light-dark(#ff3b30, #ff453a));
@@ -54,6 +60,17 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
     h6 {
       font-family: var(--headline-font-family);
       margin: 0;
+    }
+
+    a {
+      color: var(--primary-color);
+      font-weight: bolder;
+      text-decoration: none;
+      transition: scale 0.25s;
+
+      &:hover {
+        scale: 1.04;
+      }
     }
 
     button {

@@ -106,10 +106,8 @@ export class Dialog extends DotConnectElement {
           align-items: center;
           gap: 1rem;
 
-          margin: 0 1.2rem;
-          border-bottom: 1px solid var(--on-surface-color);
+          padding: 1rem 1.2rem;
           background-color: var(--surface-color);
-          padding: 1rem 0;
 
           h2 {
             flex: 1;
@@ -124,7 +122,20 @@ export class Dialog extends DotConnectElement {
         }
 
         #content {
-          margin: 1.2rem;
+          margin: 0 1.2rem 1.2rem 1.2rem;
+        }
+
+        footer {
+          color: color-mix(in srgb, currentcolor, transparent 15%);
+          font-size: 0.75em;
+          position: sticky;
+          bottom: 0;
+          background-color: var(--surface-color);
+
+          ::slotted(*) {
+            padding: 1rem 1.2rem;
+            border-top: 0.5px solid var(--outline-color);
+          }
         }
       `,
     ];
@@ -162,6 +173,9 @@ export class Dialog extends DotConnectElement {
       <div id="content">
         <slot name="content"></slot>
       </div>
+      <footer id="footer">
+        <slot name="footer"></slot>
+      </footer>
     </dialog>`;
   }
 }
