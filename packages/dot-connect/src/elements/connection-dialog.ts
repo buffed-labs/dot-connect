@@ -97,11 +97,22 @@ export class ConnectionDialog extends DotConnectElement {
           margin: 1rem 0.5rem 0.5rem 0.5rem;
         }
 
+        section:first-child h3 {
+          margin-top: 0;
+        }
+
         hr {
           margin-inline-start: 3.2rem;
           margin-inline-end: 0.5rem;
-          border-top: 1px solid var(--color-on-surface);
-          opacity: 0.25;
+          border: none;
+          border-bottom: 0.5px solid var(--outline-color);
+        }
+
+        *[slot="footer"] > div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 0 0.5rem;
         }
       `,
     ];
@@ -196,6 +207,14 @@ export class ConnectionDialog extends DotConnectElement {
               </ul>
             </section>`,
         )}
+      </div>
+      <div slot="footer">
+        <div>
+          <span>New to Web3 wallets?</span>
+          <a href="https://polkadot.com/get-started/wallets/" target="_blank"
+            >Learn more</a
+          >
+        </div>
       </div>
     </dc-dialog>`;
   }

@@ -60,8 +60,8 @@ export class LedgerDialog extends DotConnectElement {
       hr {
         margin-inline-start: 3.2rem;
         margin-inline-end: 0.5rem;
-        border-top: 1px solid var(--color-on-surface);
-        opacity: 0.25;
+        border: none;
+        border-bottom: 0.5px solid var(--outline-color);
       }
     `,
   ];
