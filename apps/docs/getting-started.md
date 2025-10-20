@@ -1,151 +1,124 @@
-# Getting started
+# Getting Started
 
-## Installation
+Add DOTConnect to a ReactiveDOT app in a few small steps.
 
-### Set up a Reactive DOT application
+## Install packages
 
-Start by setting up your Reactive DOT application. Follow the guide [here](https://reactivedot.dev/react/getting-started/setup).
+1. Create your ReactiveDOT project by following the [official setup guide](https://reactivedot.dev/react/getting-started/setup).
+2. Add DOTConnect:
 
-### Add DOTConnect as a dependency
+   ::: code-group
 
-::: code-group
+   ```sh [npm]
+   npm add dot-connect
+   ```
 
-```sh [npm]
-npm add dot-connect
-```
+   ```sh [yarn]
+   yarn add dot-connect
+   ```
 
-```sh [yarn]
-yarn add dot-connect
-```
+   ```sh [pnpm]
+   pnpm add dot-connect
+   ```
 
-```sh [pnpm]
-pnpm add dot-connect
-```
+   :::
 
-:::
+3. Install any wallet-specific dependencies you need (Ledger, WalletConnect, etc.) using the [ReactiveDOT guide](https://reactivedot.dev/react/getting-started/connect-wallets#install-optional-dependencies).
 
-### Install optional dependencies
+## Register DOTConnect
 
-Install any optional dependencies based on the wallet types you want to support by following this [documentation](https://reactivedot.dev/react/getting-started/connect-wallets#install-optional-dependencies).
-
-## Setup config
-
-Configure your project by adding the following code:
+Use the same ReactiveDOT config you already maintain; DOTConnect only needs the highlighted line:
 
 ```ts
-import { defineConfig } from "@reactive-dot/core";
-import { InjectedWalletProvider } from "@reactive-dot/core/wallets.js";
-import { LedgerWallet } from "@reactive-dot/wallet-ledger";
-import { WalletConnect } from "@reactive-dot/wallet-walletconnect";
+// ...
+// [!code focus]
 import { registerDotConnect } from "dot-connect";
 
-// ...
-
-// More information on how to set up your config: https://reactivedot.dev/react/getting-started/setup#create-config
+// ReactiveDOT config - follow the official guide for your project.
 export const config = defineConfig({
   // ...
   wallets: [
     new InjectedWalletProvider(),
     new LedgerWallet(),
     new WalletConnect({
-      projectId: "WALLET_CONNECT_PROJECT_ID",
-      providerOptions: {
-        metadata: {
-          name: "APP_NAME",
-          description: "APP_DESCRIPTION",
-          url: "APP_URL",
-          icons: ["APP_ICON"],
-        },
-      },
-      chainIds: [
-        // https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-13.md
-        "polkadot:91b171bb158e2d3848fa23a9f1c25182", // Polkadot
-      ],
+      // ...
     }),
+    // ...
   ],
 });
 
-// Register dot-connect custom elements & configure supported wallets
-registerDotConnect(config);
+// ...
+
+registerDotConnect(config); // [!code focus]
 ```
 
-## Import required fonts
+`registerDotConnect` creates the custom elements and passes through the wallet config.
 
-To import the necessary fonts, use one of the following methods:
+## Load fonts once
+
+Import DOTConnect fonts in your global CSS or entry module:
 
 ```ts
 import "dot-connect/font.css";
 ```
 
-Or
-
 ```css
 @import "dot-connect/font.css";
 ```
 
-## Usage
+## Render the UI
 
-### Add a connection button
-
-Add a connection button to your application using a web component. You can include it in your HTML or JSX.
-
-#### Using HTML
+### Web component
 
 ```html
-<!-- ... -->
-<body>
-  <dc-connection-button></dc-connection-button>
-</body>
+<dc-connection-button></dc-connection-button>
 ```
 
-#### Using React
+### React wrapper
 
 ```tsx
 import { ConnectionButton } from "dot-connect/react.js";
 
-function App() {
-  return (
-    <div>
-      <ConnectionButton />
-    </div>
-  );
+export function App() {
+  return <ConnectionButton />;
 }
 ```
 
-### Manually trigger the connection dialog
+## Manually control the dialog
 
-Use the `dc-connection-dialog` element to manually control the connection dialog.
-
-#### With Vanilla JS
-
-Invoke the `show()` and `close()` methods on the dialog element:
+### Vanilla JS
 
 ```html
-<dc-connection-dialog id="connection-dialog"></dc-connection-dialog>
+<dc-connection-dialog id="wallet-dialog"></dc-connection-dialog>
+<button type="button" onclick="document.getElementById('wallet-dialog').show()">
+  Open dialog
+</button>
 <script>
-  const dialog = document.getElementById("connection-dialog");
-
-  dialog.show();
-  dialog.close();
+  const walletDialog = document.getElementById("wallet-dialog");
+  // Call walletDialog.close() when you want to hide it again, e.g. on backdrop clicks.
 </script>
 ```
 
-#### With React
+### React
 
 ```tsx
 import { ConnectionDialog } from "dot-connect/react.js";
+import { useState } from "react";
 
-function App() {
+export function App() {
   const [open, setOpen] = useState(false);
+
   return (
-    <div>
+    <>
       <ConnectionDialog open={open} onClose={() => setOpen(false)} />
-      <button onClick={() => setOpen(true)}>Open dialog</button>
-    </div>
+      <button type="button" onClick={() => setOpen(true)}>
+        Open dialog
+      </button>
+    </>
   );
 }
 ```
 
-## Account management
+## Accounts API
 
-Access accounts via the Reactive DOT API. For more details and examples, refer to the documentation [here](https://reactivedot.dev/react/getting-started/connect-wallets#display-available-accounts).
+Check the [ReactiveDOT docs](https://reactivedot.dev/react/getting-started/connect-wallets#display-available-accounts) for the latest guidance on listing accounts and reacting to wallet state.
