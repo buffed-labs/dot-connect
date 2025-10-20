@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.23.0
+
+### Minor Changes
+
+- [#392](https://github.com/buffed-labs/dot-connect/pull/392) [`24eb3c7`](https://github.com/buffed-labs/dot-connect/commit/24eb3c76ff2e3f96b45cfdf9ac5fc193d8a18513) Thanks [@tien](https://github.com/tien)! - Added "learn more" footer.
+
 ## 0.22.3
 
 ### Patch Changes
