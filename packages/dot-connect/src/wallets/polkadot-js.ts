@@ -7,7 +7,7 @@ export const polkadotJs: WalletConfig<InjectedWalletInfo> = {
   selector: (wallet: Wallet) => wallet.id === "injected/polkadot-js",
   name: "Polkadot{.js}",
   platforms: ["chrome", "firefox"],
-  logo: urlFromSvg(
+  icon: urlFromSvg(
     html`<svg
       viewBox="15 15 140 140"
       style="enable-background:new 0 0 170 170;zoom: 1;"

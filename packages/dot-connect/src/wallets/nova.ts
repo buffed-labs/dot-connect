@@ -7,7 +7,7 @@ export const nova: WalletConfig<InjectedWalletInfo> = {
   selector: (wallet: Wallet) => wallet.id === "injected/nova-wallet",
   name: "Nova Wallet",
   platforms: ["ios", "android"],
-  logo: urlFromSvg(
+  icon: urlFromSvg(
     html`<svg
       x="0px"
       y="0px"

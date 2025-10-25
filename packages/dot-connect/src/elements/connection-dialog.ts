@@ -269,7 +269,7 @@ abstract class BaseWalletConnection<
       <div slot="leading" class="icon">
         ${this.walletInfo === undefined
           ? walletIcon({ size: "100%" })
-          : html`<img src=${this.walletInfo.logo.href} />`}
+          : html`<img src=${this.walletInfo.icon.href} />`}
       </div>
       <span slot="headline">${this.walletInfo?.name ?? this.wallet.name}</span>
       <span
@@ -402,7 +402,7 @@ export class DeepLinkWalletConnection extends BaseWalletConnection<DeepLinkWalle
             <div slot="content">
               <dc-qr-code
                 .uri=${this.#uri.get()}
-                .logoSrc=${this.walletInfo?.logo.href}
+                .logoSrc=${this.walletInfo?.icon.href}
               ></dc-qr-code>
               <div id="url-container">
                 <button
@@ -497,7 +497,7 @@ export class DownloadableWallet extends DotConnectElement {
 
     return html`<dc-list-item>
       <div slot="leading" class="icon">
-        <img src=${this.wallet.logo.href} />
+        <img src=${this.wallet.icon.href} />
       </div>
       <span slot="headline">${this.wallet.name}</span>
       <!-- No way to detect wether or not wallet is installed on mobile browser -->

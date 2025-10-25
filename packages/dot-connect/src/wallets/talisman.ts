@@ -7,7 +7,7 @@ export const talisman: WalletConfig<InjectedWalletInfo> = {
   selector: (wallet: Wallet) => wallet.id === "injected/talisman",
   name: "Talisman",
   platforms: ["chrome", "firefox"],
-  logo: urlFromSvg(
+  icon: urlFromSvg(
     html`<svg
       fill="none"
       viewBox="0 0 64 64"

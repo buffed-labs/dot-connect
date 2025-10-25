@@ -8,7 +8,7 @@ export const bittensor: WalletConfig<InjectedWalletInfo> = {
     wallet.id === "injected/@opentensor/bittensor-extension",
   name: "Bittensor",
   platforms: ["chrome"],
-  logo: urlFromSvg(
+  icon: urlFromSvg(
     html`<svg
       id="a"
       xmlns="http://www.w3.org/2000/svg"
