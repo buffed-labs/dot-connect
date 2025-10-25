@@ -5,7 +5,7 @@ import { html } from "lit";
 export const walletConnect: WalletConfig<BaseWalletInfo> = {
   selector: (wallet) => wallet.id === "wallet-connect",
   name: "WalletConnect",
-  logo: urlFromSvg(
+  icon: urlFromSvg(
     html`<svg
       fill="none"
       viewBox="0 0 400 400"

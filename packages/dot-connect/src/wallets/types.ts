@@ -2,7 +2,7 @@ import type { Wallet } from "@reactive-dot/core/wallets.js";
 
 export type BaseWalletInfo = {
   name: string;
-  logo: URL;
+  icon: URL;
 };
 
 export type Platform = "chrome" | "firefox" | "ios" | "android";

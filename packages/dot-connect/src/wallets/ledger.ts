@@ -5,7 +5,7 @@ import { html } from "lit";
 export const ledger: WalletConfig<BaseWalletInfo> = {
   selector: (wallet) => wallet.id === "ledger",
   name: "Ledger",
-  logo: urlFromSvg(
+  icon: urlFromSvg(
     html`<svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 28 28"

@@ -13,5 +13,12 @@ export function getWalletMetadata(wallet: Wallet) {
     return;
   }
 
-  return { name: walletConfig.name, logo: walletConfig.logo };
+  return {
+    name: walletConfig.name,
+    icon: walletConfig.icon,
+    /**
+     * @deprecated Use icon instead.
+     */
+    logo: walletConfig.icon,
+  };
 }

@@ -7,7 +7,7 @@ export const subWallet: WalletConfig<InjectedWalletInfo> = {
   selector: (wallet: Wallet) => wallet.id === "injected/subwallet-js",
   name: "SubWallet",
   platforms: ["chrome", "firefox", "ios", "android"],
-  logo: urlFromSvg(
+  icon: urlFromSvg(
     html`<svg
       viewBox="0 0 704 704"
       fill="none"
