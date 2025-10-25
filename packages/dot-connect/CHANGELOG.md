@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.23.1
+
+### Patch Changes
+
+- [#399](https://github.com/buffed-labs/dot-connect/pull/399) [`c91210d`](https://github.com/buffed-labs/dot-connect/commit/c91210d890e751e862010f44f258835220957162) Thanks [@tien](https://github.com/tien)! - Renamed wallet's "logo" to "icon".
+
 ## 0.23.0
 
 ### Minor Changes
