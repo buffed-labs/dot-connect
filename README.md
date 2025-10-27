@@ -1,4 +1,4 @@
-# dot-connect
+# DOTConnect
 
 Wallets connector for Substrate DApps.
 
