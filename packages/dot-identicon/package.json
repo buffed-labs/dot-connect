@@ -40,12 +40,12 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
-    "@tsconfig/recommended": "^1.0.10",
+    "@tsconfig/recommended": "^1.0.11",
     "@tsconfig/strictest": "^2.0.6",
     "@types/react": "^19.2.2",
     "eslint": "^9.38.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.1"
+    "typescript-eslint": "^8.46.2"
   },
   "peerDependencies": {
     "react": ">= 18"
