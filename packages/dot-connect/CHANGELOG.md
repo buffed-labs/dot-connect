@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.23.2
+
+### Patch Changes
+
+- [#404](https://github.com/buffed-labs/dot-connect/pull/404) [`a271055`](https://github.com/buffed-labs/dot-connect/commit/a271055277286781ffd8d96a6b11be879cd176c8) Thanks [@tien](https://github.com/tien)! - Improved focus styling & accessibility.
+
 ## 0.23.1
 
 ### Patch Changes
