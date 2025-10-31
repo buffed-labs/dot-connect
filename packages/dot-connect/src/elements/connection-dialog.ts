@@ -254,7 +254,8 @@ abstract class BaseWalletConnection<
   static override readonly styles = [
     super.styles,
     css`
-      button {
+      button,
+      .button {
         min-width: 5rem;
       }
 
@@ -480,7 +481,8 @@ export class DownloadableWallet extends DotConnectElement {
   static override styles = [
     super.styles,
     css`
-      button {
+      button,
+      .button {
         min-width: 5rem;
       }
     `,
@@ -503,12 +505,11 @@ export class DownloadableWallet extends DotConnectElement {
       <!-- No way to detect wether or not wallet is installed on mobile browser -->
       ${isMobile ? nothing : html`<span slot="supporting">Not installed</span>`}
       <a
+        class="button info sm"
         slot="trailing"
-        style="display: content; text-decoration: none;"
         href=${this.#downloadUrl.url}
         target="_blank"
-      >
-        <button class="info sm">Get</button></a
+        >Get</a
       >
     </dc-list-item>`;
   }

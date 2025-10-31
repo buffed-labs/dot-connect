@@ -50,7 +50,7 @@ export class LedgerDialog extends DotConnectElement {
         justify-content: space-between;
         align-items: center;
 
-        padding: 0 0.5rem 0.75rem 0.5rem;
+        padding: 0 0.5rem 1rem 0.5rem;
 
         h3 {
           font-size: 0.8em;
@@ -62,6 +62,10 @@ export class LedgerDialog extends DotConnectElement {
         margin-inline-end: 0.5rem;
         border: none;
         border-bottom: 0.5px solid var(--outline-color);
+      }
+
+      button.text {
+        padding: 0;
       }
     `,
   ];
