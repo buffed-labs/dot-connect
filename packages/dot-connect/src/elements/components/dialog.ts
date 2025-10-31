@@ -115,10 +115,10 @@ export class Dialog extends DotConnectElement {
             text-align: center;
             margin-inline-start: 2rem;
           }
+        }
 
-          #close-button {
-            cursor: pointer;
-          }
+        #close-button {
+          padding: 0;
         }
 
         #content {
@@ -162,13 +162,14 @@ export class Dialog extends DotConnectElement {
     >
       <header>
         <h2><slot name="title"></slot></h2>
-        <div
+        <button
           id="close-button"
-          role="button"
+          class="icon"
           @click=${() => this.#dialogRef.value?.close()}
+          autofocus
         >
           ${closeIcon({ size: "1rem" })}
-        </div>
+        </button>
       </header>
       <div id="content">
         <slot name="content"></slot>

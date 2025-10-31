@@ -43,6 +43,14 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       --error-color: var(--dc-error-color, light-dark(#ff3b30, #ff453a));
 
       --max-border-radius: var(--dc-max-border-radius, 999px);
+
+      box-sizing: border-box;
+
+      &:focus-visible {
+        outline: 2px solid
+          color-mix(in srgb, var(--primary-color) 50%, transparent);
+        outline-offset: 2px;
+      }
     }
 
     :host {
@@ -73,7 +81,11 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       }
     }
 
-    button {
+    button,
+    a.button {
+      display: inline-block;
+      text-align: center;
+
       color: var(--on-primary-color);
       font-weight: 600;
       border: none;
@@ -86,6 +98,15 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       &.sm,
       &.xs {
         padding: 0.6em 1.25em;
+
+        &.icon {
+          padding: 0.6em;
+        }
+      }
+
+      &.icon {
+        display: inline-flex;
+        padding: 0.8em;
       }
 
       &.sm {
@@ -98,8 +119,6 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
 
       &.text {
         color: var(--primary-color);
-        padding-inline-start: 0;
-        padding-inline-end: 0;
       }
 
       &.info {
@@ -126,7 +145,7 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       }
 
       &:hover {
-        scale: 1.04;
+        scale: 1.06;
       }
 
       &:active {
