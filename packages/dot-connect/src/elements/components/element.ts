@@ -48,7 +48,10 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
 
       &:focus-visible {
         outline: 2px solid
-          color-mix(in srgb, var(--primary-color) 50%, transparent);
+          light-dark(
+            color-mix(in srgb, var(--primary-color) 75%, transparent),
+            color-mix(in srgb, var(--primary-color) 50%, transparent)
+          );
         outline-offset: 2px;
       }
     }
@@ -104,11 +107,6 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
         }
       }
 
-      &.icon {
-        display: inline-flex;
-        padding: 0.8em;
-      }
-
       &.sm {
         font-size: 0.6rem;
       }
@@ -137,6 +135,12 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       &.success,
       &.error {
         background-color: var(--surface-container-color);
+      }
+
+      &.icon {
+        display: inline-flex;
+        padding: 0.8em;
+        color: var(--on-surface-color);
       }
 
       &.text,
