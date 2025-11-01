@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.23.3
+
+### Patch Changes
+
+- [#406](https://github.com/buffed-labs/dot-connect/pull/406) [`c45ae02`](https://github.com/buffed-labs/dot-connect/commit/c45ae026ceae9f07c83a74e2dd42a099bb088e69) Thanks [@tien](https://github.com/tien)! - Fixed incorrect light-mode button color.
+
 ## 0.23.2
 
 ### Patch Changes
