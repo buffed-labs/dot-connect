@@ -114,6 +114,10 @@ export class ConnectionDialog extends DotConnectElement {
           justify-content: space-between;
           margin: 0 0.5rem;
         }
+
+        #learn-more {
+          padding: 0;
+        }
       `,
     ];
   }
@@ -211,7 +215,11 @@ export class ConnectionDialog extends DotConnectElement {
       <div slot="footer">
         <div>
           <span>New to Web3 wallets?</span>
-          <a href="https://polkadot.com/get-started/wallets/" target="_blank"
+          <a
+            id="learn-more"
+            class="button text"
+            href="https://polkadot.com/get-started/wallets/"
+            target="_blank"
             >Learn more</a
           >
         </div>
