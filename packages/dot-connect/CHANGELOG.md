@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.24.0
+
+### Minor Changes
+
+- [#412](https://github.com/buffed-labs/dot-connect/pull/412) [`1a73945`](https://github.com/buffed-labs/dot-connect/commit/1a739455500651a60044a4ae16438f23051af27c) Thanks [@tien](https://github.com/tien)! - Connection dialog is now non-modal by default and anchored to the connection button.
+
 ## 0.23.3
 
 ### Patch Changes
