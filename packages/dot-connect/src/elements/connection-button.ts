@@ -7,9 +7,8 @@ import { observableSignal } from "../observable-signal.js";
 import { accounts$, connectedWallets$ } from "../stores.js";
 import { DotConnectElement } from "./components/element.js";
 import "./connection-dialog.js";
-import { signal } from "@lit-labs/signals";
 import { css, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 
 @customElement("dc-connection-button")
 export class ConnectionButton extends DotConnectElement {
@@ -35,7 +34,8 @@ export class ConnectionButton extends DotConnectElement {
     `,
   ];
 
-  readonly #dialogOpen = signal(false);
+  @property({ attribute: "dialog-variant" })
+  dialogVariant: "modal" | "non-modal" = "non-modal";
 
   readonly #connectedWallets = observableSignal(this, connectedWallets$, []);
 
@@ -43,27 +43,21 @@ export class ConnectionButton extends DotConnectElement {
 
   override render() {
     return html`
-      <button
-        id="button"
-        part="button"
-        @click=${() => this.#dialogOpen.set(true)}
-      >
-        ${this.#connectedWallets.get().length > 0
-          ? html`Connected | ${this.#connectedWallets.get().length}
-              <span class="icon"
-                >${this.#connectedWallets.get().length === 1
-                  ? walletIcon({ size: "1em" })
-                  : walletsIcon({ size: "1em" })}</span
-              >
-              ${this.#accounts.get().length}
-              <span class="icon">${usersIcon({ size: "1em" })}</span>`
-          : html`Connect
-              <span class="icon">${walletsIcon({ size: "1em" })}</span>`}
-      </button>
-      <dc-connection-dialog
-        ?open=${this.#dialogOpen.get()}
-        @close=${() => this.#dialogOpen.set(false)}
-      ></dc-connection-dialog>
+      <dc-connection-dialog variant=${this.dialogVariant}>
+        <button id="button" part="button" slot="trigger">
+          ${this.#connectedWallets.get().length > 0
+            ? html`Connected | ${this.#connectedWallets.get().length}
+                <span class="icon"
+                  >${this.#connectedWallets.get().length === 1
+                    ? walletIcon({ size: "1em" })
+                    : walletsIcon({ size: "1em" })}</span
+                >
+                ${this.#accounts.get().length}
+                <span class="icon">${usersIcon({ size: "1em" })}</span>`
+            : html`Connect
+                <span class="icon">${walletsIcon({ size: "1em" })}</span>`}
+        </button>
+      </dc-connection-dialog>
     `;
   }
 }

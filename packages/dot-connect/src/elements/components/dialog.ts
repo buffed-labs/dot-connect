@@ -2,64 +2,39 @@ import { close as closeIcon } from "../../icons/index.js";
 import { DotConnectElement } from "./element.js";
 import { css, html, type PropertyValues } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { createRef, ref } from "lit/directives/ref.js";
 
 @customElement("dc-dialog")
 export class Dialog extends DotConnectElement {
-  @property({ type: Boolean })
-  open = false;
-
-  readonly #dialogRef = createRef<HTMLDialogElement>();
-
-  protected override updated(changedProperties: PropertyValues) {
-    if (changedProperties.has("open")) {
-      if (this.open) {
-        this.#dialogRef.value?.showModal();
-      } else {
-        this.#dialogRef.value?.close();
-      }
-    }
-  }
-
-  #isBackdropClick(event: MouseEvent) {
-    if (this.#dialogRef.value === undefined) {
-      return false;
-    }
-
-    if (this.#dialogRef.value !== event.target) {
-      return false;
-    }
-
-    const boundingClientRect = this.#dialogRef.value.getBoundingClientRect();
-
-    return (
-      event.clientX < boundingClientRect.left ||
-      event.clientX > boundingClientRect.right ||
-      event.clientY < boundingClientRect.top ||
-      event.clientY > boundingClientRect.bottom
-    );
-  }
-
   static override get styles() {
     return [
       super.styles,
       css`
+        :host {
+          --border-radius: min(1.5rem, var(--max-border-radius));
+        }
+
         dialog {
           width: 100dvw;
 
-          @media (min-width: 20rem) {
+          @media (min-width: 25rem) {
             width: revert;
             min-width: min(23rem, 100dvw);
+
+            &[popover] {
+              min-width: min(max(23rem, anchor-size(width)), 100dvw);
+            }
           }
 
           box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.32);
           border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: min(1.5rem, var(--max-border-radius));
+          border-radius: var(--border-radius);
           padding: 0;
           background-color: var(--surface-color);
 
           opacity: 0;
-          translate: 0 2rem;
+          translate: 0 0.5rem;
 
           transition:
             opacity 0.25s,
@@ -67,34 +42,61 @@ export class Dialog extends DotConnectElement {
             overlay 0.25s allow-discrete,
             display 0.25s allow-discrete;
 
+          &:popover-open,
           &[open] {
             opacity: 1;
             translate: 0 0;
 
             @starting-style {
               opacity: 0;
-              translate: 0 2rem;
+              translate: 0 0.5rem;
             }
           }
         }
 
-        dialog::backdrop {
-          background-color: rgba(0, 0, 0, 0);
-          backdrop-filter: blur(0px);
-          transition:
-            background-color 0.25s,
-            backdrop-filter 0.25s,
-            overlay 0.25s allow-discrete,
-            display 0.25s allow-discrete;
+        dialog[popover] {
+          --gap: 0.5rem;
+
+          position: fixed;
+          max-height: calc(100dvh - anchor-size(height) - var(--gap));
+          margin: auto;
+          margin-bottom: unset;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+
+          @media (min-width: 25rem) {
+            max-height: 100dvh;
+            position: unset;
+            inset: auto;
+            inset-block-start: calc(anchor(outside) + var(--gap));
+            inset-inline-start: calc(anchor(inside));
+            margin: 0;
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+
+            position-try-fallbacks: flip-block, flip-inline;
+          }
         }
 
-        dialog[open]::backdrop {
-          background-color: rgba(0, 0, 0, 0.6);
-          backdrop-filter: blur(16px);
-
-          @starting-style {
+        dialog:not([popover]) {
+          &::backdrop {
             background-color: rgba(0, 0, 0, 0);
             backdrop-filter: blur(0px);
+            transition:
+              background-color 0.25s,
+              backdrop-filter 0.25s,
+              overlay 0.25s allow-discrete,
+              display 0.25s allow-discrete;
+          }
+
+          &[open]::backdrop {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+
+            @starting-style {
+              background-color: rgba(0, 0, 0, 0);
+              backdrop-filter: blur(0px);
+            }
           }
         }
 
@@ -141,43 +143,153 @@ export class Dialog extends DotConnectElement {
     ];
   }
 
+  @property({ type: Boolean })
+  open = false;
+
+  #variant: "modal" | "non-modal" = "modal";
+
+  @property()
+  get variant() {
+    return CSS.supports("anchor-name", "--anchor-name")
+      ? this.#variant
+      : "modal";
+  }
+  set variant(value: "modal" | "non-modal") {
+    this.#variant = value;
+  }
+
+  readonly #dialogRef = createRef<HTMLDialogElement>();
+
+  protected override updated(changedProperties: PropertyValues) {
+    if (changedProperties.has("open")) {
+      if (this.open) {
+        this.show();
+      } else {
+        this.#dialogRef.value?.hidePopover();
+      }
+    }
+  }
+
+  show(options?: { source?: Element }) {
+    if (this.variant === "modal") {
+      this.#dialogRef.value?.showModal();
+    } else {
+      this.#dialogRef.value?.togglePopover(
+        // @ts-expect-error TS doesn't know about the popover options yet
+        options,
+      );
+    }
+  }
+
+  hide() {
+    if (this.variant === "modal") {
+      this.#dialogRef.value?.close();
+    } else {
+      this.#dialogRef.value?.hidePopover();
+    }
+  }
+
+  #onTriggerSlotChangeCleanup?: () => void;
+
+  #onTriggerSlotChange(event: Event) {
+    this.#onTriggerSlotChangeCleanup?.();
+
+    const target = (event.target as HTMLSlotElement)
+      .assignedElements({
+        flatten: true,
+      })
+      .at(0);
+
+    if (target !== undefined) {
+      const onClick = () => this.show({ source: target });
+
+      target.addEventListener("click", onClick);
+
+      this.#onTriggerSlotChangeCleanup = () =>
+        this.removeEventListener("click", onClick);
+    }
+  }
+
+  #isBackdropClick(event: MouseEvent) {
+    if (this.#dialogRef.value === undefined) {
+      return false;
+    }
+
+    if (this.#dialogRef.value !== event.target) {
+      return false;
+    }
+
+    const boundingClientRect = this.#dialogRef.value.getBoundingClientRect();
+
+    return (
+      event.clientX < boundingClientRect.left ||
+      event.clientX > boundingClientRect.right ||
+      event.clientY < boundingClientRect.top ||
+      event.clientY > boundingClientRect.bottom
+    );
+  }
+
   override render() {
-    return html`<dialog
-      ${ref(this.#dialogRef)}
-      @close=${(event: Event) =>
-        this.dispatchEvent(new Event(event.type, event))}
-      @pointerdown=${(event: MouseEvent) => {
-        if (this.#isBackdropClick(event)) {
-          this.#dialogRef.value?.addEventListener(
-            "pointerup",
-            (event) => {
-              if (this.#isBackdropClick(event)) {
-                this.#dialogRef.value?.close();
+    return html`<slot
+        name="trigger"
+        @slotchange=${this.#onTriggerSlotChange}
+      ></slot>
+      <dialog
+        ${ref(this.#dialogRef)}
+        id="dialog"
+        popover=${ifDefined(this.variant === "modal" ? undefined : "auto")}
+        @toggle=${(event: ToggleEvent) => {
+          this.dispatchEvent(new Event(event.type, event));
+
+          if (event.newState === "closed") {
+            this.dispatchEvent(new Event("close", event));
+          }
+        }}
+        @close=${(event: Event) => {
+          this.dispatchEvent(new Event(event.type, event));
+        }}
+        @pointerdown=${(event: MouseEvent) => {
+          if (this.variant === "modal" && this.#isBackdropClick(event)) {
+            this.#dialogRef.value?.addEventListener(
+              "pointerup",
+              (event) => {
+                if (this.#isBackdropClick(event)) {
+                  this.#dialogRef.value?.close();
+                }
+              },
+              { once: true },
+            );
+          }
+        }}
+      >
+        <header>
+          <h2><slot name="title"></slot></h2>
+          <button
+            id="close-button"
+            class="icon"
+            popovertarget=${ifDefined(
+              this.variant === "modal" ? undefined : "dialog",
+            )}
+            popovertargetaction=${ifDefined(
+              this.variant === "modal" ? undefined : "hide",
+            )}
+            @click=${() => {
+              if (this.variant === "modal") {
+                this.hide();
               }
-            },
-            { once: true },
-          );
-        }
-      }}
-    >
-      <header>
-        <h2><slot name="title"></slot></h2>
-        <button
-          id="close-button"
-          class="icon"
-          @click=${() => this.#dialogRef.value?.close()}
-          autofocus
-        >
-          ${closeIcon({ size: "1rem" })}
-        </button>
-      </header>
-      <div id="content">
-        <slot name="content"></slot>
-      </div>
-      <footer id="footer">
-        <slot name="footer"></slot>
-      </footer>
-    </dialog>`;
+            }}
+            autofocus
+          >
+            ${closeIcon({ size: "1rem" })}
+          </button>
+        </header>
+        <div id="content">
+          <slot name="content"></slot>
+        </div>
+        <footer id="footer">
+          <slot name="footer"></slot>
+        </footer>
+      </dialog>`;
   }
 }
 

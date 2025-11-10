@@ -43,6 +43,9 @@ export class ConnectionDialog extends DotConnectElement {
   @property({ type: Boolean })
   open = false;
 
+  @property()
+  variant: "modal" | "non-modal" = "modal";
+
   readonly #availableWallets = observableSignal(this, wallets$, []);
 
   readonly #installedWallets = computed(() =>
@@ -124,12 +127,14 @@ export class ConnectionDialog extends DotConnectElement {
 
   override render() {
     return html`<dc-dialog
+      variant=${this.variant}
       ?open=${this.open}
       @close=${(event: Event) => {
         this.close();
         this.dispatchEvent(new Event(event.type, event));
       }}
     >
+      <slot slot="trigger" name="trigger"></slot>
       <span slot="title">Connect wallet</span>
       <div slot="content">
         ${when(
@@ -406,6 +411,7 @@ export class DeepLinkWalletConnection extends BaseWalletConnection<DeepLinkWalle
         : html`<dc-dialog
             ?open=${true}
             @close=${() => this.#uri.set(undefined)}
+            modal
           >
             <span slot="title">Scan QR code</span>
             <div slot="content">
