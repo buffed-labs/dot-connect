@@ -150,9 +150,17 @@ export class Dialog extends DotConnectElement {
 
   @property()
   get variant() {
-    return CSS.supports("anchor-name", "--anchor-name")
-      ? this.#variant
-      : "modal";
+    // TODO: Remove once Firefox supports anchor positioning
+    if (!CSS.supports("anchor-name", "--anchor-name")) {
+      return "modal";
+    }
+
+    // TODO: Remove once Safari doesn't have the bug where `togglePopover({ source })` doesn't work
+    if (!("userAgentData" in globalThis.navigator)) {
+      return "modal";
+    }
+
+    return this.#variant;
   }
   set variant(value: "modal" | "non-modal") {
     this.#variant = value;
