@@ -57,24 +57,24 @@ export class Dialog extends DotConnectElement {
         dialog[popover] {
           --gap: 0.5rem;
 
-          position: fixed;
           max-height: calc(100dvh - anchor-size(height) - var(--gap));
           margin: auto;
-          margin-bottom: unset;
+          margin-bottom: 0;
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
 
           @media (min-width: 25rem) {
             max-height: 100dvh;
-            position: unset;
             inset: auto;
             inset-block-start: calc(anchor(outside) + var(--gap));
-            inset-inline-start: calc(anchor(inside));
+            inset-inline-start: anchor(inside);
             margin: 0;
             border-bottom-left-radius: var(--border-radius);
             border-bottom-right-radius: var(--border-radius);
 
-            position-try-fallbacks: flip-block, flip-inline;
+            position-try:
+              most-height flip-block,
+              flip-inline;
           }
         }
 
