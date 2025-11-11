@@ -14,7 +14,7 @@
     "@reactive-dot/wallet-walletconnect": "^0.17.39",
     "dot-connect": "workspace:^",
     "highlight.js": "^11.11.1",
-    "polkadot-api": "^1.20.0",
+    "polkadot-api": "^1.20.2",
     "vue": "^3.5.22"
   },
   "devDependencies": {
