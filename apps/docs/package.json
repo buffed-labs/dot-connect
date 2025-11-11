@@ -8,10 +8,10 @@
     "preview": "vitepress preview"
   },
   "dependencies": {
-    "@reactive-dot/core": "^0.57.0",
-    "@reactive-dot/wallet-ledger": "^0.16.60",
-    "@reactive-dot/wallet-mimir": "^0.1.26",
-    "@reactive-dot/wallet-walletconnect": "^0.17.39",
+    "@reactive-dot/core": "^0.61.0",
+    "@reactive-dot/wallet-ledger": "^0.16.62",
+    "@reactive-dot/wallet-mimir": "^0.1.28",
+    "@reactive-dot/wallet-walletconnect": "^0.17.41",
     "dot-connect": "workspace:^",
     "highlight.js": "^11.11.1",
     "polkadot-api": "^1.20.0",
