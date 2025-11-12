@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.25.1
+
+### Patch Changes
+
+- [#419](https://github.com/buffed-labs/dot-connect/pull/419) [`867ee36`](https://github.com/buffed-labs/dot-connect/commit/867ee360428efb1f1facdc0136388f4b41e5616c) Thanks [@tien](https://github.com/tien)! - Fixed possible dangling video stream.
+
 ## 0.25.0
 
 ### Minor Changes
