@@ -4,6 +4,24 @@ import { LitElement, css, type CSSResultGroup } from "lit";
 export abstract class DotConnectElement extends SignalWatcher(LitElement) {
   static override readonly styles: CSSResultGroup = css`
     * {
+      box-sizing: border-box;
+
+      &:focus-visible {
+        outline: 2px solid
+          light-dark(
+            color-mix(in srgb, var(--primary-color) 75%, transparent),
+            color-mix(in srgb, var(--primary-color) 50%, transparent)
+          );
+        outline-offset: 2px;
+      }
+    }
+
+    :host {
+      all: initial;
+      color-scheme: inherit;
+      font-family: var(--body-font-family);
+      color: var(--on-surface-color);
+
       --headline-font-family: var(
         --dc-headline-font-family,
         Unbounded,
@@ -44,23 +62,20 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
 
       --max-border-radius: var(--dc-max-border-radius, 999px);
 
-      box-sizing: border-box;
-
-      &:focus-visible {
-        outline: 2px solid
-          light-dark(
-            color-mix(in srgb, var(--primary-color) 75%, transparent),
-            color-mix(in srgb, var(--primary-color) 50%, transparent)
-          );
-        outline-offset: 2px;
+      /* Firefox */
+      @supports (width: -moz-available) {
+        --stretch: -moz-available;
       }
-    }
 
-    :host {
-      all: initial;
-      color-scheme: inherit;
-      font-family: var(--body-font-family);
-      color: var(--on-surface-color);
+      /* Safari */
+      @supports (width: -webkit-fill-available) {
+        --stretch: -webkit-fill-available;
+      }
+
+      /* Chromium */
+      @supports (width: stretch) {
+        --stretch: stretch;
+      }
     }
 
     h1,
@@ -162,6 +177,11 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       list-style: none;
       margin: 0;
       padding: 0;
+    }
+
+    .center {
+      display: grid;
+      place-items: center;
     }
   `;
 }

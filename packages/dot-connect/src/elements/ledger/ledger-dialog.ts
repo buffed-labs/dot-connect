@@ -1,18 +1,12 @@
-import { genericChainSpec } from "../../consts.js";
-import { observableSignal } from "../../observable-signal.js";
 import "../components/account-list-item.js";
 import { DotConnectElement } from "../components/element.js";
+import "../local-wallet-dialog.js";
 import "./connected-ledger-accounts-dialog.js";
-import { getAccounts } from "@reactive-dot/core/internal/actions.js";
-import type { WalletAccount } from "@reactive-dot/core/wallets.js";
 import type { LedgerWallet } from "@reactive-dot/wallet-ledger";
 import "dot-identicon";
-import { css, html, nothing, type PropertyValues } from "lit";
+import { css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { ifDefined } from "lit/directives/if-defined.js";
-import { repeat } from "lit/directives/repeat.js";
 import { when } from "lit/directives/when.js";
-import { of } from "rxjs";
 
 @customElement("dc-ledger-dialog")
 export class LedgerDialog extends DotConnectElement {
@@ -24,23 +18,6 @@ export class LedgerDialog extends DotConnectElement {
 
   @state()
   protected addDialogOpen = false;
-
-  @state()
-  protected connectedAccounts = observableSignal(
-    this,
-    of([] as WalletAccount[]),
-    [],
-  );
-
-  protected override updated(changedProperties: PropertyValues) {
-    if (changedProperties.has("wallet")) {
-      this.connectedAccounts = observableSignal(
-        this,
-        getAccounts([this.wallet], undefined, genericChainSpec),
-        [],
-      );
-    }
-  }
 
   static override styles = [
     super.styles,
@@ -71,41 +48,13 @@ export class LedgerDialog extends DotConnectElement {
   ];
 
   protected override render() {
-    return html`<dc-dialog
+    return html`<dc-local-wallet-dialog
         ?open=${this.open}
         @close=${(event: Event) =>
           this.dispatchEvent(new Event(event.type, event))}
+        @request-new-account=${() => (this.addDialogOpen = true)}
       >
-        <span slot="title">Ledger</span>
-        <section slot="content">
-          <header>
-            <h3>Connected accounts</h3>
-            <button class="text" @click=${() => (this.addDialogOpen = true)}>
-              Add more
-            </button>
-          </header>
-          ${repeat(
-            this.connectedAccounts.get(),
-            (account) => account.id,
-            (account, index) =>
-              html`<dc-account-list-item
-                  address=${account.address}
-                  name=${ifDefined(account.name)}
-                >
-                  <button
-                    slot="trailing"
-                    class="error sm"
-                    @click=${() => this.wallet.accountStore.delete(account)}
-                  >
-                    Remove
-                  </button></dc-account-list-item
-                >${this.connectedAccounts.get().length <= 1 ||
-                index === this.connectedAccounts.get().length - 1
-                  ? nothing
-                  : html`<hr />`}`,
-          )}
-        </section>
-      </dc-dialog>
+      </dc-local-wallet-dialog>
       ${when(
         this.addDialogOpen,
         () =>

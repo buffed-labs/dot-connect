@@ -3,6 +3,7 @@ import { defineConfig } from "@reactive-dot/core";
 import { InjectedWalletProvider } from "@reactive-dot/core/wallets.js";
 import { LedgerWallet } from "@reactive-dot/wallet-ledger";
 import { MimirWalletProvider } from "@reactive-dot/wallet-mimir";
+import { PolkadotVaultWallet } from "@reactive-dot/wallet-polkadot-vault";
 import { WalletConnect } from "@reactive-dot/wallet-walletconnect";
 import { registerDotConnect } from "dot-connect";
 
@@ -12,6 +13,7 @@ const config = defineConfig({
     new InjectedWalletProvider(),
     new MimirWalletProvider(),
     new LedgerWallet(),
+    new PolkadotVaultWallet(),
     new WalletConnect({
       projectId: "6089356d0a4448aeda421a025cc286c9",
       providerOptions: {

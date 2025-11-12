@@ -6,13 +6,13 @@ export class ObservableSignal<TValue>
   extends Signal.State<TValue>
   implements ReactiveController
 {
-  #observable: Observable<TValue>;
+  #observable: Observable<TValue> | (() => Observable<TValue>);
 
   #subscription: Subscription | undefined;
 
   constructor(
     host: ReactiveControllerHost,
-    observable: Observable<TValue>,
+    observable: Observable<TValue> | (() => Observable<TValue>),
     initialValue?: TValue,
   ) {
     super(initialValue as TValue);
@@ -22,7 +22,11 @@ export class ObservableSignal<TValue>
   }
 
   hostConnected(): void {
-    this.#subscription ??= this.#observable.subscribe({
+    this.#subscription ??= (
+      typeof this.#observable === "function"
+        ? this.#observable()
+        : this.#observable
+    ).subscribe({
       next: (value) => this.set(value),
     });
   }
@@ -35,6 +39,6 @@ export class ObservableSignal<TValue>
 
 export const observableSignal = <TValue>(
   host: ReactiveControllerHost,
-  observable: Observable<TValue>,
+  observable: Observable<TValue> | (() => Observable<TValue>),
   initialValue?: TValue,
 ) => new ObservableSignal(host, observable, initialValue);
