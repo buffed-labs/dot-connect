@@ -15,7 +15,7 @@ export class QrCode extends DotConnectElement {
   ecl: QRCodeErrorCorrectionLevel = "M";
 
   @property()
-  uri!: string;
+  data!: string | Uint8Array;
 
   @property({ type: Number })
   size = 320;
@@ -106,11 +106,14 @@ export class QrCode extends DotConnectElement {
   }
 
   #generateMatrix(
-    value: string,
+    value: string | Uint8Array,
     errorCorrectionLevel: QRCodeErrorCorrectionLevel,
   ) {
     const arr = Array.prototype.slice.call(
-      createQrCode(value, { errorCorrectionLevel }).modules.data,
+      createQrCode(
+        typeof value === "string" ? value : [{ mode: "byte", data: value }],
+        { errorCorrectionLevel },
+      ).modules.data,
       0,
     );
     const sqrt = Math.sqrt(arr.length);
@@ -125,7 +128,7 @@ export class QrCode extends DotConnectElement {
 
   #generateDots() {
     const dots: TemplateResult<2>[] = [];
-    const matrix = this.#generateMatrix(this.uri, this.ecl);
+    const matrix = this.#generateMatrix(this.data, this.ecl);
     const cellSize = this.#size / matrix.length;
     const qrList = [
       { x: 0, y: 0 },

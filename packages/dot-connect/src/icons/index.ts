@@ -7,3 +7,4 @@ export { users } from "./users.js";
 export { wallet } from "./wallet.js";
 export { wallets } from "./wallets.js";
 export { copy } from "./copy.js";
+export { scanQr } from "./qr-scan.js";

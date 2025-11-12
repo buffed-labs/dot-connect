@@ -18,18 +18,15 @@ import {
   connectWallet,
   disconnectWallet,
 } from "@reactive-dot/core/internal/actions.js";
-import {
-  DeepLinkWallet,
-  type PolkadotSignerAccount,
-  type Wallet,
-} from "@reactive-dot/core/wallets.js";
+import { DeepLinkWallet, type Wallet } from "@reactive-dot/core/wallets.js";
 import type { LedgerWallet } from "@reactive-dot/wallet-ledger";
-import { css, html, nothing, type PropertyValues } from "lit";
+import type { PolkadotVaultWallet } from "@reactive-dot/wallet-polkadot-vault";
+import { css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { join } from "lit/directives/join.js";
 import { when } from "lit/directives/when.js";
-import { of } from "rxjs";
+import { filter } from "rxjs";
 import { effect } from "signal-utils/subtle/microtask-effect";
 
 declare global {
@@ -51,11 +48,7 @@ export class ConnectionDialog extends DotConnectElement {
   readonly #installedWallets = computed(() =>
     this.#availableWallets
       .get()
-      .filter(
-        (wallet) =>
-          !this.#deepLinkWallets.get().includes(wallet as DeepLinkWallet) &&
-          !this.#hardwareWallets.get().includes(wallet),
-      ),
+      .filter((wallet) => wallet.id.startsWith("injected/")),
   );
 
   readonly #deepLinkWallets = computed(() =>
@@ -67,7 +60,11 @@ export class ConnectionDialog extends DotConnectElement {
   readonly #hardwareWallets = computed(() =>
     this.#availableWallets
       .get()
-      .filter((wallet) => ["ledger"].includes(wallet.id)),
+      .filter(
+        (wallet) =>
+          (wallet.id === "ledger" && "USB" in globalThis) ||
+          wallet.id === "polkadot-vault",
+      ),
   );
 
   readonly #nonInstalledWallets = computed(() =>
@@ -156,20 +153,26 @@ export class ConnectionDialog extends DotConnectElement {
             </section>`,
         )}
         ${when(
-          "USB" in globalThis && this.#hardwareWallets.get().length > 0,
+          this.#hardwareWallets.get().length > 0,
           () =>
             html`<section>
               <header><h3>Hardware</h3></header>
               <ul>
                 ${join(
-                  this.#hardwareWallets
-                    .get()
-                    .map(
-                      (wallet) =>
-                        html`<dc-hardware-wallet
+                  this.#hardwareWallets.get().map((wallet) => {
+                    switch (wallet.id) {
+                      case "ledger":
+                        return html`<dc-ledger-wallet
                           .wallet=${wallet}
-                        ></dc-hardware-wallet>`,
-                    ),
+                        ></dc-ledger-wallet>`;
+                      case "polkadot-vault":
+                        return html`<dc-polkadot-vault-wallet
+                          .wallet=${wallet}
+                        ></dc-polkadot-vault-wallet>`;
+                      default:
+                        return nothing;
+                    }
+                  }),
                   html`<hr />`,
                 )}
               </ul>
@@ -245,24 +248,13 @@ abstract class BaseWalletConnection<
 
   readonly #connectedWallets = observableSignal(this, connectedWallets$, []);
 
-  @state()
-  protected accounts = observableSignal(
-    this,
-    of([] as PolkadotSignerAccount[]),
-    [],
-  );
+  readonly #accounts = observableSignal(this, () => this.wallet.accounts$, []);
 
   protected readonly connected = computed(() =>
     this.#connectedWallets.get().includes(this.wallet),
   );
 
   protected readonly pending = signal(false);
-
-  protected override updated(changedProperties: PropertyValues) {
-    if (changedProperties.has("wallet")) {
-      this.accounts = observableSignal(this, this.wallet.accounts$, []);
-    }
-  }
 
   static override readonly styles = [
     super.styles,
@@ -291,7 +283,7 @@ abstract class BaseWalletConnection<
         slot="supporting"
         class=${classMap({ connected: this.connected.get() })}
         >${this.connected.get()
-          ? html`Connected | ${this.accounts.get().length}
+          ? html`Connected | ${this.#accounts.get().length}
               <span class="icon">${usersIcon({ size: "1em" })}</span>`
           : "Not connected"}</span
       >
@@ -416,7 +408,7 @@ export class DeepLinkWalletConnection extends BaseWalletConnection<DeepLinkWalle
             <span slot="title">Scan QR code</span>
             <div slot="content">
               <dc-qr-code
-                .uri=${this.#uri.get()}
+                data=${this.#uri.get()!}
                 .logoSrc=${this.walletInfo?.icon.href}
               ></dc-qr-code>
               <div id="url-container">
@@ -434,8 +426,8 @@ export class DeepLinkWalletConnection extends BaseWalletConnection<DeepLinkWalle
   }
 }
 
-@customElement("dc-hardware-wallet")
-export class HardwareWalletConnection extends BaseWalletConnection<LedgerWallet> {
+@customElement("dc-ledger-wallet")
+export class LedgerWalletConnection extends BaseWalletConnection<LedgerWallet> {
   @state()
   protected open: false | "manage" | "connect" = false;
 
@@ -473,6 +465,62 @@ export class HardwareWalletConnection extends BaseWalletConnection<LedgerWallet>
             @close=${() => (this.open = false)}
             .wallet=${this.wallet}
           ></dc-connected-ledger-accounts-dialog>`,
+      )}
+    `;
+  }
+}
+
+@customElement("dc-polkadot-vault-wallet")
+export class PolkadotVaultWalletConnection extends BaseWalletConnection<PolkadotVaultWallet> {
+  @state()
+  protected manageDialogOpen: boolean = false;
+
+  readonly accountRequest = observableSignal(this, () =>
+    this.wallet.request$.pipe(
+      filter((request) => request === undefined || request?.type === "account"),
+    ),
+  );
+
+  protected override trailing() {
+    return html`<button
+      slot="trailing"
+      class=${classMap({
+        success: !this.connected.get(),
+        info: this.connected.get(),
+        sm: true,
+      })}
+      @click=${async () => {
+        if (this.connected.get()) {
+          this.manageDialogOpen = true;
+        } else {
+          this.wallet.accountStore.add(await this.wallet.getNewAccount());
+        }
+      }}
+    >
+      ${this.connected.get() ? "Manage" : "Connect"}
+    </button>`;
+  }
+
+  protected override render() {
+    return html`
+      ${super.render()}
+      ${when(
+        this.manageDialogOpen,
+        () =>
+          html`<dc-local-wallet-dialog
+            open
+            .wallet=${this.wallet}
+            @close=${() => (this.manageDialogOpen = false)}
+            @request-new-account=${async () =>
+              this.wallet.accountStore.add(await this.wallet.getNewAccount())}
+          ></dc-local-wallet-dialog>`,
+      )}
+      ${when(
+        this.accountRequest.get() !== undefined,
+        () =>
+          html`<dc-polkadot-vault-account-scanner-dialog
+            .request=${this.accountRequest.get()!}
+          ></dc-polkadot-vault-account-scanner-dialog>`,
       )}
     `;
   }

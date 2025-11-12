@@ -128,6 +128,7 @@ export class Dialog extends DotConnectElement {
         }
 
         footer {
+          display: flex;
           color: color-mix(in srgb, currentcolor, transparent 15%);
           font-size: 0.75em;
           position: sticky;
@@ -135,8 +136,14 @@ export class Dialog extends DotConnectElement {
           background-color: var(--surface-color);
 
           ::slotted(*) {
+            flex: 1;
             padding: 1rem 1.2rem;
             border-top: 0.5px solid var(--outline-color);
+          }
+
+          ::slotted(span) {
+            display: block;
+            text-align: center;
           }
         }
       `,
