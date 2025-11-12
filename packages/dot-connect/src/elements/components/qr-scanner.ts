@@ -69,9 +69,7 @@ export class QrScanner extends DotConnectElement {
     import("@undecaf/barcode-detector-polyfill").then(
       async ({ BarcodeDetectorPolyfill }) => {
         try {
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: { ideal: "user" }, aspectRatio: { ideal: 1 } },
-          });
+          const stream = await this.#createStream();
 
           this.videoElement.srcObject = stream;
 
@@ -115,9 +113,7 @@ export class QrScanner extends DotConnectElement {
 
   override disconnectedCallback() {
     super.disconnectedCallback();
-    if (this.videoElement.srcObject instanceof MediaStream) {
-      this.videoElement.srcObject?.getTracks().forEach((track) => track.stop());
-    }
+    this.#stopStream();
   }
 
   protected override render() {
@@ -129,6 +125,21 @@ export class QrScanner extends DotConnectElement {
         height=${ifDefined(this.responsive ? undefined : "300")}
       ></video>
     </div>`;
+  }
+
+  #stream?: Promise<MediaStream> = undefined;
+
+  #createStream() {
+    this.#stopStream();
+    return (this.#stream = navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: "user" }, aspectRatio: { ideal: 1 } },
+    }));
+  }
+
+  #stopStream() {
+    this.#stream?.then((stream) =>
+      stream.getTracks().forEach((track) => track.stop()),
+    );
   }
 }
 
