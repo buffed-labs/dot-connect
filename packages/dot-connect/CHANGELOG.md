@@ -1,5 +1,15 @@
 # dot-connect
 
+## 0.25.0
+
+### Minor Changes
+
+- [#418](https://github.com/buffed-labs/dot-connect/pull/418) [`4a9e9d7`](https://github.com/buffed-labs/dot-connect/commit/4a9e9d7433db027df73b687f97fc6a58e2b34276) Thanks [@tien](https://github.com/tien)! - Added support for Polkadot Vault.
+
+### Patch Changes
+
+- [#415](https://github.com/buffed-labs/dot-connect/pull/415) [`f43d882`](https://github.com/buffed-labs/dot-connect/commit/f43d8829693dda6cd568726f8a521c48403b8bc4) Thanks [@tien](https://github.com/tien)! - Improved popover fallback performance.
+
 ## 0.24.0
 
 ### Minor Changes
