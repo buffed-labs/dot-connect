@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.25.2
+
+### Patch Changes
+
+- [#421](https://github.com/buffed-labs/dot-connect/pull/421) [`67213f8`](https://github.com/buffed-labs/dot-connect/commit/67213f8dd71a6706be005d26b000e8cee8983a3a) Thanks [@tien](https://github.com/tien)! - Fixed list marker styling in light mode.
+
 ## 0.25.1
 
 ### Patch Changes
