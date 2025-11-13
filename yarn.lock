@@ -2696,17 +2696,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/recommended@npm:^1.0.12":
-  version: 1.0.12
-  resolution: "@tsconfig/recommended@npm:1.0.12"
-  checksum: 10c0/ab548b08d4a58d0ea6e8a7532c786dccc319f82366b41e487dca3a2e0c01522857698ca32ca3a7bba428e21b0ce52842910c50faab666b4b0e9743b62a5c7d73
+"@tsconfig/recommended@npm:^1.0.13":
+  version: 1.0.13
+  resolution: "@tsconfig/recommended@npm:1.0.13"
+  checksum: 10c0/b0fae7ff8243621da68cd7a259499e1fd536e1aa3b3e3be233d30ab8d5bf046ec3dcc4ff68fc640435f421575e41e56bc735f61a1fe8a47b4475f3f2bf5ed882
   languageName: node
   linkType: hard
 
-"@tsconfig/strictest@npm:^2.0.7":
-  version: 2.0.7
-  resolution: "@tsconfig/strictest@npm:2.0.7"
-  checksum: 10c0/5122ced742f7271fbc423182d40ade0264c7ef5acd517eb892a4aa2ea74bc0e4fa874931c4a8f271275913b2d289ae20bcc8cd9e355b38dfacd03d475a2c19f3
+"@tsconfig/strictest@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "@tsconfig/strictest@npm:2.0.8"
+  checksum: 10c0/96d7f1c6988c284886e7f2caea87415a6ebc779dc24c3f102cfa83b7d924da1363176b09c4600d11a1205bf2d819f35515c542a4bbcbe2fe13c1d7833376d203
   languageName: node
   linkType: hard
 
@@ -4531,8 +4531,8 @@ __metadata:
     "@reactive-dot/core": "npm:^0.62.0"
     "@reactive-dot/wallet-ledger": "npm:^0.17.0"
     "@reactive-dot/wallet-polkadot-vault": "npm:^0.1.1"
-    "@tsconfig/recommended": "npm:^1.0.12"
-    "@tsconfig/strictest": "npm:^2.0.7"
+    "@tsconfig/recommended": "npm:^1.0.13"
+    "@tsconfig/strictest": "npm:^2.0.8"
     "@types/qrcode": "npm:^1.5.6"
     "@types/react": "npm:^19.2.4"
     "@undecaf/barcode-detector-polyfill": "npm:^0.9.23"
@@ -4561,8 +4561,8 @@ __metadata:
     "@lit/react": "npm:^1.0.8"
     "@noble/hashes": "npm:^2.0.1"
     "@polkadot-api/substrate-bindings": "npm:^0.16.5"
-    "@tsconfig/recommended": "npm:^1.0.12"
-    "@tsconfig/strictest": "npm:^2.0.7"
+    "@tsconfig/recommended": "npm:^1.0.13"
+    "@tsconfig/strictest": "npm:^2.0.8"
     "@types/react": "npm:^19.2.4"
     eslint: "npm:^9.39.1"
     lit: "npm:^3.3.1"
