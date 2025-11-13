@@ -35,7 +35,6 @@ export class PolkadotVaultAccountScannerDialog extends DotConnectElement {
         border-radius: 50%;
         display: inline-block;
         line-height: 2em;
-        color: white;
         text-align: center;
         margin-right: 0.5em;
       }
