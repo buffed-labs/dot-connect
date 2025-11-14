@@ -7,6 +7,7 @@ import { observableSignal } from "../observable-signal.js";
 import { connectedWallets$, walletConfigs, wallets$ } from "../stores.js";
 import { getDownloadUrl } from "../utils.js";
 import type { InjectedWalletInfo, WalletConfig } from "../wallets/types.js";
+import "./add-readonly-account-dialog.js";
 import "./components/dialog.js";
 import { DotConnectElement } from "./components/element.js";
 import "./components/list-item.js";
@@ -21,6 +22,7 @@ import {
 import { DeepLinkWallet, type Wallet } from "@reactive-dot/core/wallets.js";
 import type { LedgerWallet } from "@reactive-dot/wallet-ledger";
 import type { PolkadotVaultWallet } from "@reactive-dot/wallet-polkadot-vault";
+import type { ReadonlyWallet } from "@reactive-dot/wallet-readonly";
 import { css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -65,6 +67,10 @@ export class ConnectionDialog extends DotConnectElement {
           (wallet.id === "ledger" && "USB" in globalThis) ||
           wallet.id === "polkadot-vault",
       ),
+  );
+
+  readonly #readonlyWallets = computed(() =>
+    this.#availableWallets.get().filter((wallet) => wallet.id === "readonly"),
   );
 
   readonly #nonInstalledWallets = computed(() =>
@@ -192,6 +198,26 @@ export class ConnectionDialog extends DotConnectElement {
                         html`<dc-deep-link-wallet
                           .wallet=${wallet}
                         ></dc-deep-link-wallet>`,
+                    ),
+                  html`<hr />`,
+                )}
+              </ul>
+            </section>`,
+        )}
+        ${when(
+          this.#readonlyWallets.get().length > 0,
+          () =>
+            html`<section>
+              <header><h3>Others</h3></header>
+              <ul>
+                ${join(
+                  this.#readonlyWallets
+                    .get()
+                    .map(
+                      (wallet) =>
+                        html`<dc-readonly-wallet
+                          .wallet=${wallet}
+                        ></dc-readonly-wallet>`,
                     ),
                   html`<hr />`,
                 )}
@@ -521,6 +547,60 @@ export class PolkadotVaultWalletConnection extends BaseWalletConnection<Polkadot
           html`<dc-polkadot-vault-account-scanner-dialog
             .request=${this.accountRequest.get()!}
           ></dc-polkadot-vault-account-scanner-dialog>`,
+      )}
+    `;
+  }
+}
+
+@customElement("dc-readonly-wallet")
+export class ReadonlyWalletConnection extends BaseWalletConnection<ReadonlyWallet> {
+  @state()
+  protected manageDialogOpen = false;
+
+  @state()
+  protected addDialogOpen = false;
+
+  protected override trailing() {
+    return html`<button
+      slot="trailing"
+      class=${classMap({
+        success: !this.connected.get(),
+        info: this.connected.get(),
+        sm: true,
+      })}
+      @click=${() => {
+        if (this.connected.get()) {
+          this.manageDialogOpen = true;
+        } else {
+          this.addDialogOpen = true;
+        }
+      }}
+    >
+      ${this.connected.get() ? "Manage" : "Connect"}
+    </button>`;
+  }
+
+  protected override render() {
+    return html`
+      ${super.render()}
+      ${when(
+        this.manageDialogOpen,
+        () =>
+          html`<dc-local-wallet-dialog
+            open
+            .wallet=${this.wallet}
+            @close=${() => (this.manageDialogOpen = false)}
+            @request-new-account=${() => (this.addDialogOpen = true)}
+          ></dc-local-wallet-dialog>`,
+      )}
+      ${when(
+        this.addDialogOpen,
+        () =>
+          html`<dc-add-readonly-account-dialog
+            open
+            @close=${() => (this.addDialogOpen = false)}
+            .wallet=${this.wallet}
+          ></dc-add-readonly-account-dialog>`,
       )}
     `;
   }

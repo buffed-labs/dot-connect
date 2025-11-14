@@ -4,6 +4,7 @@ import { mimir } from "./mimir.js";
 import { nova } from "./nova.js";
 import { polkadotJs } from "./polkadot-js.js";
 import { polkadotVault } from "./polkadot-vault.js";
+import { readonly } from "./readonly.js";
 import { subWallet } from "./subwallet.js";
 import { talisman } from "./talisman.js";
 import { walletConnect } from "./walletconnect.js";
@@ -16,6 +17,7 @@ export const wallets = [
   bittensor,
   ledger,
   polkadotVault,
+  readonly,
   walletConnect,
   mimir,
 ];
