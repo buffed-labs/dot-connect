@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.26.1
+
+### Patch Changes
+
+- [#426](https://github.com/buffed-labs/dot-connect/pull/426) [`c26c5af`](https://github.com/buffed-labs/dot-connect/commit/c26c5afcfbdfd5e0d0196c8a8cc84d2157a75f58) Thanks [@tien](https://github.com/tien)! - Adjusted address input label.
+
 ## 0.26.0
 
 ### Minor Changes
