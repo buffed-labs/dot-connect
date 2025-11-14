@@ -11,9 +11,11 @@ export class AddReadonlyAccountDialog extends DotConnectElement {
     css`
       label {
         p {
+          text-align: center;
           color: color-mix(in srgb, currentcolor, transparent 15%);
           font-size: 0.75em;
           margin: unset;
+          padding-bottom: 0.25em;
         }
       }
 
