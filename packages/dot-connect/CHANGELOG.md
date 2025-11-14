@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.26.0
+
+### Minor Changes
+
+- [#424](https://github.com/buffed-labs/dot-connect/pull/424) [`fbcd867`](https://github.com/buffed-labs/dot-connect/commit/fbcd867941446b456c4dab977d579c5f5a65b070) Thanks [@tien](https://github.com/tien)! - Added readonly wallet support.
+
 ## 0.25.2
 
 ### Patch Changes
