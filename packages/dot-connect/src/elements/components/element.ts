@@ -14,6 +14,16 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
           );
         outline-offset: 2px;
       }
+
+      input:focus-visible {
+        outline-offset: revert;
+      }
+
+      input[type="text"] {
+        border: 1px solid var(--outline-color);
+        border-radius: min(0.25em, var(--max-border-radius));
+        background-color: var(--surface-container-color);
+      }
     }
 
     :host {
@@ -112,6 +122,12 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       padding: 0.8em 1.25rem;
       cursor: pointer;
       transition: scale 0.25s;
+
+      &[disabled] {
+        filter: grayscale(1);
+        cursor: not-allowed;
+        pointer-events: none;
+      }
 
       &.sm,
       &.xs {
