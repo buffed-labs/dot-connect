@@ -1,5 +1,13 @@
 # dot-connect
 
+## 0.26.2
+
+### Patch Changes
+
+- [#432](https://github.com/buffed-labs/dot-connect/pull/432) [`7511ac6`](https://github.com/buffed-labs/dot-connect/commit/7511ac6940c037e6192a32f55e9ec29600416757) Thanks [@tien](https://github.com/tien)! - Only recommend wallets when none are installed or connected.
+
+- [#432](https://github.com/buffed-labs/dot-connect/pull/432) [`2face5d`](https://github.com/buffed-labs/dot-connect/commit/2face5dc3a422ead1d16c4efce73758f13d32d9f) Thanks [@tien](https://github.com/tien)! - Updated Talisman logo.
+
 ## 0.26.1
 
 ### Patch Changes
