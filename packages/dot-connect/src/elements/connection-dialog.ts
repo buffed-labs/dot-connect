@@ -47,6 +47,8 @@ export class ConnectionDialog extends DotConnectElement {
 
   readonly #availableWallets = observableSignal(this, wallets$, []);
 
+  readonly #connectedWallets = observableSignal(this, connectedWallets$, []);
+
   readonly #installedWallets = computed(() =>
     this.#availableWallets
       .get()
@@ -73,17 +75,22 @@ export class ConnectionDialog extends DotConnectElement {
     this.#availableWallets.get().filter((wallet) => wallet.id === "readonly"),
   );
 
-  readonly #nonInstalledWallets = computed(() =>
-    walletConfigs
-      .get()
-      .filter(
-        (config): config is WalletConfig<InjectedWalletInfo> =>
-          "downloadUrl" in config &&
-          "recommended" in config &&
-          !this.#installedWallets
-            .get()
-            .some((wallet) => config.selector(wallet)),
-      ),
+  readonly #recommendedWallets = computed(() =>
+    this.#installedWallets.get().length > 0 ||
+    this.#connectedWallets.get().length > 0
+      ? []
+      : walletConfigs
+          .get()
+          .filter(
+            (config): config is WalletConfig<InjectedWalletInfo> =>
+              "downloadUrl" in config &&
+              DownloadableWallet.shouldRender(
+                config as WalletConfig<InjectedWalletInfo>,
+              ) &&
+              !this.#installedWallets
+                .get()
+                .some((wallet) => config.selector(wallet)),
+          ),
   );
 
   show() {
@@ -225,15 +232,14 @@ export class ConnectionDialog extends DotConnectElement {
             </section>`,
         )}
         ${when(
-          this.#nonInstalledWallets.get().length > 0,
+          this.#recommendedWallets.get().length > 0,
           () =>
             html`<section>
               <header><h3>Popular</h3></header>
               <ul>
                 ${join(
-                  this.#nonInstalledWallets
+                  this.#recommendedWallets
                     .get()
-                    .filter(DownloadableWallet.shouldRender)
                     .map(
                       (wallet) =>
                         html`<dc-downloadable-wallet
@@ -613,7 +619,7 @@ export class DownloadableWallet extends DotConnectElement {
 
   // TODO: this is a hack
   static shouldRender(wallet: InjectedWalletInfo) {
-    return getDownloadUrl(wallet) !== undefined;
+    return wallet.recommended === true && getDownloadUrl(wallet) !== undefined;
   }
 
   get #downloadUrl() {
