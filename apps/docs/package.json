@@ -8,15 +8,15 @@
     "preview": "vitepress preview"
   },
   "dependencies": {
-    "@reactive-dot/core": "^0.63.1",
-    "@reactive-dot/wallet-ledger": "^0.17.1",
-    "@reactive-dot/wallet-mimir": "^0.1.30",
-    "@reactive-dot/wallet-polkadot-vault": "^0.1.2",
-    "@reactive-dot/wallet-readonly": "^0.1.1",
-    "@reactive-dot/wallet-walletconnect": "^0.17.43",
+    "@reactive-dot/core": "^0.64.1",
+    "@reactive-dot/wallet-ledger": "^0.18.1",
+    "@reactive-dot/wallet-mimir": "^0.2.1",
+    "@reactive-dot/wallet-polkadot-vault": "^0.2.1",
+    "@reactive-dot/wallet-readonly": "^0.2.1",
+    "@reactive-dot/wallet-walletconnect": "^0.18.1",
     "dot-connect": "workspace:^",
     "highlight.js": "^11.11.1",
-    "polkadot-api": "^1.20.5",
+    "polkadot-api": "^1.20.7",
     "vue": "^3.5.24"
   },
   "devDependencies": {

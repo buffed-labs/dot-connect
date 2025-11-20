@@ -49,6 +49,7 @@ export class LedgerDialog extends DotConnectElement {
 
   protected override render() {
     return html`<dc-local-wallet-dialog
+        .wallet=${this.wallet}
         ?open=${this.open}
         @close=${(event: Event) =>
           this.dispatchEvent(new Event(event.type, event))}
