@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.26.3
+
+### Patch Changes
+
+- [#435](https://github.com/buffed-labs/dot-connect/pull/435) [`41204c4`](https://github.com/buffed-labs/dot-connect/commit/41204c470f930527ba6baa30e0b5a0f3713538e3) Thanks [@tien](https://github.com/tien)! - Fixed Ledger account deletion.
+
 ## 0.26.2
 
 ### Patch Changes
