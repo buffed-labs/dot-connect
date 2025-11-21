@@ -34,12 +34,12 @@ const config = defineConfig({
 });
 
 registerDotConnect(config);
+</script>
 
-export default {
-  setup() {},
-};
+<script lang="ts" setup>
+import type {} from "dot-connect/vue.js";
 </script>
 
 <template>
-  <dc-connection-button></dc-connection-button>
+  <dc-connection-button />
 </template>

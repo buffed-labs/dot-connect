@@ -23,6 +23,7 @@
   "exports": {
     ".": "./build/index.js",
     "./react.js": "./build/react/index.js",
+    "./vue.js": "./build/vue/index.js",
     "./font.css": "./assets/fonts/index.css"
   },
   "files": [
@@ -57,14 +58,19 @@
     "eslint": "^9.39.1",
     "polkadot-api": "^1.20.7",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.47.0"
+    "typescript-eslint": "^8.47.0",
+    "vue": "^3.5.24"
   },
   "peerDependencies": {
     "@reactive-dot/core": ">= 0.46.0",
-    "react": ">= 18"
+    "react": ">= 18",
+    "vue": ">= 3"
   },
   "peerDependenciesMeta": {
     "react": {
+      "optional": true
+    },
+    "vue": {
       "optional": true
     }
   }
