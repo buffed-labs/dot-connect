@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.27.0
+
+### Minor Changes
+
+- [#438](https://github.com/buffed-labs/dot-connect/pull/438) [`0794b2f`](https://github.com/buffed-labs/dot-connect/commit/0794b2f94dba9c43574d3ebbff08974ee69143c3) Thanks [@tien](https://github.com/tien)! - Added Vue specific type definitions.
+
 ## 0.26.3
 
 ### Patch Changes
