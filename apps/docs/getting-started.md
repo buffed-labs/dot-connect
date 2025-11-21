@@ -68,13 +68,7 @@ import "dot-connect/font.css";
 
 ## Render the UI
 
-### Web component
-
-```html
-<dc-connection-button></dc-connection-button>
-```
-
-### React wrapper
+### React
 
 ```tsx
 import { ConnectionButton } from "dot-connect/react.js";
@@ -84,20 +78,26 @@ export function App() {
 }
 ```
 
-## Manually control the dialog
+### Vue
 
-### Vanilla JS
+```vue
+<script lang="ts" setup>
+// Import Vue-specific type definitions
+import type {} from "dot-connect/vue.js";
+</script>
+
+<template>
+  <dc-connection-button />
+</template>
+```
+
+### Vanilla
 
 ```html
-<dc-connection-dialog id="wallet-dialog"></dc-connection-dialog>
-<button type="button" onclick="document.getElementById('wallet-dialog').show()">
-  Open dialog
-</button>
-<script>
-  const walletDialog = document.getElementById("wallet-dialog");
-  // Call walletDialog.close() when you want to hide it again, e.g. on backdrop clicks.
-</script>
+<dc-connection-button></dc-connection-button>
 ```
+
+## Manually control the dialog
 
 ### React
 
@@ -117,6 +117,36 @@ export function App() {
     </>
   );
 }
+```
+
+### Vue
+
+```vue
+<script lang="ts" setup>
+// Import Vue-specific type definitions
+import type {} from "dot-connect/vue.js";
+import { ref } from "vue";
+
+const open = ref(false);
+</script>
+
+<template>
+  <dc-connection-dialog :open="open" @close="open = false" />
+  <button type="button" @click="open = true">Open dialog</button>
+</template>
+```
+
+### Vanilla
+
+```html
+<dc-connection-dialog id="wallet-dialog"></dc-connection-dialog>
+<button type="button" onclick="document.getElementById('wallet-dialog').show()">
+  Open dialog
+</button>
+<script>
+  const walletDialog = document.getElementById("wallet-dialog");
+  // Call walletDialog.close() when you want to hide it again.
+</script>
 ```
 
 ## Accounts API
