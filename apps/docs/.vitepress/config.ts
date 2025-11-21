@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import llmstxt from "vitepress-plugin-llms";
 
 export default defineConfig({
   title: "DOTConnect",
@@ -33,5 +34,8 @@ export default defineConfig({
     socialLinks: [
       { icon: "github", link: "https://github.com/buffed-labs/dot-connect" },
     ],
+  },
+  vite: {
+    plugins: [llmstxt()],
   },
 });
