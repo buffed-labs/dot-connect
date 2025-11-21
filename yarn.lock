@@ -4630,11 +4630,15 @@ __metadata:
     signal-utils: "npm:^0.21.1"
     typescript: "npm:^5.9.3"
     typescript-eslint: "npm:^8.47.0"
+    vue: "npm:^3.5.24"
   peerDependencies:
     "@reactive-dot/core": ">= 0.46.0"
     react: ">= 18"
+    vue: ">= 3"
   peerDependenciesMeta:
     react:
+      optional: true
+    vue:
       optional: true
   languageName: unknown
   linkType: soft
