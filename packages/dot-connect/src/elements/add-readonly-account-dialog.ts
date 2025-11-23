@@ -1,5 +1,5 @@
 import { DotConnectElement } from "./components/element.js";
-import { Binary, getSs58AddressInfo } from "@polkadot-api/substrate-bindings";
+import { getSs58AddressInfo } from "@polkadot-api/substrate-bindings";
 import type { ReadonlyWallet } from "@reactive-dot/wallet-readonly";
 import { css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
@@ -59,7 +59,6 @@ export class AddReadonlyAccountDialog extends DotConnectElement {
 
               if (this.addressInfo.isValid) {
                 this.wallet.accountStore.add({
-                  id: Binary.fromBytes(this.addressInfo.publicKey).asHex(),
                   publicKey: this.addressInfo.publicKey,
                 });
                 this.dispatchEvent(new CloseEvent("close"));
