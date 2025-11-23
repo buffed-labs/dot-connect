@@ -1,5 +1,13 @@
 # dot-connect
 
+## 0.27.1
+
+### Patch Changes
+
+- [#442](https://github.com/buffed-labs/dot-connect/pull/442) [`8e44c8f`](https://github.com/buffed-labs/dot-connect/commit/8e44c8f36a2b5764a955301ab85fdeb8e82303cd) Thanks [@tien](https://github.com/tien)! - Fixed incorrect Vue-specific close event type definition.
+
+- [#444](https://github.com/buffed-labs/dot-connect/pull/444) [`9a4256f`](https://github.com/buffed-labs/dot-connect/commit/9a4256fd5c76bb9a76982429dfd991e925074e04) Thanks [@tien](https://github.com/tien)! - Improved compatibility with latest ReactiveDOT version.
+
 ## 0.27.0
 
 ### Minor Changes
