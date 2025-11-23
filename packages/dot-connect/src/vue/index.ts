@@ -7,7 +7,7 @@ declare module "vue" {
     "dc-connection-button": DefineCustomElement<ConnectionButton>;
     "dc-connection-dialog": DefineCustomElement<
       ConnectionDialog,
-      { close: CloseEvent }
+      { close: Event }
     >;
   }
 }
