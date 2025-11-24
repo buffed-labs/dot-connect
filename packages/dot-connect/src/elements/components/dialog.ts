@@ -180,7 +180,7 @@ export class Dialog extends DotConnectElement {
       if (this.open) {
         this.show();
       } else {
-        this.#dialogRef.value?.hidePopover();
+        this.close();
       }
     }
   }
@@ -191,16 +191,16 @@ export class Dialog extends DotConnectElement {
     } else {
       this.#dialogRef.value?.togglePopover(
         // @ts-expect-error TS doesn't know about the popover options yet
-        options,
+        { ...options, force: true },
       );
     }
   }
 
-  hide() {
+  close() {
     if (this.variant === "modal") {
       this.#dialogRef.value?.close();
     } else {
-      this.#dialogRef.value?.hidePopover();
+      this.#dialogRef.value?.togglePopover(false);
     }
   }
 
@@ -290,7 +290,7 @@ export class Dialog extends DotConnectElement {
             )}
             @click=${() => {
               if (this.variant === "modal") {
-                this.hide();
+                this.close();
               }
             }}
             autofocus
