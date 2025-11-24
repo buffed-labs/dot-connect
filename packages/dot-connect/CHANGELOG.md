@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.27.2
+
+### Patch Changes
+
+- [#445](https://github.com/buffed-labs/dot-connect/pull/445) [`a5e9dd4`](https://github.com/buffed-labs/dot-connect/commit/a5e9dd4f01346bfdae0cd4f245402fe1f939bd28) Thanks [@tien](https://github.com/tien)! - Fixed harmless console error triggered when attempting to close an already closed dialog.
+
 ## 0.27.1
 
 ### Patch Changes
