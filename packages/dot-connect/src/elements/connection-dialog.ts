@@ -39,6 +39,42 @@ declare global {
 
 @customElement("dc-connection-dialog")
 export class ConnectionDialog extends DotConnectElement {
+  static override styles = [
+    super.styles,
+    css`
+      :host {
+        display: contents;
+      }
+
+      h3 {
+        font-size: 0.8em;
+        margin: 1rem 0.5rem 0.5rem 0.5rem;
+      }
+
+      section:first-child h3 {
+        margin-top: 0;
+      }
+
+      hr {
+        margin-inline-start: 3.2rem;
+        margin-inline-end: 0.5rem;
+        border: none;
+        border-bottom: 0.5px solid var(--outline-color);
+      }
+
+      *[slot="footer"] > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 0.5rem;
+      }
+
+      #learn-more {
+        padding: 0;
+      }
+    `,
+  ];
+
   @property({ type: Boolean })
   open = false;
 
@@ -99,40 +135,6 @@ export class ConnectionDialog extends DotConnectElement {
 
   close() {
     this.open = false;
-  }
-
-  static override get styles() {
-    return [
-      super.styles,
-      css`
-        h3 {
-          font-size: 0.8em;
-          margin: 1rem 0.5rem 0.5rem 0.5rem;
-        }
-
-        section:first-child h3 {
-          margin-top: 0;
-        }
-
-        hr {
-          margin-inline-start: 3.2rem;
-          margin-inline-end: 0.5rem;
-          border: none;
-          border-bottom: 0.5px solid var(--outline-color);
-        }
-
-        *[slot="footer"] > div {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin: 0 0.5rem;
-        }
-
-        #learn-more {
-          padding: 0;
-        }
-      `,
-    ];
   }
 
   override render() {
