@@ -7,148 +7,147 @@ import { createRef, ref } from "lit/directives/ref.js";
 
 @customElement("dc-dialog")
 export class Dialog extends DotConnectElement {
-  static override get styles() {
-    return [
-      super.styles,
-      css`
-        :host {
-          --border-radius: min(1.5rem, var(--max-border-radius));
+  static override styles = [
+    super.styles,
+    css`
+      :host {
+        --border-radius: min(1.5rem, var(--max-border-radius));
+        display: contents;
+      }
+
+      dialog {
+        width: 100dvw;
+
+        @media (min-width: 25rem) {
+          width: revert;
+          min-width: min(23rem, 100dvw);
+
+          &[popover] {
+            min-width: min(max(23rem, anchor-size(width)), 100dvw);
+          }
         }
 
-        dialog {
-          width: 100dvw;
+        box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.32);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--border-radius);
+        padding: 0;
+        background-color: var(--surface-color);
 
-          @media (min-width: 25rem) {
-            width: revert;
-            min-width: min(23rem, 100dvw);
+        opacity: 0;
+        translate: 0 0.5rem;
 
-            &[popover] {
-              min-width: min(max(23rem, anchor-size(width)), 100dvw);
-            }
+        transition:
+          opacity 0.25s,
+          translate 0.25s,
+          overlay 0.25s allow-discrete,
+          display 0.25s allow-discrete;
+
+        &:popover-open,
+        &[open] {
+          opacity: 1;
+          translate: 0 0;
+
+          @starting-style {
+            opacity: 0;
+            translate: 0 0.5rem;
           }
+        }
+      }
 
-          box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.32);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: var(--border-radius);
-          padding: 0;
-          background-color: var(--surface-color);
+      dialog[popover] {
+        --gap: 0.5rem;
 
-          opacity: 0;
-          translate: 0 0.5rem;
+        max-height: calc(100dvh - anchor-size(height) - var(--gap));
+        margin: auto;
+        margin-bottom: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
 
+        @media (min-width: 25rem) {
+          max-height: 100dvh;
+          inset: auto;
+          inset-block-start: calc(anchor(outside) + var(--gap));
+          inset-inline-start: anchor(inside);
+          margin: 0;
+          border-bottom-left-radius: var(--border-radius);
+          border-bottom-right-radius: var(--border-radius);
+
+          position-try:
+            most-height flip-block,
+            flip-inline;
+        }
+      }
+
+      dialog:not([popover]) {
+        &::backdrop {
+          background-color: rgba(0, 0, 0, 0);
+          backdrop-filter: blur(0px);
           transition:
-            opacity 0.25s,
-            translate 0.25s,
+            background-color 0.25s,
+            backdrop-filter 0.25s,
             overlay 0.25s allow-discrete,
             display 0.25s allow-discrete;
-
-          &:popover-open,
-          &[open] {
-            opacity: 1;
-            translate: 0 0;
-
-            @starting-style {
-              opacity: 0;
-              translate: 0 0.5rem;
-            }
-          }
         }
 
-        dialog[popover] {
-          --gap: 0.5rem;
+        &[open]::backdrop {
+          background-color: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(8px);
 
-          max-height: calc(100dvh - anchor-size(height) - var(--gap));
-          margin: auto;
-          margin-bottom: 0;
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-
-          @media (min-width: 25rem) {
-            max-height: 100dvh;
-            inset: auto;
-            inset-block-start: calc(anchor(outside) + var(--gap));
-            inset-inline-start: anchor(inside);
-            margin: 0;
-            border-bottom-left-radius: var(--border-radius);
-            border-bottom-right-radius: var(--border-radius);
-
-            position-try:
-              most-height flip-block,
-              flip-inline;
-          }
-        }
-
-        dialog:not([popover]) {
-          &::backdrop {
+          @starting-style {
             background-color: rgba(0, 0, 0, 0);
             backdrop-filter: blur(0px);
-            transition:
-              background-color 0.25s,
-              backdrop-filter 0.25s,
-              overlay 0.25s allow-discrete,
-              display 0.25s allow-discrete;
-          }
-
-          &[open]::backdrop {
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-
-            @starting-style {
-              background-color: rgba(0, 0, 0, 0);
-              backdrop-filter: blur(0px);
-            }
           }
         }
+      }
 
-        header {
-          position: sticky;
-          top: 0;
+      header {
+        position: sticky;
+        top: 0;
 
-          display: flex;
-          align-items: center;
-          gap: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
 
+        padding: 1rem 1.2rem;
+        background-color: var(--surface-color);
+
+        h2 {
+          flex: 1;
+          font-size: 1em;
+          text-align: center;
+          margin-inline-start: 2rem;
+        }
+      }
+
+      #close-button {
+        padding: 0;
+      }
+
+      #content {
+        margin: 0 1.2rem 1.2rem 1.2rem;
+      }
+
+      footer {
+        display: flex;
+        color: color-mix(in srgb, currentcolor, transparent 15%);
+        font-size: 0.75em;
+        position: sticky;
+        bottom: 0;
+        background-color: var(--surface-color);
+
+        ::slotted(*) {
+          flex: 1;
           padding: 1rem 1.2rem;
-          background-color: var(--surface-color);
-
-          h2 {
-            flex: 1;
-            font-size: 1em;
-            text-align: center;
-            margin-inline-start: 2rem;
-          }
+          border-top: 0.5px solid var(--outline-color);
         }
 
-        #close-button {
-          padding: 0;
+        ::slotted(span) {
+          display: block;
+          text-align: center;
         }
-
-        #content {
-          margin: 0 1.2rem 1.2rem 1.2rem;
-        }
-
-        footer {
-          display: flex;
-          color: color-mix(in srgb, currentcolor, transparent 15%);
-          font-size: 0.75em;
-          position: sticky;
-          bottom: 0;
-          background-color: var(--surface-color);
-
-          ::slotted(*) {
-            flex: 1;
-            padding: 1rem 1.2rem;
-            border-top: 0.5px solid var(--outline-color);
-          }
-
-          ::slotted(span) {
-            display: block;
-            text-align: center;
-          }
-        }
-      `,
-    ];
-  }
+      }
+    `,
+  ];
 
   @property({ type: Boolean })
   open = false;

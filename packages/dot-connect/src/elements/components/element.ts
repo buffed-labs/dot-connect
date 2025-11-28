@@ -14,16 +14,10 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
           );
         outline-offset: 2px;
       }
+    }
 
-      input:focus-visible {
-        outline-offset: revert;
-      }
-
-      input[type="text"] {
-        border: 1px solid var(--outline-color);
-        border-radius: min(0.25em, var(--max-border-radius));
-        background-color: var(--surface-container-color);
-      }
+    :host([hidden]) {
+      display: none;
     }
 
     :host {
@@ -193,6 +187,16 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       list-style: none;
       margin: 0;
       padding: 0;
+    }
+
+    input:focus-visible {
+      outline-offset: revert;
+    }
+
+    input[type="text"] {
+      border: 1px solid var(--outline-color);
+      border-radius: min(0.25em, var(--max-border-radius));
+      background-color: var(--surface-container-color);
     }
 
     .center {
