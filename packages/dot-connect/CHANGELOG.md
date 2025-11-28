@@ -1,5 +1,13 @@
 # dot-connect
 
+## 0.28.0
+
+### Minor Changes
+
+- [#448](https://github.com/buffed-labs/dot-connect/pull/448) [`6fbd812`](https://github.com/buffed-labs/dot-connect/commit/6fbd81224819866d5cca18d8d6b085ec2c859977) Thanks [@tien](https://github.com/tien)! - CSS improvements:
+  - Dialog host elements now use `display: contents`
+  - Elements can be hidden using the `hidden` attribute
+
 ## 0.27.2
 
 ### Patch Changes
