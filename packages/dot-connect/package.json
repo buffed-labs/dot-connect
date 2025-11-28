@@ -1,6 +1,6 @@
 {
   "name": "dot-connect",
-  "version": "0.27.2",
+  "version": "0.28.0",
   "description": "Wallets connector for Substrate DApps",
   "keywords": [
     "front-end",
