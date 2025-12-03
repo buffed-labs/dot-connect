@@ -1,5 +1,6 @@
 import { defineConfig } from "vitepress";
 import llmstxt from "vitepress-plugin-llms";
+import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 
 export default defineConfig({
   title: "DOTConnect",
@@ -37,5 +38,10 @@ export default defineConfig({
   },
   vite: {
     plugins: [llmstxt()],
+  },
+  markdown: {
+    config(md) {
+      md.use(tabsMarkdownPlugin);
+    },
   },
 });
