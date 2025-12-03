@@ -68,7 +68,8 @@ import "dot-connect/font.css";
 
 ## Render the UI
 
-### React
+:::tabs key:framework
+== React
 
 ```tsx
 import { ConnectionButton } from "dot-connect/react.js";
@@ -78,7 +79,7 @@ export function App() {
 }
 ```
 
-### Vue
+== Vue
 
 ```vue
 <script lang="ts" setup>
@@ -91,15 +92,18 @@ import type {} from "dot-connect/vue.js";
 </template>
 ```
 
-### Vanilla
+== Vanilla
 
 ```html
 <dc-connection-button></dc-connection-button>
 ```
 
+:::
+
 ## Manually control the dialog
 
-### React
+:::tabs key:framework
+== React
 
 ```tsx
 import { ConnectionDialog } from "dot-connect/react.js";
@@ -119,7 +123,7 @@ export function App() {
 }
 ```
 
-### Vue
+== Vue
 
 ```vue
 <script lang="ts" setup>
@@ -136,7 +140,7 @@ const open = ref(false);
 </template>
 ```
 
-### Vanilla
+== Vanilla
 
 ```html
 <dc-connection-dialog id="wallet-dialog"></dc-connection-dialog>
@@ -149,6 +153,25 @@ const open = ref(false);
 </script>
 ```
 
-## Accounts API
+:::
 
+## Getting connected accounts
+
+:::tabs key:framework
+== React
 Check the [ReactiveDOT docs](https://reactivedot.dev/react/getting-started/connect-wallets#display-available-accounts) for the latest guidance on listing accounts and reacting to wallet state.
+
+== Vue
+Check the [ReactiveDOT docs](https://reactivedot.dev/vue/getting-started/connect-wallets#display-available-accounts) for the latest guidance on listing accounts and reacting to wallet state.
+
+== Vanilla
+
+```ts
+import { whenAccountsChanged } from "@reactive-dot/core";
+
+whenAccountsChanged(config).subscribe((accounts) => {
+  console.log(accounts);
+});
+```
+
+:::

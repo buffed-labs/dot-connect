@@ -47,19 +47,19 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@reactive-dot/core": "^0.64.2",
-    "@reactive-dot/wallet-ledger": "^0.18.2",
-    "@reactive-dot/wallet-polkadot-vault": "^0.2.2",
-    "@reactive-dot/wallet-readonly": "^0.2.2",
+    "@reactive-dot/core": "^0.66.0",
+    "@reactive-dot/wallet-ledger": "^0.18.5",
+    "@reactive-dot/wallet-polkadot-vault": "^0.2.4",
+    "@reactive-dot/wallet-readonly": "^0.2.4",
     "@tsconfig/recommended": "^1.0.13",
     "@tsconfig/strictest": "^2.0.8",
     "@types/qrcode": "^1.5.6",
-    "@types/react": "^19.2.6",
+    "@types/react": "^19.2.7",
     "eslint": "^9.39.1",
-    "polkadot-api": "^1.20.7",
+    "polkadot-api": "^1.22.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.47.0",
-    "vue": "^3.5.24"
+    "typescript-eslint": "^8.48.1",
+    "vue": "^3.5.25"
   },
   "peerDependencies": {
     "@reactive-dot/core": ">= 0.64.2",
