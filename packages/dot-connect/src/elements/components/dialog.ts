@@ -159,11 +159,6 @@ export class Dialog extends DotConnectElement {
       return "modal";
     }
 
-    // TODO: Remove once Safari doesn't have the bug where `togglePopover({ source })` doesn't work
-    if (!("userAgentData" in globalThis.navigator)) {
-      return "modal";
-    }
-
     return this.#variant;
   }
   set variant(value: "modal" | "non-modal") {
