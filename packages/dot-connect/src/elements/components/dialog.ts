@@ -224,25 +224,6 @@ export class Dialog extends DotConnectElement {
     }
   }
 
-  #isBackdropClick(event: MouseEvent) {
-    if (this.#dialogRef.value === undefined) {
-      return false;
-    }
-
-    if (this.#dialogRef.value !== event.target) {
-      return false;
-    }
-
-    const boundingClientRect = this.#dialogRef.value.getBoundingClientRect();
-
-    return (
-      event.clientX < boundingClientRect.left ||
-      event.clientX > boundingClientRect.right ||
-      event.clientY < boundingClientRect.top ||
-      event.clientY > boundingClientRect.bottom
-    );
-  }
-
   override render() {
     return html`<slot
         name="trigger"
@@ -252,6 +233,7 @@ export class Dialog extends DotConnectElement {
         ${ref(this.#dialogRef)}
         id="dialog"
         popover=${ifDefined(this.variant === "modal" ? undefined : "auto")}
+        closedby=${ifDefined(this.variant === "non-modal" ? undefined : "any")}
         @toggle=${(event: ToggleEvent) => {
           this.dispatchEvent(new Event(event.type, event));
 
@@ -262,36 +244,14 @@ export class Dialog extends DotConnectElement {
         @close=${(event: Event) => {
           this.dispatchEvent(new Event(event.type, event));
         }}
-        @pointerdown=${(event: MouseEvent) => {
-          if (this.variant === "modal" && this.#isBackdropClick(event)) {
-            this.#dialogRef.value?.addEventListener(
-              "pointerup",
-              (event) => {
-                if (this.#isBackdropClick(event)) {
-                  this.#dialogRef.value?.close();
-                }
-              },
-              { once: true },
-            );
-          }
-        }}
       >
         <header>
           <h2><slot name="title"></slot></h2>
           <button
             id="close-button"
             class="icon"
-            popovertarget=${ifDefined(
-              this.variant === "modal" ? undefined : "dialog",
-            )}
-            popovertargetaction=${ifDefined(
-              this.variant === "modal" ? undefined : "hide",
-            )}
-            @click=${() => {
-              if (this.variant === "modal") {
-                this.close();
-              }
-            }}
+            commandfor="dialog"
+            command=${this.variant === "modal" ? "close" : "hide-popover"}
             autofocus
           >
             ${closeIcon({ size: "1rem" })}
