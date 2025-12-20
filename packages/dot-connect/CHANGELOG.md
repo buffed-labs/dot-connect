@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.28.1
+
+### Patch Changes
+
+- [#455](https://github.com/buffed-labs/dot-connect/pull/455) [`a944061`](https://github.com/buffed-labs/dot-connect/commit/a944061080f5f646bcc43f5f7c35a1d53a4f326a) Thanks [@tien](https://github.com/tien)! - Fixed WalletConnect QR code not center-aligned on mobile view.
+
 ## 0.28.0
 
 ### Minor Changes
