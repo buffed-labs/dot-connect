@@ -18,7 +18,7 @@ export class Dialog extends DotConnectElement {
       dialog {
         width: 100dvw;
 
-        @media (min-width: 25rem) {
+        @media (min-width: 30rem) {
           width: revert;
           min-width: min(23rem, 100dvw);
 
@@ -63,7 +63,7 @@ export class Dialog extends DotConnectElement {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
 
-        @media (min-width: 25rem) {
+        @media (min-width: 30rem) {
           max-height: 100dvh;
           inset: auto;
           inset-block-start: calc(anchor(outside) + var(--gap));

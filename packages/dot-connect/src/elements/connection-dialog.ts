@@ -413,6 +413,11 @@ export class DeepLinkWalletConnection extends BaseWalletConnection<DeepLinkWalle
   static override styles = [
     super.styles,
     css`
+      #qr-code-container {
+        display: flex;
+        justify-content: center;
+      }
+
       #url-container {
         display: flex;
         justify-content: center;
@@ -441,10 +446,12 @@ export class DeepLinkWalletConnection extends BaseWalletConnection<DeepLinkWalle
           >
             <span slot="title">Scan QR code</span>
             <div slot="content">
-              <dc-qr-code
-                data=${this.#uri.get()!}
-                .logoSrc=${this.walletInfo?.icon.href}
-              ></dc-qr-code>
+              <div id="qr-code-container">
+                <dc-qr-code
+                  data=${this.#uri.get()!}
+                  .logoSrc=${this.walletInfo?.icon.href}
+                ></dc-qr-code>
+              </div>
               <div id="url-container">
                 <button
                   class="text info"
