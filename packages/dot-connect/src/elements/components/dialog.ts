@@ -12,40 +12,38 @@ export class Dialog extends DotConnectElement {
     css`
       :host {
         --border-radius: min(1.5rem, var(--max-border-radius));
+        --dialog-ease: 0.25s;
+
         display: contents;
       }
 
       dialog {
         width: 100dvw;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--border-radius);
+        padding: 0;
+        background-color: var(--surface-color);
+        opacity: 0;
+        translate: 0 0.5rem;
+        transition:
+          opacity var(--dialog-ease),
+          translate var(--dialog-ease),
+          overlay var(--dialog-ease) allow-discrete,
+          display var(--dialog-ease) allow-discrete;
 
         @media (min-width: 30rem) {
           width: revert;
           min-width: min(23rem, 100dvw);
 
           &[popover] {
-            min-width: min(max(23rem, anchor-size(width)), 100dvw);
+            min-width: clamp(23rem, anchor-size(width), 100dvw);
           }
         }
 
-        box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.32);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: var(--border-radius);
-        padding: 0;
-        background-color: var(--surface-color);
-
-        opacity: 0;
-        translate: 0 0.5rem;
-
-        transition:
-          opacity 0.25s,
-          translate 0.25s,
-          overlay 0.25s allow-discrete,
-          display 0.25s allow-discrete;
-
-        &:popover-open,
-        &[open] {
+        &:is(:popover-open, [open]) {
           opacity: 1;
-          translate: 0 0;
+          translate: 0;
 
           @starting-style {
             opacity: 0;
@@ -57,20 +55,17 @@ export class Dialog extends DotConnectElement {
       dialog[popover] {
         --gap: 0.5rem;
 
-        max-height: calc(100dvh - anchor-size(height) - var(--gap));
-        margin: auto;
-        margin-bottom: 0;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        max-height: 100dvh;
+        margin: auto auto 0;
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
 
         @media (min-width: 30rem) {
-          max-height: 100dvh;
+          max-height: calc(100dvh - anchor-size(height) - var(--gap));
           inset: auto;
           inset-block-start: calc(anchor(outside) + var(--gap));
           inset-inline-start: anchor(inside);
           margin: 0;
-          border-bottom-left-radius: var(--border-radius);
-          border-bottom-right-radius: var(--border-radius);
+          border-radius: var(--border-radius);
 
           position-try:
             most-height flip-block,
@@ -81,21 +76,24 @@ export class Dialog extends DotConnectElement {
       dialog:not([popover]) {
         &::backdrop {
           background-color: rgba(0, 0, 0, 0);
-          backdrop-filter: blur(0px);
+          backdrop-filter: blur(0);
           transition:
-            background-color 0.25s,
-            backdrop-filter 0.25s,
-            overlay 0.25s allow-discrete,
-            display 0.25s allow-discrete;
+            background-color var(--dialog-ease),
+            backdrop-filter var(--dialog-ease),
+            overlay var(--dialog-ease) allow-discrete,
+            display var(--dialog-ease) allow-discrete;
         }
 
         &[open]::backdrop {
           background-color: rgba(0, 0, 0, 0.6);
           backdrop-filter: blur(8px);
+        }
 
-          @starting-style {
+        /* https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Nesting_selector#cannot_represent_pseudo-elements */
+        @starting-style {
+          &[open]::backdrop {
             background-color: rgba(0, 0, 0, 0);
-            backdrop-filter: blur(0px);
+            backdrop-filter: blur(0);
           }
         }
       }
