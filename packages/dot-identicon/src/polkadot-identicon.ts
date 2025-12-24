@@ -7,11 +7,11 @@ export class PolkadotIdenticon extends LitElement {
   @property()
   address!: string;
 
-  // @deprecated use CSS property --size instead
+  /** @deprecated use CSS property --size instead */
   @property()
   size?: string | number;
 
-  // @deprecated use CSS property --background-color instead
+  /** @deprecated use CSS property --background-color instead */
   @property()
   backgroundColor?: string;
 
