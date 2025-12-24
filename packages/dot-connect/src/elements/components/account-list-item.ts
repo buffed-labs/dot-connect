@@ -1,12 +1,21 @@
 import { DotConnectElement } from "./element.js";
 import "./list-item.js";
 import "dot-identicon";
-import { html, nothing } from "lit";
+import { css, html, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 
 @customElement("dc-account-list-item")
 export class AccountListItem extends DotConnectElement {
+  static override readonly styles = [
+    super.styles,
+    css`
+      polkadot-identicon {
+        --size: 100%;
+        --background-color: var(--surface-container-color);
+      }
+    `,
+  ];
   @property()
   address!: string;
 
@@ -37,11 +46,7 @@ export class AccountListItem extends DotConnectElement {
       ?checked=${this.checked}
     >
       <div class="icon" slot="leading">
-        <polkadot-identicon
-          address=${this.address}
-          size="100%"
-          backgroundColor="var(--surface-container-color)"
-        ></polkadot-identicon>
+        <polkadot-identicon address=${this.address}></polkadot-identicon>
       </div>
       <span slot="headline">${this.name ?? this.shortenedAddress}</span>
       ${this.name === undefined
