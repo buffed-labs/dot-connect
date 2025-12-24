@@ -1,5 +1,11 @@
 # dot-identicon
 
+## 0.2.0
+
+### Minor Changes
+
+- [#460](https://github.com/buffed-labs/dot-connect/pull/460) [`311880f`](https://github.com/buffed-labs/dot-connect/commit/311880f1a4ebd96b393d53fa6c939262bf9e07aa) Thanks [@tien](https://github.com/tien)! - Added Vue specific type definitions.
+
 ## 0.1.6
 
 ### Patch Changes

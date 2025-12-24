@@ -1,5 +1,16 @@
 # dot-connect
 
+## 0.28.2
+
+### Patch Changes
+
+- [#458](https://github.com/buffed-labs/dot-connect/pull/458) [`48c35e5`](https://github.com/buffed-labs/dot-connect/commit/48c35e5ef26f259088bc5acd48a85007b9505867) Thanks [@tien](https://github.com/tien)! - Optimized the CSS for dialogs.
+
+- [#461](https://github.com/buffed-labs/dot-connect/pull/461) [`e089c78`](https://github.com/buffed-labs/dot-connect/commit/e089c78d78df87d2766fa131bb019a09d0b30cfb) Thanks [@tien](https://github.com/tien)! - Refactored the identicon component to use CSS variables instead of HTML attributes.
+
+- Updated dependencies [[`311880f`](https://github.com/buffed-labs/dot-connect/commit/311880f1a4ebd96b393d53fa6c939262bf9e07aa)]:
+  - dot-identicon@0.2.0
+
 ## 0.28.1
 
 ### Patch Changes
