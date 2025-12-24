@@ -22,7 +22,8 @@
   "type": "module",
   "exports": {
     ".": "./build/index.js",
-    "./react.js": "./build/react/index.js"
+    "./react.js": "./build/react/index.js",
+    "./vue.js": "./build/vue/index.js"
   },
   "files": [
     "build"
@@ -45,13 +46,18 @@
     "@types/react": "^19.2.7",
     "eslint": "^9.39.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.50.0"
+    "typescript-eslint": "^8.50.0",
+    "vue": "^3.5.26"
   },
   "peerDependencies": {
-    "react": ">= 18"
+    "react": ">= 18",
+    "vue": ">= 3"
   },
   "peerDependenciesMeta": {
     "react": {
+      "optional": true
+    },
+    "vue": {
       "optional": true
     }
   }
