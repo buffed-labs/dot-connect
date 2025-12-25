@@ -90,7 +90,7 @@ export class PolkadotVaultSignatureScannerDialog extends DotConnectElement {
             () =>
               html`${this.frame === undefined
                   ? nothing
-                  : html`<div class="center" style="margin-bottom: 25px">
+                  : html`<div class="center" style="margin-block-end: 25px">
                       <dc-qr-scanner
                         @qr-code-value=${(
                           event: QrScannerEventMap["qr-code-value"],

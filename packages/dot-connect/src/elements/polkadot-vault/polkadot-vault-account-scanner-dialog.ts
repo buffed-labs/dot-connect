@@ -14,7 +14,7 @@ export class PolkadotVaultAccountScannerDialog extends DotConnectElement {
     super.styles,
     css`
       ol {
-        margin-top: 0;
+        margin-block-start: 0;
         padding-inline-start: 0;
         list-style: none;
       }
@@ -24,7 +24,7 @@ export class PolkadotVaultAccountScannerDialog extends DotConnectElement {
       }
 
       li + li {
-        margin-top: 0.5em;
+        margin-block-start: 0.5em;
       }
 
       li::before {
@@ -36,7 +36,7 @@ export class PolkadotVaultAccountScannerDialog extends DotConnectElement {
         display: inline-block;
         line-height: 2em;
         text-align: center;
-        margin-right: 0.5em;
+        margin-inline-end: 0.5em;
       }
     `,
   ];

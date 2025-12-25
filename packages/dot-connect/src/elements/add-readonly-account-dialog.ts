@@ -15,18 +15,18 @@ export class AddReadonlyAccountDialog extends DotConnectElement {
           color: color-mix(in srgb, currentcolor, transparent 15%);
           font-size: 0.75em;
           margin: unset;
-          padding-bottom: 0.25em;
+          padding-block-end: 0.25em;
         }
       }
 
       input {
-        width: var(--stretch);
-        margin-bottom: 1rem;
+        inline-size: var(--stretch);
+        margin-block-end: 1rem;
         padding: 0.5rem;
       }
 
       button {
-        width: var(--stretch);
+        inline-size: var(--stretch);
       }
     `,
   ];

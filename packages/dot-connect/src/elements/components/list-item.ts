@@ -58,8 +58,8 @@ export class ListItem extends DotConnectElement {
         }
 
         ::slotted(.icon) {
-          width: 2rem;
-          height: 2rem;
+          inline-size: 2rem;
+          block-size: 2rem;
         }
       }
 
@@ -93,8 +93,8 @@ export class ListItem extends DotConnectElement {
         }
 
         ::slotted(:is(.icon, input[type="checkbox"])) {
-          width: 1.2rem;
-          height: 1.2rem;
+          inline-size: 1.2rem;
+          block-size: 1.2rem;
         }
       }
 

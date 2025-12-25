@@ -18,12 +18,12 @@ export class PolkadotIdenticon extends LitElement {
   static override styles = css`
     :host {
       display: inline-flex;
-      width: var(--size, 24px);
-      min-width: var(--size, 24px);
-      max-width: var(--size, 24px);
-      height: var(--size, 24px);
-      min-height: var(--size, 24px);
-      max-height: var(--size, 24px);
+      inline-size: var(--size, 24px);
+      min-inline-size: var(--size, 24px);
+      max-inline-size: var(--size, 24px);
+      block-size: var(--size, 24px);
+      min-block-size: var(--size, 24px);
+      max-block-size: var(--size, 24px);
       aspect-ratio: 1;
     }
 

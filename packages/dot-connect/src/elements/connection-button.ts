@@ -21,7 +21,7 @@ export class ConnectionButton extends DotConnectElement {
       }
 
       #button {
-        width: 100%;
+        inline-size: 100%;
         text-wrap-mode: nowrap;
       }
 
