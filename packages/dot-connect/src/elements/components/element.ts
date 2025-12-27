@@ -113,7 +113,8 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       border: none;
       border-radius: min(999px, var(--max-border-radius));
       background-color: var(--primary-color);
-      padding: 0.8em 1.25rem;
+      padding-block: 0.8em;
+      padding-inline: 1.25rem;
       cursor: pointer;
       transition: scale 0.25s;
 
@@ -125,7 +126,8 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
 
       &.sm,
       &.xs {
-        padding: 0.6em 1.25em;
+        padding-block: 0.6em;
+        padding-inline: 1.25em;
 
         &.icon {
           padding: 0.6em;

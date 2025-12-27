@@ -18,7 +18,7 @@ export class Dialog extends DotConnectElement {
       }
 
       dialog {
-        width: 100dvw;
+        inline-size: 100dvw;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: var(--border-radius);
@@ -33,11 +33,11 @@ export class Dialog extends DotConnectElement {
           display var(--dialog-ease) allow-discrete;
 
         @media (min-width: 30rem) {
-          width: revert;
-          min-width: min(23rem, 100dvw);
+          inline-size: revert;
+          min-inline-size: min(23rem, 100dvw);
 
           &[popover] {
-            min-width: clamp(23rem, anchor-size(width), 100dvw);
+            min-inline-size: clamp(23rem, anchor-size(inline-size), 100dvw);
           }
         }
 
@@ -55,12 +55,12 @@ export class Dialog extends DotConnectElement {
       dialog[popover] {
         --gap: 0.5rem;
 
-        max-height: 100dvh;
+        max-block-size: 100dvh;
         margin: auto auto 0;
         border-radius: var(--border-radius) var(--border-radius) 0 0;
 
         @media (min-width: 30rem) {
-          max-height: calc(100dvh - anchor-size(height) - var(--gap));
+          max-block-size: calc(100dvh - anchor-size(block-size) - var(--gap));
           inset: auto;
           inset-block-start: calc(anchor(outside) + var(--gap));
           inset-inline-start: anchor(inside);
@@ -100,13 +100,14 @@ export class Dialog extends DotConnectElement {
 
       header {
         position: sticky;
-        top: 0;
+        inset-block-start: 0;
 
         display: flex;
         align-items: center;
         gap: 1rem;
 
-        padding: 1rem 1.2rem;
+        padding-block: 1rem;
+        padding-inline: 1.2rem;
         background-color: var(--surface-color);
 
         h2 {
@@ -122,7 +123,8 @@ export class Dialog extends DotConnectElement {
       }
 
       #content {
-        margin: 0 1.2rem 1.2rem 1.2rem;
+        margin-block: 0 1.2rem;
+        margin-inline: 1.2rem;
       }
 
       footer {
@@ -130,13 +132,14 @@ export class Dialog extends DotConnectElement {
         color: color-mix(in srgb, currentcolor, transparent 15%);
         font-size: 0.75em;
         position: sticky;
-        bottom: 0;
+        inset-block-end: 0;
         background-color: var(--surface-color);
 
         ::slotted(*) {
           flex: 1;
-          padding: 1rem 1.2rem;
-          border-top: 0.5px solid var(--outline-color);
+          padding-block: 1rem;
+          padding-inline: 1.2rem;
+          border-block-start: 0.5px solid var(--outline-color);
         }
 
         ::slotted(span) {

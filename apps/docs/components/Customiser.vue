@@ -191,16 +191,16 @@ label {
   align-items: center;
 
   input {
-    margin-right: 0.75em;
+    margin-inline-end: 0.75em;
   }
 
   input[type="color"] {
-    margin-right: 0.75em;
+    margin-inline-end: 0.75em;
   }
 }
 
 label + label {
-  margin-top: 0.5rem;
+  margin-block-start: 0.5rem;
 }
 
 input[type="color"] {

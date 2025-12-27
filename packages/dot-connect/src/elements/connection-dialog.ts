@@ -48,25 +48,26 @@ export class ConnectionDialog extends DotConnectElement {
 
       h3 {
         font-size: 0.8em;
-        margin: 1rem 0.5rem 0.5rem 0.5rem;
+        margin-block: 1rem 0.5rem;
+        margin-inline: 0.5rem;
       }
 
       section:first-child h3 {
-        margin-top: 0;
+        margin-block-start: 0;
       }
 
       hr {
         margin-inline-start: 3.2rem;
         margin-inline-end: 0.5rem;
         border: none;
-        border-bottom: 0.5px solid var(--outline-color);
+        border-block-end: 0.5px solid var(--outline-color);
       }
 
       *[slot="footer"] > div {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin: 0 0.5rem;
+        margin-inline: 0.5rem;
       }
 
       #learn-more {
@@ -295,7 +296,7 @@ abstract class BaseWalletConnection<
     css`
       button,
       .button {
-        min-width: 5rem;
+        min-inline-size: 5rem;
       }
 
       #connection-status.connected {
@@ -640,7 +641,7 @@ export class DownloadableWallet extends DotConnectElement {
     css`
       button,
       .button {
-        min-width: 5rem;
+        min-inline-size: 5rem;
       }
     `,
   ];

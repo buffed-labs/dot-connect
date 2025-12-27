@@ -52,7 +52,7 @@ export class ConnectedLedgerAccountsDialog extends DotConnectElement {
 
       #retry-button,
       #load-more-button {
-        margin-top: 0.5rem;
+        margin-block-start: 0.5rem;
         width: 100%;
       }
     `,

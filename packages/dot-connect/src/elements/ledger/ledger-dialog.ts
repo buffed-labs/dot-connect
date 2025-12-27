@@ -38,7 +38,7 @@ export class LedgerDialog extends DotConnectElement {
         margin-inline-start: 3.2rem;
         margin-inline-end: 0.5rem;
         border: none;
-        border-bottom: 0.5px solid var(--outline-color);
+        border-block-end: 0.5px solid var(--outline-color);
       }
 
       button.text {

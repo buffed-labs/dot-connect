@@ -47,12 +47,12 @@ export class QrCode extends DotConnectElement {
       }
 
       #container {
-        width: min-content;
+        inline-size: min-content;
       }
 
       #qr-code-container {
         position: relative;
-        width: min-content;
+        inline-size: min-content;
       }
 
       #logo-container {
