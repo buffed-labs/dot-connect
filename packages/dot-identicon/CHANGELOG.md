@@ -1,5 +1,11 @@
 # dot-identicon
 
+## 0.2.1
+
+### Patch Changes
+
+- [#462](https://github.com/buffed-labs/dot-connect/pull/462) [`b8a4770`](https://github.com/buffed-labs/dot-connect/commit/b8a47701dd281e49c5f2b86d5877ac6816a516f1) Thanks [@tien](https://github.com/tien)! - Used logical CSS properties instead of physical properties.
+
 ## 0.2.0
 
 ### Minor Changes
