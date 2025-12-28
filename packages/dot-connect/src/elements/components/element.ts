@@ -9,8 +9,8 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       &:focus-visible {
         outline: 2px solid
           light-dark(
-            color-mix(in srgb, var(--primary-color) 75%, transparent),
-            color-mix(in srgb, var(--primary-color) 50%, transparent)
+            color-mix(in oklab, var(--primary-color) 75%, transparent),
+            color-mix(in oklab, var(--primary-color) 50%, transparent)
           );
         outline-offset: 2px;
       }
@@ -49,13 +49,13 @@ export abstract class DotConnectElement extends SignalWatcher(LitElement) {
       );
 
       --surface-container-color: color-mix(
-        in srgb,
+        in oklab,
         var(--on-surface-color),
         transparent 95%
       );
 
       --outline-color: color-mix(
-        in srgb,
+        in oklab,
         var(--on-surface-color) 25%,
         transparent
       );
