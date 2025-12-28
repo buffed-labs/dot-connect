@@ -77,7 +77,7 @@ export class ListItem extends DotConnectElement {
       #supporting {
         grid-area: supporting;
         font-size: 0.75em;
-        color: color-mix(in srgb, currentcolor, transparent 15%);
+        color: color-mix(in oklab, currentcolor, transparent 15%);
       }
 
       #trailing {

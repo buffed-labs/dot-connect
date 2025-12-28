@@ -129,7 +129,7 @@ export class Dialog extends DotConnectElement {
 
       footer {
         display: flex;
-        color: color-mix(in srgb, currentcolor, transparent 15%);
+        color: color-mix(in oklab, currentcolor, transparent 15%);
         font-size: 0.75em;
         position: sticky;
         inset-block-end: 0;
