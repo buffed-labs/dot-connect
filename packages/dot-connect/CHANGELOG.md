@@ -1,5 +1,18 @@
 # dot-connect
 
+## 0.28.3
+
+### Patch Changes
+
+- [#462](https://github.com/buffed-labs/dot-connect/pull/462) [`b8a4770`](https://github.com/buffed-labs/dot-connect/commit/b8a47701dd281e49c5f2b86d5877ac6816a516f1) Thanks [@tien](https://github.com/tien)! - Used logical CSS properties instead of physical properties.
+
+- [#465](https://github.com/buffed-labs/dot-connect/pull/465) [`1a09f7a`](https://github.com/buffed-labs/dot-connect/commit/1a09f7a0aa2dfbd58f846ff3a4e0034b4ec4e1e6) Thanks [@tien](https://github.com/tien)! - Bumped dependencies.
+
+- [#464](https://github.com/buffed-labs/dot-connect/pull/464) [`a344bb3`](https://github.com/buffed-labs/dot-connect/commit/a344bb3eade6ca4b01d501a692927e4bfe8860fc) Thanks [@tien](https://github.com/tien)! - Switched to Oklab instead of sRGB for color mixing.
+
+- Updated dependencies [[`b8a4770`](https://github.com/buffed-labs/dot-connect/commit/b8a47701dd281e49c5f2b86d5877ac6816a516f1), [`1a09f7a`](https://github.com/buffed-labs/dot-connect/commit/1a09f7a0aa2dfbd58f846ff3a4e0034b4ec4e1e6)]:
+  - dot-identicon@0.2.1
+
 ## 0.28.2
 
 ### Patch Changes
