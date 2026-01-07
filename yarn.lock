@@ -1474,13 +1474,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lit-labs/signals@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "@lit-labs/signals@npm:0.1.3"
+"@lit-labs/signals@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@lit-labs/signals@npm:0.2.0"
   dependencies:
     lit: "npm:^2.0.0 || ^3.0.0"
-    signal-polyfill: "npm:^0.2.0"
-  checksum: 10c0/299f35e522c183eba010697aad0cca061a725de13ef89990083b27a678965936abf70687f6af8a40617e0471b028c283e71f66c63f2d7b82fb9fe9e5b8b91733
+    signal-polyfill: "npm:^0.2.2"
+  checksum: 10c0/4c9f4216220dea94e34ffe916a5e49651da90de827fa7868bf82bb9ee1207ef09cab09189c97d2ace4c566eebb90dc431142d14c332c7258356479592846c38a
   languageName: node
   linkType: hard
 
@@ -2282,6 +2282,18 @@ __metadata:
     "@scure/base": "npm:^2.0.0"
     scale-ts: "npm:^1.6.1"
   checksum: 10c0/1cfdac28266149ee893352cc55987b12d475d56d09acde9f8dc6ad79d1a0c3b973d94c1817b2b4a975ffbccd5d733b05b7977bf2dd08e64e2b73f6c8552cbdad
+  languageName: node
+  linkType: hard
+
+"@polkadot-api/substrate-bindings@npm:^0.16.6":
+  version: 0.16.6
+  resolution: "@polkadot-api/substrate-bindings@npm:0.16.6"
+  dependencies:
+    "@noble/hashes": "npm:^2.0.1"
+    "@polkadot-api/utils": "npm:0.2.0"
+    "@scure/base": "npm:^2.0.0"
+    scale-ts: "npm:^1.6.1"
+  checksum: 10c0/3ee879b8a2f8119bf5be406f7ed3e220dbf706d3a1868b4d38a3d174c38514f1ffea29f69fc02523d8ccbea30ec65261d1aaa400ddf44690aadd7ca0bcdd2f3d
   languageName: node
   linkType: hard
 
@@ -4589,7 +4601,7 @@ __metadata:
   resolution: "dot-connect@workspace:packages/dot-connect"
   dependencies:
     "@eslint/js": "npm:^9.39.2"
-    "@lit-labs/signals": "npm:^0.1.3"
+    "@lit-labs/signals": "npm:^0.2.0"
     "@lit/react": "npm:^1.0.8"
     "@lit/task": "npm:^1.0.3"
     "@reactive-dot/core": "npm:^0.67.3"
@@ -4603,7 +4615,7 @@ __metadata:
     "@undecaf/barcode-detector-polyfill": "npm:^0.9.23"
     dot-identicon: "workspace:^"
     eslint: "npm:^9.39.2"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     polkadot-api: "npm:^1.23.1"
     qrcode: "npm:^1.5.4"
     signal-utils: "npm:^0.21.1"
@@ -4629,12 +4641,12 @@ __metadata:
     "@eslint/js": "npm:^9.39.2"
     "@lit/react": "npm:^1.0.8"
     "@noble/hashes": "npm:^2.0.1"
-    "@polkadot-api/substrate-bindings": "npm:^0.16.5"
+    "@polkadot-api/substrate-bindings": "npm:^0.16.6"
     "@tsconfig/recommended": "npm:^1.0.13"
     "@tsconfig/strictest": "npm:^2.0.8"
     "@types/react": "npm:^19.2.7"
     eslint: "npm:^9.39.2"
-    lit: "npm:^3.3.1"
+    lit: "npm:^3.3.2"
     typescript: "npm:^5.9.3"
     typescript-eslint: "npm:^8.50.0"
     vue: "npm:^3.5.26"
@@ -6594,7 +6606,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lit@npm:^2.0.0 || ^3.0.0, lit@npm:^3.3.1":
+"lit@npm:^2.0.0 || ^3.0.0":
   version: 3.3.1
   resolution: "lit@npm:3.3.1"
   dependencies:
@@ -6602,6 +6614,17 @@ __metadata:
     lit-element: "npm:^4.2.0"
     lit-html: "npm:^3.3.0"
   checksum: 10c0/9f3e171e211be7cd3e01693eac4ba4752fc7bafebc8298fc5b9cb70ff279dd4dc292f1cb425ca42f61c3767a75b7557295c2f6b16335719bc8cf1ca6f3622fb7
+  languageName: node
+  linkType: hard
+
+"lit@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "lit@npm:3.3.2"
+  dependencies:
+    "@lit/reactive-element": "npm:^2.1.0"
+    lit-element: "npm:^4.2.0"
+    lit-html: "npm:^3.3.0"
+  checksum: 10c0/50563fd9c7bf546f8fdc6a936321b5be581ce440a359b06048ae5d44c1ecf6c38c2ded708e97d36a1ce70da1a7ad569890e40e0fb5ed040ec42d5ed2365f468d
   languageName: node
   linkType: hard
 
@@ -8891,7 +8914,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"signal-polyfill@npm:^0.2.0":
+"signal-polyfill@npm:^0.2.2":
   version: 0.2.2
   resolution: "signal-polyfill@npm:0.2.2"
   checksum: 10c0/485b0e66d93961454af32e7fbff88130138dffcbf7bce35e5c873d760ceb9ce33a125dd63cc59454c739c43246980515b1162cbe0ebc975a974ee036fb58d18a
