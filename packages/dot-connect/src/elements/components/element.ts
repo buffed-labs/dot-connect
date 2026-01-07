@@ -1,7 +1,10 @@
 import { SignalWatcher } from "@lit-labs/signals";
 import { LitElement, css, type CSSResultGroup } from "lit";
 
-export abstract class DotConnectElement extends SignalWatcher(LitElement) {
+export abstract class DotConnectElement
+  // TODO: remove once https://github.com/lit/lit/issues/5192 is resolved
+  extends (SignalWatcher(LitElement) as typeof LitElement)
+{
   static override readonly styles: CSSResultGroup = css`
     * {
       box-sizing: border-box;
