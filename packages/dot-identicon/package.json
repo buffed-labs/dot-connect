@@ -36,7 +36,7 @@
   "dependencies": {
     "@lit/react": "^1.0.8",
     "@noble/hashes": "^2.0.1",
-    "@polkadot-api/substrate-bindings": "^0.16.6",
+    "@polkadot-api/substrate-bindings": "^0.17.0",
     "lit": "^3.3.2"
   },
   "devDependencies": {
