@@ -1,5 +1,11 @@
 # dot-identicon
 
+## 0.2.2
+
+### Patch Changes
+
+- [#469](https://github.com/buffed-labs/dot-connect/pull/469) [`9ce9a7f`](https://github.com/buffed-labs/dot-connect/commit/9ce9a7f640d562b36d0a7f8ea33bc4353a89d4e6) Thanks [@tien](https://github.com/tien)! - Bumped dependencies.
+
 ## 0.2.1
 
 ### Patch Changes
