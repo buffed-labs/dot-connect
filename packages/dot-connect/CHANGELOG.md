@@ -1,5 +1,16 @@
 # dot-connect
 
+## 0.29.0
+
+### Minor Changes
+
+- [#454](https://github.com/buffed-labs/dot-connect/pull/454) [`539db7c`](https://github.com/buffed-labs/dot-connect/commit/539db7c2527ae487cacf71baf90e347b40991896) Thanks [@tien](https://github.com/tien)! - Enabled non-modal dialog (anchored to button) support on Firefox & Safari.
+
+### Patch Changes
+
+- Updated dependencies [[`9ce9a7f`](https://github.com/buffed-labs/dot-connect/commit/9ce9a7f640d562b36d0a7f8ea33bc4353a89d4e6)]:
+  - dot-identicon@0.2.2
+
 ## 0.28.3
 
 ### Patch Changes
