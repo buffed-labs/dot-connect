@@ -28,7 +28,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { join } from "lit/directives/join.js";
 import { when } from "lit/directives/when.js";
-import { filter } from "rxjs";
+import { filter, map } from "rxjs";
 import { effect } from "signal-utils/subtle/microtask-effect";
 
 declare global {
@@ -82,7 +82,18 @@ export class ConnectionDialog extends DotConnectElement {
   @property()
   variant: "modal" | "non-modal" = "modal";
 
-  readonly #availableWallets = observableSignal(this, wallets$, []);
+  readonly #availableWallets = observableSignal(
+    this,
+    wallets$.pipe(
+      map((wallets) =>
+        wallets.filter(
+          // TODO: move this logic to wallet definition
+          (wallet) => wallet.id !== "ledger" || "USB" in globalThis,
+        ),
+      ),
+    ),
+    [],
+  );
 
   readonly #connectedWallets = observableSignal(this, connectedWallets$, []);
 
@@ -102,14 +113,25 @@ export class ConnectionDialog extends DotConnectElement {
     this.#availableWallets
       .get()
       .filter(
-        (wallet) =>
-          (wallet.id === "ledger" && "USB" in globalThis) ||
-          wallet.id === "polkadot-vault",
+        (wallet) => wallet.id === "ledger" || wallet.id === "polkadot-vault",
       ),
   );
 
   readonly #readonlyWallets = computed(() =>
     this.#availableWallets.get().filter((wallet) => wallet.id === "readonly"),
+  );
+
+  readonly #otherWallets = computed(() =>
+    this.#availableWallets.get().filter(
+      (wallet) =>
+        !this.#installedWallets.get().includes(wallet) &&
+        !this.#deepLinkWallets.get().includes(
+          // @ts-expect-error TS2345: Argument of type 'Wallet' is not assignable to parameter of type 'DeepLinkWallet'.
+          wallet,
+        ) &&
+        !this.#hardwareWallets.get().includes(wallet) &&
+        !this.#readonlyWallets.get().includes(wallet),
+    ),
   );
 
   readonly #recommendedWallets = computed(() =>
@@ -221,14 +243,22 @@ export class ConnectionDialog extends DotConnectElement {
               <header><h3>Others</h3></header>
               <ul>
                 ${join(
-                  this.#readonlyWallets
-                    .get()
-                    .map(
-                      (wallet) =>
-                        html`<dc-readonly-wallet
-                          .wallet=${wallet}
-                        ></dc-readonly-wallet>`,
-                    ),
+                  [
+                    ...this.#otherWallets
+                      .get()
+                      .map(
+                        (wallet) =>
+                          html`<dc-wallet .wallet=${wallet}></dc-wallet>`,
+                      ),
+                    ...this.#readonlyWallets
+                      .get()
+                      .map(
+                        (wallet) =>
+                          html`<dc-readonly-wallet
+                            .wallet=${wallet}
+                          ></dc-readonly-wallet>`,
+                      ),
+                  ],
                   html`<hr />`,
                 )}
               </ul>
