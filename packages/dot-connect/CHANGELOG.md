@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.29.1
+
+### Patch Changes
+
+- [#470](https://github.com/buffed-labs/dot-connect/pull/470) [`9b3f6a9`](https://github.com/buffed-labs/dot-connect/commit/9b3f6a9cba4b5ed0e9c354e4ce2ed55c3acde8ba) Thanks [@tien](https://github.com/tien)! - Fixed Mimir wallet availability.
+
 ## 0.29.0
 
 ### Minor Changes
