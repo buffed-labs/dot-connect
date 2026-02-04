@@ -1,5 +1,11 @@
 # dot-connect
 
+## 0.30.0
+
+### Minor Changes
+
+- [#472](https://github.com/buffed-labs/dot-connect/pull/472) [`1aaa8ad`](https://github.com/buffed-labs/dot-connect/commit/1aaa8adb9c656a1c97c51af84405c935da95c8b4) Thanks [@tien](https://github.com/tien)! - Simplified button hover and active states to reduce visual distraction.
+
 ## 0.29.1
 
 ### Patch Changes
