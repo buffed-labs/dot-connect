@@ -8,12 +8,12 @@
     "preview": "vitepress preview"
   },
   "dependencies": {
-    "@reactive-dot/core": "^0.68.2",
-    "@reactive-dot/wallet-ledger": "^0.18.10",
-    "@reactive-dot/wallet-mimir": "^0.2.5",
-    "@reactive-dot/wallet-polkadot-vault": "^0.2.8",
-    "@reactive-dot/wallet-readonly": "^0.2.6",
-    "@reactive-dot/wallet-walletconnect": "^0.18.7",
+    "@reactive-dot/core": "^0.69.0",
+    "@reactive-dot/wallet-ledger": "^0.18.11",
+    "@reactive-dot/wallet-mimir": "^0.2.6",
+    "@reactive-dot/wallet-polkadot-vault": "^0.2.9",
+    "@reactive-dot/wallet-readonly": "^0.2.7",
+    "@reactive-dot/wallet-walletconnect": "^0.18.8",
     "dot-connect": "workspace:^",
     "highlight.js": "^11.11.1",
     "polkadot-api": "^1.23.3",
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "vitepress": "^1.6.4",
-    "vitepress-plugin-llms": "^1.10.0",
+    "vitepress-plugin-llms": "^1.11.0",
     "vitepress-plugin-tabs": "^0.7.3"
   }
 }
