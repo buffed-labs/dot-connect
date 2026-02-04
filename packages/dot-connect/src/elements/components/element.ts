@@ -99,15 +99,16 @@ export abstract class DotConnectElement
       color: var(--primary-color);
       font-weight: bolder;
       text-decoration: none;
-      transition: scale 0.25s;
 
-      &:hover {
-        scale: 1.04;
+      &:hover:not(.button:not(.text)) {
+        text-decoration: underline;
       }
     }
 
     button,
     a.button {
+      --container-color: var(--primary-color);
+
       display: inline-block;
       text-align: center;
 
@@ -115,11 +116,10 @@ export abstract class DotConnectElement
       font-weight: 600;
       border: none;
       border-radius: min(999px, var(--max-border-radius));
-      background-color: var(--primary-color);
+      background-color: var(--container-color);
       padding-block: 0.8em;
       padding-inline: 1.25rem;
       cursor: pointer;
-      transition: scale 0.25s;
 
       &[disabled] {
         filter: grayscale(1);
@@ -164,7 +164,7 @@ export abstract class DotConnectElement
       &.info,
       &.success,
       &.error {
-        background-color: var(--surface-container-color);
+        --container-color: var(--surface-container-color);
       }
 
       &.icon {
@@ -175,16 +175,23 @@ export abstract class DotConnectElement
 
       &.text,
       &.icon {
-        background-color: transparent;
+        --container-color: transparent;
       }
 
-      &:hover {
-        scale: 1.06;
-      }
+      &:not(.text, .icon) {
+        &:hover {
+          background-color: light-dark(
+            color-mix(in oklab, var(--container-color), black 5%),
+            color-mix(in oklab, var(--container-color), white 5%)
+          );
+        }
 
-      &:active {
-        scale: 1;
-        filter: brightness(1.125);
+        &:active {
+          background-color: light-dark(
+            color-mix(in oklab, var(--container-color), white 5%),
+            color-mix(in oklab, var(--container-color), black 5%)
+          );
+        }
       }
     }
 
