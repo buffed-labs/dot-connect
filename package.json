@@ -9,11 +9,7 @@
   "author": "Tiến Nguyễn Khắc <tien.nguyenkhac@icloud.com> (https://tien.zone/)",
   "repository": "github:buffed-labs/dot-connect",
   "type": "module",
-  "packageManager": "yarn@4.12.0",
-  "volta": {
-    "node": "25.6.0",
-    "yarn": "4.12.0"
-  },
+  "packageManager": "yarn@4.13.0",
   "engines": {
     "node": "25.x"
   },
