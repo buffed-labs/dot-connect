@@ -129,8 +129,8 @@ export class PolkadotVaultSignatureScannerDialog extends DotConnectElement {
       (f, i): Uint8Array =>
         mergeUint8([
           new Uint8Array([0x00]),
-          Binary.fromHex(frames.length.toString(16).padStart(4, "0")).asBytes(),
-          Binary.fromHex(i.toString(16).padStart(4, "0")).asBytes(),
+          Binary.fromHex(frames.length.toString(16).padStart(4, "0")),
+          Binary.fromHex(i.toString(16).padStart(4, "0")),
           f,
         ]),
     );
