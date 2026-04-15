@@ -1,5 +1,15 @@
 # dot-identicon
 
+## 0.3.0
+
+### Minor Changes
+
+- [#498](https://github.com/buffed-labs/dot-connect/pull/498) [`c2f5732`](https://github.com/buffed-labs/dot-connect/commit/c2f57324c8caf9ea921dc4b90a96e47934caff1f) Thanks [@tien](https://github.com/tien)! - Added Polkadot-API v2 support.
+
+### Patch Changes
+
+- [#498](https://github.com/buffed-labs/dot-connect/pull/498) [`1e54b59`](https://github.com/buffed-labs/dot-connect/commit/1e54b59e9f0ce6d47ddb475d4d4a185920bbf5cf) Thanks [@tien](https://github.com/tien)! - Bumped dependencies.
+
 ## 0.2.2
 
 ### Patch Changes
