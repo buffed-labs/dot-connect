@@ -23,6 +23,8 @@
     "build:packages": "nx run-many -t build --projects='packages/*'",
     "publish:packages": "yarn build:packages && yarn workspaces foreach -Apt --no-private npm publish --tolerate-republish && yarn changeset tag",
     "lint": "nx run-many -t lint",
+    "lint:fix": "nx run-many -t lint -- --fix",
+    "lint:github": "nx run-many -t lint -- --format=github",
     "postinstall": "husky"
   },
   "devDependencies": {
