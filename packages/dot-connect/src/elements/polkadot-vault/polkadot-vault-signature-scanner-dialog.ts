@@ -1,13 +1,15 @@
-import { polkadotVault } from "../../wallets/polkadot-vault.js";
-import { DotConnectElement } from "../components/element.js";
-import "../components/qr-scanner.js";
-import type { QrScannerEventMap } from "../components/qr-scanner.js";
 import { Binary } from "@polkadot-api/substrate-bindings";
 import { mergeUint8 } from "@polkadot-api/utils";
+
+import "../components/qr-scanner.js";
 import type { VaultRequest } from "@reactive-dot/wallet-polkadot-vault";
 import { css, html, nothing, type PropertyValues } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { choose } from "lit/directives/choose.js";
+
+import { polkadotVault } from "../../wallets/polkadot-vault.js";
+import { DotConnectElement } from "../components/element.js";
+import type { QrScannerEventMap } from "../components/qr-scanner.js";
 
 @customElement("dc-polkadot-vault-signature-scanner-dialog")
 export class PolkadotVaultSignatureScannerDialog extends DotConnectElement {
@@ -92,12 +94,10 @@ export class PolkadotVaultSignatureScannerDialog extends DotConnectElement {
                   ? nothing
                   : html`<div class="center" style="margin-block-end: 25px">
                       <dc-qr-scanner
-                        @qr-code-value=${(
-                          event: QrScannerEventMap["qr-code-value"],
-                        ) => this.request.response.resolve(event.detail.value)}
-                        @qr-code-error=${(
-                          event: QrScannerEventMap["qr-code-error"],
-                        ) => this.request.response.reject(event.detail.error)}
+                        @qr-code-value=${(event: QrScannerEventMap["qr-code-value"]) =>
+                          this.request.response.resolve(event.detail.value)}
+                        @qr-code-error=${(event: QrScannerEventMap["qr-code-error"]) =>
+                          this.request.response.reject(event.detail.error)}
                       ></dc-qr-scanner>
                     </div>`}
                 <div id="button-container">

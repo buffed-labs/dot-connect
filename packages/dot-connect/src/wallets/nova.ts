@@ -1,7 +1,8 @@
-import { urlFromSvg } from "../utils.js";
-import type { InjectedWalletInfo, WalletConfig } from "./types.js";
 import type { Wallet } from "@reactive-dot/core/wallets.js";
 import { html } from "lit";
+
+import { urlFromSvg } from "../utils.js";
+import type { InjectedWalletInfo, WalletConfig } from "./types.js";
 
 export const nova: WalletConfig<InjectedWalletInfo> = {
   selector: (wallet: Wallet) => wallet.id === "injected/nova-wallet",
@@ -51,7 +52,6 @@ export const nova: WalletConfig<InjectedWalletInfo> = {
   recommended: true,
   downloadUrl: {
     ios: "https://apps.apple.com/us/app/nova-polkadot-wallet/id1597119355",
-    android:
-      "https://play.google.com/store/apps/details?id=io.novafoundation.nova.market",
+    android: "https://play.google.com/store/apps/details?id=io.novafoundation.nova.market",
   },
 };

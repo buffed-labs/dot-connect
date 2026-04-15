@@ -1,9 +1,11 @@
-import { DotConnectElement } from "../components/element.js";
-import "../components/qr-scanner.js";
-import type { QrScannerEventMap } from "../components/qr-scanner.js";
 import type { VaultRequest } from "@reactive-dot/wallet-polkadot-vault";
+
+import "../components/qr-scanner.js";
 import { css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
+
+import { DotConnectElement } from "../components/element.js";
+import type { QrScannerEventMap } from "../components/qr-scanner.js";
 
 @customElement("dc-polkadot-vault-account-scanner-dialog")
 export class PolkadotVaultAccountScannerDialog extends DotConnectElement {

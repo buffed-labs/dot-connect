@@ -5,9 +5,6 @@ import type { DefineCustomElement } from "./define-custom-element.js";
 declare module "vue" {
   interface GlobalComponents {
     "dc-connection-button": DefineCustomElement<ConnectionButton>;
-    "dc-connection-dialog": DefineCustomElement<
-      ConnectionDialog,
-      { close: Event }
-    >;
+    "dc-connection-dialog": DefineCustomElement<ConnectionDialog, { close: Event }>;
   }
 }

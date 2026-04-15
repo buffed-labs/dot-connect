@@ -1,13 +1,14 @@
-import { genericChainSpec } from "../../consts.js";
-import { observableSignal } from "../../observable-signal.js";
-import { logAndThrow } from "../../utils.js";
-import { DotConnectElement } from "../components/element.js";
 import { Task } from "@lit/task";
 import { getAccounts } from "@reactive-dot/core/internal/actions.js";
 import type { LedgerWallet } from "@reactive-dot/wallet-ledger";
 import { css, html, type PropertyValues } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { AccountId } from "polkadot-api";
+
+import { genericChainSpec } from "../../consts.js";
+import { observableSignal } from "../../observable-signal.js";
+import { logAndThrow } from "../../utils.js";
+import { DotConnectElement } from "../components/element.js";
 
 const genericAccountId = AccountId();
 
@@ -28,9 +29,7 @@ export class ConnectedLedgerAccountListItem extends DotConnectElement {
   readonly #accountTask = new Task(this, {
     task: async ([wallet, path]) =>
       wallet === undefined
-        ? Promise.withResolvers<
-            Awaited<ReturnType<LedgerWallet["getConnectedAccount"]>>
-          >().promise
+        ? Promise.withResolvers<Awaited<ReturnType<LedgerWallet["getConnectedAccount"]>>>().promise
         : wallet.getConnectedAccount(path).catch(logAndThrow),
     args: () => [this.wallet, this.accountPath] as const,
   });
@@ -87,13 +86,7 @@ export class ConnectedLedgerAccountListItem extends DotConnectElement {
       error: () =>
         html`<dc-list-item>
           <span slot="headline">Failed to load account</span>
-          <button
-            slot="trailing"
-            class="xs"
-            @click=${() => this.#accountTask.run()}
-          >
-            Retry
-          </button>
+          <button slot="trailing" class="xs" @click=${() => this.#accountTask.run()}>Retry</button>
         </dc-list-item>`,
     });
   }

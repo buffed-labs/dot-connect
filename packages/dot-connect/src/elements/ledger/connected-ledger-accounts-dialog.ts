@@ -1,10 +1,12 @@
-import { logAndThrow } from "../../utils.js";
-import { DotConnectElement } from "../components/element.js";
-import "./connected-ledger-account-list-item.js";
 import { Task } from "@lit/task";
 import type { LedgerWallet } from "@reactive-dot/wallet-ledger";
+
+import "./connected-ledger-account-list-item.js";
 import { css, html, type PropertyValues } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+
+import { logAndThrow } from "../../utils.js";
+import { DotConnectElement } from "../components/element.js";
 
 @customElement("dc-connected-ledger-accounts-dialog")
 export class ConnectedLedgerAccountsDialog extends DotConnectElement {
@@ -22,9 +24,7 @@ export class ConnectedLedgerAccountsDialog extends DotConnectElement {
   #connectLedgerTask = new Task(this, {
     task: ([wallet]) =>
       wallet === undefined
-        ? Promise.withResolvers<
-            Awaited<ReturnType<LedgerWallet["getConnectedAccount"]>>
-          >().promise
+        ? Promise.withResolvers<Awaited<ReturnType<LedgerWallet["getConnectedAccount"]>>>().promise
         : wallet.getConnectedAccount().catch(logAndThrow),
     args: () => [this.wallet] as const,
     autoRun: false,
@@ -62,8 +62,7 @@ export class ConnectedLedgerAccountsDialog extends DotConnectElement {
     return html`
       <dc-dialog
         ?open=${this.open}
-        @close=${(event: Event) =>
-          this.dispatchEvent(new Event(event.type, event))}
+        @close=${(event: Event) => this.dispatchEvent(new Event(event.type, event))}
       >
         <span slot="title">Connectable accounts</span>
         <div slot="content">
@@ -80,18 +79,14 @@ export class ConnectedLedgerAccountsDialog extends DotConnectElement {
               <button
                 id="load-more-button"
                 @click=${() =>
-                  (this.accountCount +=
-                    ConnectedLedgerAccountsDialog.accountIncrement)}
+                  (this.accountCount += ConnectedLedgerAccountsDialog.accountIncrement)}
               >
                 Load more accounts
               </button>
             `,
             error: () =>
               html`<p>Failed to connect Ledger device.</p>
-                <button
-                  id="retry-button"
-                  @click=${() => this.#connectLedgerTask.run()}
-                >
+                <button id="retry-button" @click=${() => this.#connectLedgerTask.run()}>
                   Try again
                 </button>`,
           })}

@@ -1,11 +1,12 @@
 import "./circular-progress-indicator.js";
-import { DotConnectElement } from "./element.js";
 import { css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { createRef, ref, type Ref } from "lit/directives/ref.js";
 import { styleMap } from "lit/directives/style-map.js";
+
+import { DotConnectElement } from "./element.js";
 
 const composedEvent = Symbol("composedEvent");
 
@@ -127,10 +128,7 @@ export class ListItem extends DotConnectElement {
         <header id="headline"><slot name="headline"></slot></header>
         <div id="supporting"><slot name="supporting"></slot></div>
       </div>
-      <div
-        id="trailing"
-        style=${styleMap({ opacity: this.pending ? 1 : undefined })}
-      >
+      <div id="trailing" style=${styleMap({ opacity: this.pending ? 1 : undefined })}>
         ${(() => {
           if (this.pending) {
             return html`<dc-circular-progress-indicator
@@ -148,10 +146,9 @@ export class ListItem extends DotConnectElement {
                 @change=${(event: Event) => {
                   if (!(composedEvent in event)) {
                     this.#checkboxRef.value?.dispatchEvent(
-                      Object.assign(
-                        new Event(event.type, { ...event, composed: true }),
-                        { [composedEvent]: true },
-                      ),
+                      Object.assign(new Event(event.type, { ...event, composed: true }), {
+                        [composedEvent]: true,
+                      }),
                     );
                   }
                 }}

@@ -144,9 +144,7 @@ const open = ref(false);
 
 ```html
 <dc-connection-dialog id="wallet-dialog"></dc-connection-dialog>
-<button type="button" onclick="document.getElementById('wallet-dialog').show()">
-  Open dialog
-</button>
+<button type="button" onclick="document.getElementById('wallet-dialog').show()">Open dialog</button>
 <script>
   const walletDialog = document.getElementById("wallet-dialog");
   // Call walletDialog.close() when you want to hide it again.

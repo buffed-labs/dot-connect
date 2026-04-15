@@ -10,10 +10,7 @@ export default defineConfig({
     ["meta", { property: "og:image", content: "/social-card.png" }],
     ["meta", { property: "twitter:image", content: "/social-card.png" }],
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
-    [
-      "link",
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
-    ],
+    ["link", { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }],
     [
       "link",
       {
@@ -32,9 +29,7 @@ export default defineConfig({
       { text: "Getting started", link: "/getting-started" },
       { text: "Theming", link: "/theming" },
     ],
-    socialLinks: [
-      { icon: "github", link: "https://github.com/buffed-labs/dot-connect" },
-    ],
+    socialLinks: [{ icon: "github", link: "https://github.com/buffed-labs/dot-connect" }],
   },
   vite: {
     plugins: [llmstxt()],

@@ -12,9 +12,7 @@ import { AccountId } from "@polkadot-api/substrate-bindings";
 
 export function generatePolkadotIcon(
   address: string,
-  {
-    backgroundColor = "transparent",
-  }: { backgroundColor?: string | undefined } = {},
+  { backgroundColor = "transparent" }: { backgroundColor?: string | undefined } = {},
 ) {
   const xy = getCircleXY();
   let colors: string[];
@@ -94,9 +92,7 @@ function blake2AsU8a(
   const byteLength = Math.ceil(bitLength / 8);
   const u8a = data;
 
-  return key
-    ? blake2b(u8a, { dkLen: byteLength, key })
-    : blake2b(u8a, { dkLen: byteLength });
+  return key ? blake2b(u8a, { dkLen: byteLength, key }) : blake2b(u8a, { dkLen: byteLength });
 }
 
 function getRotation() {
@@ -157,9 +153,7 @@ function addressToId(address: string) {
     zeroHash = blake2AsU8a(new Uint8Array(32), 512);
   }
 
-  return blake2AsU8a(AccountId().enc(address), 512).map(
-    (x, i) => (x + 256 - zeroHash[i]!) % 256,
-  );
+  return blake2AsU8a(AccountId().enc(address), 512).map((x, i) => (x + 256 - zeroHash[i]!) % 256);
 }
 
 function getColors(address: string) {
@@ -183,7 +177,5 @@ function getColors(address: string) {
     return `hsl(${h}, ${sat}%, ${l}%)`;
   });
 
-  return scheme.colors.map(
-    (_, i) => palette[scheme.colors[i < 18 ? (i + rot) % 18 : 18]!]!,
-  );
+  return scheme.colors.map((_, i) => palette[scheme.colors[i < 18 ? (i + rot) % 18 : 18]!]!);
 }

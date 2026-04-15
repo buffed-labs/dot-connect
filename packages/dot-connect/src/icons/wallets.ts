@@ -1,5 +1,6 @@
-import type { IconProps } from "./types.js";
 import { html } from "lit";
+
+import type { IconProps } from "./types.js";
 
 export function wallets({ size = 24 }: IconProps) {
   return html`<svg

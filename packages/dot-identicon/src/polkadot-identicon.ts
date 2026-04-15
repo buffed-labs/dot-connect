@@ -1,6 +1,7 @@
-import { generatePolkadotIcon } from "./icon.js";
 import { css, html, LitElement, svg } from "lit";
 import { customElement, property } from "lit/decorators.js";
+
+import { generatePolkadotIcon } from "./icon.js";
 
 @customElement("polkadot-identicon")
 export class PolkadotIdenticon extends LitElement {
@@ -40,10 +41,7 @@ export class PolkadotIdenticon extends LitElement {
       );
     }
 
-    if (
-      changedProps.has("backgroundColor") &&
-      this.backgroundColor !== undefined
-    ) {
+    if (changedProps.has("backgroundColor") && this.backgroundColor !== undefined) {
       this.style.setProperty("--background-color", this.backgroundColor);
     }
   }
@@ -53,16 +51,8 @@ export class PolkadotIdenticon extends LitElement {
       backgroundColor: `var(--background-color, transparent)`,
     });
 
-    return html`<svg
-      name=${this.address}
-      width="100%"
-      height="100%"
-      viewBox="0 0 64 64"
-    >
-      ${circles.map(
-        ({ cx, cy, r, fill }) =>
-          svg`<circle cx=${cx} cy=${cy} r=${r} fill=${fill} />`,
-      )}
+    return html`<svg name=${this.address} width="100%" height="100%" viewBox="0 0 64 64">
+      ${circles.map(({ cx, cy, r, fill }) => svg`<circle cx=${cx} cy=${cy} r=${r} fill=${fill} />`)}
     </svg>`;
   }
 }

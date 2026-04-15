@@ -1,12 +1,14 @@
 import "../components/account-list-item.js";
-import { DotConnectElement } from "../components/element.js";
+import type { LedgerWallet } from "@reactive-dot/wallet-ledger";
+
 import "../local-wallet-dialog.js";
 import "./connected-ledger-accounts-dialog.js";
-import type { LedgerWallet } from "@reactive-dot/wallet-ledger";
-import "dot-identicon";
 import { css, html } from "lit";
+import "dot-identicon";
 import { customElement, property, state } from "lit/decorators.js";
 import { when } from "lit/directives/when.js";
+
+import { DotConnectElement } from "../components/element.js";
 
 @customElement("dc-ledger-dialog")
 export class LedgerDialog extends DotConnectElement {
@@ -51,8 +53,7 @@ export class LedgerDialog extends DotConnectElement {
     return html`<dc-local-wallet-dialog
         .wallet=${this.wallet}
         ?open=${this.open}
-        @close=${(event: Event) =>
-          this.dispatchEvent(new Event(event.type, event))}
+        @close=${(event: Event) => this.dispatchEvent(new Event(event.type, event))}
         @request-new-account=${() => (this.addDialogOpen = true)}
       >
       </dc-local-wallet-dialog>

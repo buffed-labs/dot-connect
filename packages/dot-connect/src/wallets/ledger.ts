@@ -1,16 +1,13 @@
+import { html } from "lit";
+
 import { urlFromSvg } from "../utils.js";
 import type { BaseWalletInfo, WalletConfig } from "./types.js";
-import { html } from "lit";
 
 export const ledger: WalletConfig<BaseWalletInfo> = {
   selector: (wallet) => wallet.id === "ledger",
   name: "Ledger",
   icon: urlFromSvg(
-    html`<svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 28 28"
-      fill="none"
-    >
+    html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none">
       <script xmlns="" />
       <path fill="#000" d="M0 0h28v28H0z" />
       <path

@@ -1,28 +1,17 @@
-import {
-  copy as copyIcon,
-  users as usersIcon,
-  wallet as walletIcon,
-} from "../icons/index.js";
-import { observableSignal } from "../observable-signal.js";
-import { connectedWallets$, walletConfigs, wallets$ } from "../stores.js";
-import { getDownloadUrl } from "../utils.js";
-import type { InjectedWalletInfo, WalletConfig } from "../wallets/types.js";
+import { computed, signal } from "@lit-labs/signals";
+import { connectWallet, disconnectWallet } from "@reactive-dot/core/internal/actions.js";
+import { DeepLinkWallet, type Wallet } from "@reactive-dot/core/wallets.js";
+import type { LedgerWallet } from "@reactive-dot/wallet-ledger";
+import type { PolkadotVaultWallet } from "@reactive-dot/wallet-polkadot-vault";
+
 import "./add-readonly-account-dialog.js";
 import "./components/dialog.js";
-import { DotConnectElement } from "./components/element.js";
+import type { ReadonlyWallet } from "@reactive-dot/wallet-readonly";
+
 import "./components/list-item.js";
 import "./components/qr-code.js";
 import "./ledger/connected-ledger-accounts-dialog.js";
 import "./ledger/ledger-dialog.js";
-import { computed, signal } from "@lit-labs/signals";
-import {
-  connectWallet,
-  disconnectWallet,
-} from "@reactive-dot/core/internal/actions.js";
-import { DeepLinkWallet, type Wallet } from "@reactive-dot/core/wallets.js";
-import type { LedgerWallet } from "@reactive-dot/wallet-ledger";
-import type { PolkadotVaultWallet } from "@reactive-dot/wallet-polkadot-vault";
-import type { ReadonlyWallet } from "@reactive-dot/wallet-readonly";
 import { css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -30,6 +19,13 @@ import { join } from "lit/directives/join.js";
 import { when } from "lit/directives/when.js";
 import { filter, map } from "rxjs";
 import { effect } from "signal-utils/subtle/microtask-effect";
+
+import { copy as copyIcon, users as usersIcon, wallet as walletIcon } from "../icons/index.js";
+import { observableSignal } from "../observable-signal.js";
+import { connectedWallets$, walletConfigs, wallets$ } from "../stores.js";
+import { getDownloadUrl } from "../utils.js";
+import type { InjectedWalletInfo, WalletConfig } from "../wallets/types.js";
+import { DotConnectElement } from "./components/element.js";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -98,23 +94,17 @@ export class ConnectionDialog extends DotConnectElement {
   readonly #connectedWallets = observableSignal(this, connectedWallets$, []);
 
   readonly #installedWallets = computed(() =>
-    this.#availableWallets
-      .get()
-      .filter((wallet) => wallet.id.startsWith("injected/")),
+    this.#availableWallets.get().filter((wallet) => wallet.id.startsWith("injected/")),
   );
 
   readonly #deepLinkWallets = computed(() =>
-    this.#availableWallets
-      .get()
-      .filter((wallet) => wallet instanceof DeepLinkWallet),
+    this.#availableWallets.get().filter((wallet) => wallet instanceof DeepLinkWallet),
   );
 
   readonly #hardwareWallets = computed(() =>
     this.#availableWallets
       .get()
-      .filter(
-        (wallet) => wallet.id === "ledger" || wallet.id === "polkadot-vault",
-      ),
+      .filter((wallet) => wallet.id === "ledger" || wallet.id === "polkadot-vault"),
   );
 
   readonly #readonlyWallets = computed(() =>
@@ -135,20 +125,15 @@ export class ConnectionDialog extends DotConnectElement {
   );
 
   readonly #recommendedWallets = computed(() =>
-    this.#installedWallets.get().length > 0 ||
-    this.#connectedWallets.get().length > 0
+    this.#installedWallets.get().length > 0 || this.#connectedWallets.get().length > 0
       ? []
       : walletConfigs
           .get()
           .filter(
             (config): config is WalletConfig<InjectedWalletInfo> =>
               "downloadUrl" in config &&
-              DownloadableWallet.shouldRender(
-                config as WalletConfig<InjectedWalletInfo>,
-              ) &&
-              !this.#installedWallets
-                .get()
-                .some((wallet) => config.selector(wallet)),
+              DownloadableWallet.shouldRender(config as WalletConfig<InjectedWalletInfo>) &&
+              !this.#installedWallets.get().some((wallet) => config.selector(wallet)),
           ),
   );
 
@@ -181,10 +166,7 @@ export class ConnectionDialog extends DotConnectElement {
                 ${join(
                   this.#installedWallets
                     .get()
-                    .map(
-                      (wallet) =>
-                        html`<dc-wallet .wallet=${wallet}></dc-wallet>`,
-                    ),
+                    .map((wallet) => html`<dc-wallet .wallet=${wallet}></dc-wallet>`),
                   html`<hr />`,
                 )}
               </ul>
@@ -200,9 +182,7 @@ export class ConnectionDialog extends DotConnectElement {
                   this.#hardwareWallets.get().map((wallet) => {
                     switch (wallet.id) {
                       case "ledger":
-                        return html`<dc-ledger-wallet
-                          .wallet=${wallet}
-                        ></dc-ledger-wallet>`;
+                        return html`<dc-ledger-wallet .wallet=${wallet}></dc-ledger-wallet>`;
                       case "polkadot-vault":
                         return html`<dc-polkadot-vault-wallet
                           .wallet=${wallet}
@@ -227,9 +207,7 @@ export class ConnectionDialog extends DotConnectElement {
                     .get()
                     .map(
                       (wallet) =>
-                        html`<dc-deep-link-wallet
-                          .wallet=${wallet}
-                        ></dc-deep-link-wallet>`,
+                        html`<dc-deep-link-wallet .wallet=${wallet}></dc-deep-link-wallet>`,
                     ),
                   html`<hr />`,
                 )}
@@ -246,17 +224,12 @@ export class ConnectionDialog extends DotConnectElement {
                   [
                     ...this.#otherWallets
                       .get()
-                      .map(
-                        (wallet) =>
-                          html`<dc-wallet .wallet=${wallet}></dc-wallet>`,
-                      ),
+                      .map((wallet) => html`<dc-wallet .wallet=${wallet}></dc-wallet>`),
                     ...this.#readonlyWallets
                       .get()
                       .map(
                         (wallet) =>
-                          html`<dc-readonly-wallet
-                            .wallet=${wallet}
-                          ></dc-readonly-wallet>`,
+                          html`<dc-readonly-wallet .wallet=${wallet}></dc-readonly-wallet>`,
                       ),
                   ],
                   html`<hr />`,
@@ -275,9 +248,7 @@ export class ConnectionDialog extends DotConnectElement {
                     .get()
                     .map(
                       (wallet) =>
-                        html`<dc-downloadable-wallet
-                          .wallet=${wallet}
-                        ></dc-downloadable-wallet>`,
+                        html`<dc-downloadable-wallet .wallet=${wallet}></dc-downloadable-wallet>`,
                     ),
                   html`<hr />`,
                 )}
@@ -301,9 +272,7 @@ export class ConnectionDialog extends DotConnectElement {
   }
 }
 
-abstract class BaseWalletConnection<
-  TWallet extends Wallet = Wallet,
-> extends DotConnectElement {
+abstract class BaseWalletConnection<TWallet extends Wallet = Wallet> extends DotConnectElement {
   @property({ attribute: false })
   wallet!: TWallet;
 
@@ -315,9 +284,7 @@ abstract class BaseWalletConnection<
 
   readonly #accounts = observableSignal(this, () => this.wallet.accounts$, []);
 
-  protected readonly connected = computed(() =>
-    this.#connectedWallets.get().includes(this.wallet),
-  );
+  protected readonly connected = computed(() => this.#connectedWallets.get().includes(this.wallet));
 
   protected readonly pending = signal(false);
 
@@ -470,11 +437,7 @@ export class DeepLinkWalletConnection extends BaseWalletConnection<DeepLinkWalle
       ${super.render()}
       ${this.#uri.get() === undefined
         ? nothing
-        : html`<dc-dialog
-            ?open=${true}
-            @close=${() => this.#uri.set(undefined)}
-            modal
-          >
+        : html`<dc-dialog ?open=${true} @close=${() => this.#uri.set(undefined)} modal>
             <span slot="title">Scan QR code</span>
             <div slot="content">
               <div id="qr-code-container">
@@ -486,8 +449,7 @@ export class DeepLinkWalletConnection extends BaseWalletConnection<DeepLinkWalle
               <div id="url-container">
                 <button
                   class="text info"
-                  @click=${() =>
-                    globalThis.navigator.clipboard.writeText(this.#uri.get()!)}
+                  @click=${() => globalThis.navigator.clipboard.writeText(this.#uri.get()!)}
                 >
                   Copy link ${copyIcon({ size: "1em" })}
                 </button>
@@ -682,8 +644,7 @@ export class DownloadableWallet extends DotConnectElement {
     }
 
     const isMobile =
-      this.#downloadUrl.platform === "android" ||
-      this.#downloadUrl.platform === "ios";
+      this.#downloadUrl.platform === "android" || this.#downloadUrl.platform === "ios";
 
     return html`<dc-list-item>
       <div slot="leading" class="icon">
@@ -692,11 +653,7 @@ export class DownloadableWallet extends DotConnectElement {
       <span slot="headline">${this.wallet.name}</span>
       <!-- No way to detect wether or not wallet is installed on mobile browser -->
       ${isMobile ? nothing : html`<span slot="supporting">Not installed</span>`}
-      <a
-        class="button info sm"
-        slot="trailing"
-        href=${this.#downloadUrl.url}
-        target="_blank"
+      <a class="button info sm" slot="trailing" href=${this.#downloadUrl.url} target="_blank"
         >Get</a
       >
     </dc-list-item>`;

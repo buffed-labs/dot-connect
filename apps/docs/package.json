@@ -1,7 +1,7 @@
 {
   "name": "@dot-connect/docs",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",

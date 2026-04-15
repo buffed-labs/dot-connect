@@ -1,6 +1,7 @@
-import { DotConnectElement } from "./element.js";
 import { css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
+
+import { DotConnectElement } from "./element.js";
 
 @customElement("dc-circular-progress-indicator")
 export class CircularProgressIndicator extends DotConnectElement {

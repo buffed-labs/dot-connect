@@ -1,18 +1,15 @@
-import { urlFromSvg } from "../utils.js";
-import type { InjectedWalletInfo, WalletConfig } from "./types.js";
 import type { Wallet } from "@reactive-dot/core/wallets.js";
 import { html } from "lit";
+
+import { urlFromSvg } from "../utils.js";
+import type { InjectedWalletInfo, WalletConfig } from "./types.js";
 
 export const talisman: WalletConfig<InjectedWalletInfo> = {
   selector: (wallet: Wallet) => wallet.id === "injected/talisman",
   name: "Talisman",
   platforms: ["chrome", "firefox"],
   icon: urlFromSvg(
-    html`<svg
-      viewBox="0 0 181.76259 192.63068"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    html`<svg viewBox="0 0 181.76259 192.63068" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs id="defs10" />
       <path
         fill-rule="evenodd"

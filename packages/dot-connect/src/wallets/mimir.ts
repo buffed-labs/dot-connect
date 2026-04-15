@@ -1,11 +1,11 @@
-import { urlFromSvg } from "../utils.js";
-import type { InjectedWalletInfo, WalletConfig } from "./types.js";
 import type { Wallet } from "@reactive-dot/core/wallets.js";
 import { html } from "lit";
 
+import { urlFromSvg } from "../utils.js";
+import type { InjectedWalletInfo, WalletConfig } from "./types.js";
+
 export const mimir: WalletConfig<InjectedWalletInfo> = {
-  selector: (wallet: Wallet) =>
-    wallet.id === "mimir" || wallet.id === "injected/mimir",
+  selector: (wallet: Wallet) => wallet.id === "mimir" || wallet.id === "injected/mimir",
   name: "Mimir",
   platforms: ["chrome", "firefox"],
   icon: urlFromSvg(

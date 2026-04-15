@@ -1,27 +1,16 @@
-import { urlFromSvg } from "../utils.js";
-import type { BaseWalletInfo, WalletConfig } from "./types.js";
 import type { Wallet } from "@reactive-dot/core/wallets.js";
 import { html } from "lit";
+
+import { urlFromSvg } from "../utils.js";
+import type { BaseWalletInfo, WalletConfig } from "./types.js";
 
 export const polkadotVault: WalletConfig<BaseWalletInfo> = {
   selector: (wallet: Wallet) => wallet.id === "polkadot-vault",
   name: "Polkadot Vault",
   icon: urlFromSvg(
-    html`<svg
-      viewBox="0 0 80 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    html`<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g id="g2" transform="translate(0,-8)">
-        <rect
-          y="8"
-          width="80"
-          height="80"
-          rx="40"
-          fill="#e6007a"
-          id="rect1"
-          x="0"
-        />
+        <rect y="8" width="80" height="80" rx="40" fill="#e6007a" id="rect1" x="0" />
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
