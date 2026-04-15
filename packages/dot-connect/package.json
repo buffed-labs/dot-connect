@@ -33,7 +33,7 @@
   "scripts": {
     "dev": "tsc --build --watch",
     "build": "rm -rf build && tsc --build",
-    "lint": "eslint src"
+    "lint": "oxlint src"
   },
   "dependencies": {
     "@lit-labs/signals": "^0.2.0",
@@ -46,7 +46,6 @@
     "signal-utils": "^0.21.1"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
     "@reactive-dot/core": "^0.72.0",
     "@reactive-dot/wallet-ledger": "^0.20.0",
     "@reactive-dot/wallet-polkadot-vault": "^0.3.0",
@@ -55,10 +54,9 @@
     "@tsconfig/strictest": "^2.0.8",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19.2.14",
-    "eslint": "^10.2.0",
+    "oxlint": "^1.60.0",
     "polkadot-api": "^2.0.1",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.2",
     "vue": "^3.5.32"
   },
   "peerDependencies": {

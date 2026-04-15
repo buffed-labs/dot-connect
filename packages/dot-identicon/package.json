@@ -31,7 +31,7 @@
   "scripts": {
     "dev": "tsc --build --watch",
     "build": "rm -rf build && tsc --build",
-    "lint": "eslint src"
+    "lint": "oxlint src"
   },
   "dependencies": {
     "@lit/react": "^1.0.8",
@@ -40,13 +40,11 @@
     "lit": "^3.3.2"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
     "@tsconfig/recommended": "^1.0.13",
     "@tsconfig/strictest": "^2.0.8",
     "@types/react": "^19.2.14",
-    "eslint": "^10.2.0",
+    "oxlint": "^1.60.0",
     "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.2",
     "vue": "^3.5.32"
   },
   "peerDependencies": {
