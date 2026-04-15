@@ -1,14 +1,15 @@
+import { css, html } from "lit";
+import { customElement, property } from "lit/decorators.js";
+
 import {
   users as usersIcon,
   wallet as walletIcon,
   wallets as walletsIcon,
 } from "../icons/index.js";
 import { observableSignal } from "../observable-signal.js";
+import "./connection-dialog.js";
 import { accounts$, connectedWallets$ } from "../stores.js";
 import { DotConnectElement } from "./components/element.js";
-import "./connection-dialog.js";
-import { css, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
 
 @customElement("dc-connection-button")
 export class ConnectionButton extends DotConnectElement {
@@ -54,8 +55,7 @@ export class ConnectionButton extends DotConnectElement {
                 >
                 ${this.#accounts.get().length}
                 <span class="icon">${usersIcon({ size: "1em" })}</span>`
-            : html`Connect
-                <span class="icon">${walletsIcon({ size: "1em" })}</span>`}
+            : html`Connect <span class="icon">${walletsIcon({ size: "1em" })}</span>`}
         </button>
       </dc-connection-dialog>
     `;

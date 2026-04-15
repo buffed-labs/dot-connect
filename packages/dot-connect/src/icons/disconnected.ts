@@ -1,5 +1,6 @@
-import type { IconProps } from "./types.js";
 import { html } from "lit";
+
+import type { IconProps } from "./types.js";
 
 export function disconnected({ size = 24 }: IconProps) {
   return html`<svg
@@ -24,11 +25,7 @@ export function disconnected({ size = 24 }: IconProps) {
         fill="none"
         data-nofill="true"
       ></path>
-      <path
-        d="M20.1082 13.7365L7.86182 13.7365"
-        fill="none"
-        data-nofill="true"
-      ></path>
+      <path d="M20.1082 13.7365L7.86182 13.7365" fill="none" data-nofill="true"></path>
       <path d="M2.99982 2L24.9998 26" fill="none" data-nofill="true"></path>
     </g>
   </svg>`;

@@ -1,8 +1,9 @@
-import { scanQr as scanQrIcon } from "../../icons/index.js";
-import { DotConnectElement } from "./element.js";
 import { css, html } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+
+import { scanQr as scanQrIcon } from "../../icons/index.js";
+import { DotConnectElement } from "./element.js";
 
 export type QrScannerEventMap = {
   "qr-code-value": CustomEvent<{ value: string }>;
@@ -11,9 +12,7 @@ export type QrScannerEventMap = {
 
 @customElement("dc-qr-scanner")
 export class QrScanner extends DotConnectElement {
-  override dispatchEvent<T extends keyof QrScannerEventMap>(
-    event: QrScannerEventMap[T],
-  ) {
+  override dispatchEvent<T extends keyof QrScannerEventMap>(event: QrScannerEventMap[T]) {
     return super.dispatchEvent(event);
   }
 
@@ -66,49 +65,42 @@ export class QrScanner extends DotConnectElement {
 
   override connectedCallback(): void {
     super.connectedCallback();
-    import("@undecaf/barcode-detector-polyfill").then(
-      async ({ BarcodeDetectorPolyfill }) => {
-        try {
-          const stream = await this.#createStream();
+    import("@undecaf/barcode-detector-polyfill").then(async ({ BarcodeDetectorPolyfill }) => {
+      try {
+        const stream = await this.#createStream();
 
-          this.videoElement.srcObject = stream;
+        this.videoElement.srcObject = stream;
 
-          if (
-            stream.getVideoTracks()[0]?.getSettings()?.facingMode ===
-            "environment"
-          ) {
-            this.videoElement.style.transform = "none";
-          } else {
-            this.videoElement.style.transform = "scaleX(-1)";
-          }
-
-          await this.videoElement.play();
-
-          const barcodeDetector = new BarcodeDetectorPolyfill({
-            formats: ["qr_code"],
-          });
-
-          while (true) {
-            const barcodes = await barcodeDetector.detect(this.videoElement);
-            const barcode = barcodes[0]!;
-
-            if (barcode !== undefined) {
-              this.dispatchEvent(
-                new CustomEvent("qr-code-value", {
-                  detail: { value: barcode.rawValue },
-                }),
-              );
-            }
-
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-          }
-        } catch (error) {
-          this.dispatchEvent(
-            new CustomEvent("qr-code-error", { detail: { error } }),
-          );
+        if (stream.getVideoTracks()[0]?.getSettings()?.facingMode === "environment") {
+          this.videoElement.style.transform = "none";
+        } else {
+          this.videoElement.style.transform = "scaleX(-1)";
         }
-      },
-    );
+
+        await this.videoElement.play();
+
+        const barcodeDetector = new BarcodeDetectorPolyfill({
+          formats: ["qr_code"],
+        });
+
+        while (true) {
+          const barcodes = await barcodeDetector.detect(this.videoElement);
+          const barcode = barcodes[0]!;
+
+          if (barcode !== undefined) {
+            this.dispatchEvent(
+              new CustomEvent("qr-code-value", {
+                detail: { value: barcode.rawValue },
+              }),
+            );
+          }
+
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+      } catch (error) {
+        this.dispatchEvent(new CustomEvent("qr-code-error", { detail: { error } }));
+      }
+    });
   }
 
   override disconnectedCallback() {
@@ -137,9 +129,7 @@ export class QrScanner extends DotConnectElement {
   }
 
   #stopStream() {
-    this.#stream?.then((stream) =>
-      stream.getTracks().forEach((track) => track.stop()),
-    );
+    this.#stream?.then((stream) => stream.getTracks().forEach((track) => track.stop()));
   }
 }
 

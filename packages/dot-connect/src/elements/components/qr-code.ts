@@ -1,13 +1,10 @@
-import { wallet as walletIcon } from "../../icons/index.js";
-import { DotConnectElement } from "./element.js";
 import { type TemplateResult, css, html, svg } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
-import {
-  create as createQrCode,
-  type QRCode,
-  type QRCodeErrorCorrectionLevel,
-} from "qrcode";
+import { create as createQrCode, type QRCode, type QRCodeErrorCorrectionLevel } from "qrcode";
+
+import { wallet as walletIcon } from "../../icons/index.js";
+import { DotConnectElement } from "./element.js";
 
 @customElement("dc-qr-code")
 export class QrCode extends DotConnectElement {
@@ -88,10 +85,7 @@ export class QrCode extends DotConnectElement {
             <title>QR Code</title>
             <defs>
               <clipPath id="clip-wrapper">
-                <rect
-                  height=${this.#logoWrapperSize}
-                  width=${this.#logoWrapperSize}
-                />
+                <rect height=${this.#logoWrapperSize} width=${this.#logoWrapperSize} />
               </clipPath>
               <clipPath id="clip-logo">
                 <rect height=${this.logoSize} width=${this.logoSize} />
@@ -105,23 +99,17 @@ export class QrCode extends DotConnectElement {
     `;
   }
 
-  #generateMatrix(
-    value: string | Uint8Array,
-    errorCorrectionLevel: QRCodeErrorCorrectionLevel,
-  ) {
+  #generateMatrix(value: string | Uint8Array, errorCorrectionLevel: QRCodeErrorCorrectionLevel) {
     const arr = Array.prototype.slice.call(
-      createQrCode(
-        typeof value === "string" ? value : [{ mode: "byte", data: value }],
-        { errorCorrectionLevel },
-      ).modules.data,
+      createQrCode(typeof value === "string" ? value : [{ mode: "byte", data: value }], {
+        errorCorrectionLevel,
+      }).modules.data,
       0,
     );
     const sqrt = Math.sqrt(arr.length);
     return arr.reduce(
       (rows, key, index) =>
-        (index % sqrt === 0
-          ? rows.push([key])
-          : rows[rows.length - 1].push(key)) && rows,
+        (index % sqrt === 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) && rows,
       [],
     ) as Array<QRCode[]>;
   }
@@ -150,10 +138,7 @@ export class QrCode extends DotConnectElement {
             x=${x1 + cellSize * i}
             y=${y1 + cellSize * i}
             style=${styleMap({
-              fill:
-                i % 2 !== 0
-                  ? "var(--surface-color)"
-                  : "var(--on-surface-color)",
+              fill: i % 2 !== 0 ? "var(--surface-color)" : "var(--on-surface-color)",
             })}
           />`,
         );

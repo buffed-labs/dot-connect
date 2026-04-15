@@ -4,8 +4,8 @@
   "description": "Polkadot's identicon",
   "keywords": [
     "front-end",
-    "polkadot",
-    "identicon"
+    "identicon",
+    "polkadot"
   ],
   "homepage": "https://github.com/buffed-labs/dot-connect",
   "bugs": {
@@ -19,15 +19,15 @@
     "url": "https://github.com/buffed-labs/dot-connect.git",
     "directory": "packages/dot-identicon"
   },
+  "files": [
+    "build"
+  ],
   "type": "module",
   "exports": {
     ".": "./build/index.js",
     "./react.js": "./build/react/index.js",
     "./vue.js": "./build/vue/index.js"
   },
-  "files": [
-    "build"
-  ],
   "scripts": {
     "dev": "tsc --build --watch",
     "build": "rm -rf build && tsc --build",

@@ -1,7 +1,8 @@
-import { urlFromSvg } from "../utils.js";
-import type { BaseWalletInfo, WalletConfig } from "./types.js";
 import type { Wallet } from "@reactive-dot/core/wallets.js";
 import { html } from "lit";
+
+import { urlFromSvg } from "../utils.js";
+import type { BaseWalletInfo, WalletConfig } from "./types.js";
 
 export const readonly: WalletConfig<BaseWalletInfo> = {
   selector: (wallet: Wallet) => wallet.id === "readonly",

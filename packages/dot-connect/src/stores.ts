@@ -1,5 +1,3 @@
-import { genericChainSpec } from "./consts.js";
-import { wallets as rawWalletConfigs } from "./wallets/index.js";
 import { signal } from "@lit-labs/signals";
 import {
   aggregateWallets,
@@ -11,9 +9,10 @@ import type { Wallet, WalletProvider } from "@reactive-dot/core/wallets.js";
 import { BehaviorSubject } from "rxjs";
 import { switchMap, tap } from "rxjs/operators";
 
-export const walletsOrProviders$ = new BehaviorSubject<
-  Array<Wallet | WalletProvider>
->([]);
+import { genericChainSpec } from "./consts.js";
+import { wallets as rawWalletConfigs } from "./wallets/index.js";
+
+export const walletsOrProviders$ = new BehaviorSubject<Array<Wallet | WalletProvider>>([]);
 
 export const wallets$ = walletsOrProviders$.pipe(
   switchMap(aggregateWallets),

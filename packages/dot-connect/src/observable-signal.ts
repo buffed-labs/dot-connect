@@ -2,10 +2,7 @@ import { Signal } from "@lit-labs/signals";
 import type { ReactiveController, ReactiveControllerHost } from "lit";
 import type { Observable, Subscription } from "rxjs";
 
-export class ObservableSignal<TValue>
-  extends Signal.State<TValue>
-  implements ReactiveController
-{
+export class ObservableSignal<TValue> extends Signal.State<TValue> implements ReactiveController {
   #observable: Observable<TValue> | (() => Observable<TValue>);
 
   #subscription: Subscription | undefined;
@@ -23,9 +20,7 @@ export class ObservableSignal<TValue>
 
   hostConnected(): void {
     this.#subscription ??= (
-      typeof this.#observable === "function"
-        ? this.#observable()
-        : this.#observable
+      typeof this.#observable === "function" ? this.#observable() : this.#observable
     ).subscribe({
       next: (value) => this.set(value),
     });

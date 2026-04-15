@@ -1,16 +1,13 @@
+import { html } from "lit";
+
 import { urlFromSvg } from "../utils.js";
 import type { BaseWalletInfo, WalletConfig } from "./types.js";
-import { html } from "lit";
 
 export const walletConnect: WalletConfig<BaseWalletInfo> = {
   selector: (wallet) => wallet.id === "wallet-connect",
   name: "WalletConnect",
   icon: urlFromSvg(
-    html`<svg
-      fill="none"
-      viewBox="0 0 400 400"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    html`<svg fill="none" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
       <clipPath id="a">
         <path d="m0 0h400v400h-400z" />
       </clipPath>

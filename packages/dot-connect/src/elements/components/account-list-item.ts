@@ -1,9 +1,11 @@
-import { DotConnectElement } from "./element.js";
+import { css, html, nothing } from "lit";
+
 import "./list-item.js";
 import "dot-identicon";
-import { css, html, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+
+import { DotConnectElement } from "./element.js";
 
 @customElement("dc-account-list-item")
 export class AccountListItem extends DotConnectElement {

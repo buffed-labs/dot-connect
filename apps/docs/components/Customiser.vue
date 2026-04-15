@@ -6,8 +6,9 @@ hljs.registerLanguage("css", css);
 </script>
 
 <script lang="ts" setup>
-import WalletConnectionButton from "./WalletConnectionButton.vue";
 import { ref, computed } from "vue";
+
+import WalletConnectionButton from "./WalletConnectionButton.vue";
 
 const colourScheme = ref<"inherit" | "light" | "dark">("inherit");
 
@@ -67,9 +68,7 @@ function toCss(style: Record<string, any>) {
 
 const cssSnippet = computed(() => toCss(style.value));
 
-const highlightedCss = computed(
-  () => hljs.highlight(cssSnippet.value, { language: "css" }).value,
-);
+const highlightedCss = computed(() => hljs.highlight(cssSnippet.value, { language: "css" }).value);
 </script>
 
 <template>
@@ -88,65 +87,36 @@ const highlightedCss = computed(
             ><input type="radio" value="inherit" v-model="colourScheme" />
             Inherit
           </label>
-          <label
-            ><input type="radio" value="light" v-model="colourScheme" />
-            Light</label
-          >
-          <label
-            ><input type="radio" value="dark" v-model="colourScheme" />
-            Dark</label
-          >
+          <label><input type="radio" value="light" v-model="colourScheme" /> Light</label>
+          <label><input type="radio" value="dark" v-model="colourScheme" /> Dark</label>
         </fieldset>
         <fieldset id="colours-fieldset">
           <legend>Colours</legend>
           <div id="colour-sections">
             <section>
               <label><input type="color" v-model="primary" /> Primary</label>
-              <label
-                ><input type="color" v-model="onPrimary" /> On-primary</label
-              >
+              <label><input type="color" v-model="onPrimary" /> On-primary</label>
             </section>
             <section>
               <label><input type="color" v-model="surface" /> Surface</label>
-              <label
-                ><input type="color" v-model="surfaceDark" /> Surface
-                (Dark)</label
-              >
-              <label
-                ><input type="color" v-model="onSurface" /> On-surface</label
-              >
-              <label
-                ><input type="color" v-model="onSurfaceDark" /> On-surface
-                (Dark)</label
-              >
+              <label><input type="color" v-model="surfaceDark" /> Surface (Dark)</label>
+              <label><input type="color" v-model="onSurface" /> On-surface</label>
+              <label><input type="color" v-model="onSurfaceDark" /> On-surface (Dark)</label>
             </section>
             <section>
               <label><input type="color" v-model="info" /> Info</label>
-              <label
-                ><input type="color" v-model="infoDark" /> Info (Dark)</label
-              >
+              <label><input type="color" v-model="infoDark" /> Info (Dark)</label>
               <label><input type="color" v-model="success" /> Success</label>
-              <label
-                ><input type="color" v-model="successDark" /> Success
-                (Dark)</label
-              >
+              <label><input type="color" v-model="successDark" /> Success (Dark)</label>
               <label><input type="color" v-model="error" /> Error</label>
-              <label
-                ><input type="color" v-model="errorDark" /> Error (Dark)</label
-              >
+              <label><input type="color" v-model="errorDark" /> Error (Dark)</label>
             </section>
           </div>
         </fieldset>
         <fieldset>
           <legend>Radius</legend>
           <label for="max-border-radius">Maximum border radius</label>
-          <input
-            id="max-border-radius"
-            type="range"
-            min="0"
-            max="25"
-            v-model="maxBorderRadius"
-          />
+          <input id="max-border-radius" type="range" min="0" max="25" v-model="maxBorderRadius" />
           <div>
             Value:
             <output for="max-border-radius">{{ maxBorderRadius }}px</output>

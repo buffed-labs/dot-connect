@@ -1,18 +1,16 @@
-import { genericChainSpec } from "../consts.js";
-import { getWalletMetadata } from "../get-wallet-metadata.js";
-import { observableSignal } from "../observable-signal.js";
-import "./components/account-list-item.js";
-import { DotConnectElement } from "./components/element.js";
 import { getAccounts } from "@reactive-dot/core/internal/actions.js";
-import type {
-  LocalWallet,
-  PolkadotSignerAccount,
-} from "@reactive-dot/core/wallets.js";
-import "dot-identicon";
+import type { LocalWallet, PolkadotSignerAccount } from "@reactive-dot/core/wallets.js";
 import { css, html, nothing } from "lit";
+
+import "./components/account-list-item.js";
 import { customElement, property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { repeat } from "lit/directives/repeat.js";
+import "dot-identicon";
+import { genericChainSpec } from "../consts.js";
+import { getWalletMetadata } from "../get-wallet-metadata.js";
+import { observableSignal } from "../observable-signal.js";
+import { DotConnectElement } from "./components/element.js";
 
 @customElement("dc-local-wallet-dialog")
 export class LocalWalletDialog extends DotConnectElement {
@@ -60,19 +58,15 @@ export class LocalWalletDialog extends DotConnectElement {
   protected override render() {
     return html`<dc-dialog
       ?open=${this.open}
-      @close=${(event: Event) =>
-        this.dispatchEvent(new Event(event.type, event))}
+      @close=${(event: Event) => this.dispatchEvent(new Event(event.type, event))}
     >
-      <span slot="title"
-        >${getWalletMetadata(this.wallet)?.name ?? this.wallet.name}</span
-      >
+      <span slot="title">${getWalletMetadata(this.wallet)?.name ?? this.wallet.name}</span>
       <section slot="content">
         <header>
           <h3>Connected accounts</h3>
           <button
             class="text"
-            @click=${() =>
-              this.dispatchEvent(new CustomEvent("request-new-account"))}
+            @click=${() => this.dispatchEvent(new CustomEvent("request-new-account"))}
           >
             Add more
           </button>
@@ -81,10 +75,7 @@ export class LocalWalletDialog extends DotConnectElement {
           this.#connectedAccounts.get(),
           (account) => account.id,
           (account, index) =>
-            html`<dc-account-list-item
-                address=${account.address}
-                name=${ifDefined(account.name)}
-              >
+            html`<dc-account-list-item address=${account.address} name=${ifDefined(account.name)}>
                 <button
                   slot="trailing"
                   class="error sm"

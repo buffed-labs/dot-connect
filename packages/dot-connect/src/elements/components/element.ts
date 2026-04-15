@@ -29,39 +29,18 @@ export abstract class DotConnectElement
       font-family: var(--body-font-family);
       color: var(--on-surface-color);
 
-      --headline-font-family: var(
-        --dc-headline-font-family,
-        Unbounded,
-        system-ui,
-        sans-serif
-      );
-      --body-font-family: var(
-        --dc-body-font-family,
-        Manrope,
-        system-ui,
-        sans-serif
-      );
+      --headline-font-family: var(--dc-headline-font-family, Unbounded, system-ui, sans-serif);
+      --body-font-family: var(--dc-body-font-family, Manrope, system-ui, sans-serif);
 
       --primary-color: var(--dc-primary-color, #ff2670);
       --on-primary-color: var(--dc-on-primary-color, #ffffff);
 
       --surface-color: var(--dc-surface-color, light-dark(#ffffff, #1e1e1e));
-      --on-surface-color: var(
-        --dc-on-surface-color,
-        light-dark(#000000, #ffffff)
-      );
+      --on-surface-color: var(--dc-on-surface-color, light-dark(#000000, #ffffff));
 
-      --surface-container-color: color-mix(
-        in oklab,
-        var(--on-surface-color),
-        transparent 95%
-      );
+      --surface-container-color: color-mix(in oklab, var(--on-surface-color), transparent 95%);
 
-      --outline-color: color-mix(
-        in oklab,
-        var(--on-surface-color) 25%,
-        transparent
-      );
+      --outline-color: color-mix(in oklab, var(--on-surface-color) 25%, transparent);
 
       --info-color: var(--dc-info-color, light-dark(#007aff, #0a84ff));
       --success-color: var(--dc-success-color, light-dark(#34c759, #30d158));

@@ -1,5 +1,6 @@
-import type { IconProps } from "./types.js";
 import { html } from "lit";
+
+import type { IconProps } from "./types.js";
 
 export function connected({ size = 24 }: IconProps) {
   return html`<svg
@@ -24,11 +25,7 @@ export function connected({ size = 24 }: IconProps) {
         fill="none"
         data-nofill="true"
       ></path>
-      <path
-        d="M21.079 13.8675L8.83264 13.8675"
-        fill="none"
-        data-nofill="true"
-      ></path>
+      <path d="M21.079 13.8675L8.83264 13.8675" fill="none" data-nofill="true"></path>
     </g>
   </svg>`;
 }

@@ -4,8 +4,8 @@
   "description": "Wallets connector for Substrate DApps",
   "keywords": [
     "front-end",
-    "substrate",
-    "polkadot"
+    "polkadot",
+    "substrate"
   ],
   "homepage": "https://dotconnect.dev/",
   "bugs": {
@@ -19,6 +19,10 @@
     "url": "https://github.com/buffed-labs/dot-connect.git",
     "directory": "packages/dot-connect"
   },
+  "files": [
+    "build",
+    "assets"
+  ],
   "type": "module",
   "exports": {
     ".": "./build/index.js",
@@ -26,10 +30,6 @@
     "./vue.js": "./build/vue/index.js",
     "./font.css": "./assets/fonts/index.css"
   },
-  "files": [
-    "build",
-    "assets"
-  ],
   "scripts": {
     "dev": "tsc --build --watch",
     "build": "rm -rf build && tsc --build",

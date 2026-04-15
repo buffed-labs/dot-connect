@@ -1,5 +1,6 @@
-import type { InjectedWalletInfo, Platform } from "./wallets/types.js";
 import type { HTMLTemplateResult } from "lit";
+
+import type { InjectedWalletInfo, Platform } from "./wallets/types.js";
 
 export function logAndThrow(error: unknown): never {
   console.error(error);
@@ -10,8 +11,7 @@ export function identifyBrowser(): Platform | undefined {
   const userAgent = globalThis.navigator.userAgent;
 
   const isFirefox = /Firefox/i.test(userAgent);
-  const isChrome =
-    /Chrome|Chromium/i.test(userAgent) && !/Edg/i.test(userAgent);
+  const isChrome = /Chrome|Chromium/i.test(userAgent) && !/Edg/i.test(userAgent);
   const isAndroid = /Android/i.test(userAgent);
   const isIOS =
     /iPad|iPhone|iPod/i.test(userAgent) ||
@@ -69,9 +69,5 @@ export function getDownloadUrl(walletInfo: InjectedWalletInfo) {
 // TODO: replace with `new URL("logo.svg", import.meta.url)`
 // once Vite fixes https://github.com/vitejs/vite/issues/8427
 export function urlFromSvg(svg: HTMLTemplateResult) {
-  return new URL(
-    URL.createObjectURL(
-      new Blob([svg.strings.join()], { type: "image/svg+xml" }),
-    ),
-  );
+  return new URL(URL.createObjectURL(new Blob([svg.strings.join()], { type: "image/svg+xml" })));
 }

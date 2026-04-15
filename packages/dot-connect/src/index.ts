@@ -2,11 +2,12 @@ import "./elements/connection-button.js";
 import "./elements/connection-dialog.js";
 import "./elements/polkadot-vault/polkadot-vault-account-scanner-dialog.js";
 import "./elements/polkadot-vault/polkadot-vault-signature-scanner-dialog.js";
-import { walletsOrProviders$ } from "./stores.js";
 import type { Config } from "@reactive-dot/core";
 import type { Wallet, WalletProvider } from "@reactive-dot/core/wallets.js";
 import type { PolkadotVaultWallet } from "@reactive-dot/wallet-polkadot-vault";
 import { html, nothing, render } from "lit";
+
+import { walletsOrProviders$ } from "./stores.js";
 
 export { getWalletMetadata } from "./get-wallet-metadata.js";
 
@@ -20,8 +21,7 @@ export function registerDotConnect(options: Options): void;
 export function registerDotConnect(config: Config | Options) {
   config.wallets
     ?.filter(
-      (wallet): wallet is PolkadotVaultWallet =>
-        "id" in wallet && wallet.id === "polkadot-vault",
+      (wallet): wallet is PolkadotVaultWallet => "id" in wallet && wallet.id === "polkadot-vault",
     )
     .forEach((wallet) => {
       const container = globalThis.document.createElement("div");

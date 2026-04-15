@@ -1,9 +1,10 @@
-import { close as closeIcon } from "../../icons/index.js";
-import { DotConnectElement } from "./element.js";
 import { css, html, type PropertyValues } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { createRef, ref } from "lit/directives/ref.js";
+
+import { close as closeIcon } from "../../icons/index.js";
+import { DotConnectElement } from "./element.js";
 
 @customElement("dc-dialog")
 export class Dialog extends DotConnectElement {
@@ -220,8 +221,7 @@ export class Dialog extends DotConnectElement {
 
       target.addEventListener("click", onClick);
 
-      this.#onTriggerSlotChangeCleanup = () =>
-        this.removeEventListener("click", onClick);
+      this.#onTriggerSlotChangeCleanup = () => this.removeEventListener("click", onClick);
     }
   }
 
@@ -245,10 +245,7 @@ export class Dialog extends DotConnectElement {
   }
 
   override render() {
-    return html`<slot
-        name="trigger"
-        @slotchange=${this.#onTriggerSlotChange}
-      ></slot>
+    return html`<slot name="trigger" @slotchange=${this.#onTriggerSlotChange}></slot>
       <dialog
         ${ref(this.#dialogRef)}
         id="dialog"
@@ -282,12 +279,8 @@ export class Dialog extends DotConnectElement {
           <button
             id="close-button"
             class="icon"
-            popovertarget=${ifDefined(
-              this.variant === "modal" ? undefined : "dialog",
-            )}
-            popovertargetaction=${ifDefined(
-              this.variant === "modal" ? undefined : "hide",
-            )}
+            popovertarget=${ifDefined(this.variant === "modal" ? undefined : "dialog")}
+            popovertargetaction=${ifDefined(this.variant === "modal" ? undefined : "hide")}
             @click=${() => {
               if (this.variant === "modal") {
                 this.close();

@@ -1,8 +1,9 @@
-import { DotConnectElement } from "./components/element.js";
 import { getSs58AddressInfo } from "@polkadot-api/substrate-bindings";
 import type { ReadonlyWallet } from "@reactive-dot/wallet-readonly";
 import { css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+
+import { DotConnectElement } from "./components/element.js";
 
 @customElement("dc-add-readonly-account-dialog")
 export class AddReadonlyAccountDialog extends DotConnectElement {
@@ -48,8 +49,7 @@ export class AddReadonlyAccountDialog extends DotConnectElement {
     return html`
       <dc-dialog
         .open=${this.open}
-        @close=${(event: Event) =>
-          this.dispatchEvent(new Event(event.type, event))}
+        @close=${(event: Event) => this.dispatchEvent(new Event(event.type, event))}
       >
         <span slot="title">View external account</span>
         <div slot="content">
@@ -74,9 +74,7 @@ export class AddReadonlyAccountDialog extends DotConnectElement {
                   (this.address = (event.target as HTMLInputElement).value)}"
               />
             </label>
-            <button type="submit" ?disabled=${!this.addressInfo.isValid}>
-              Confirm
-            </button>
+            <button type="submit" ?disabled=${!this.addressInfo.isValid}>Confirm</button>
           </form>
         </div>
       </dc-dialog>
